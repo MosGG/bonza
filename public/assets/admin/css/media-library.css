@@ -1,0 +1,214 @@
+.clear-both{
+    clear: both;
+}
+.media-library:after{
+    display: table;
+    content: "";
+    clear: both;
+}
+.media-library{
+    position: relative;
+}
+.multi-delete-btn{
+    position: absolute;
+    right: 20px;
+    top: 22px;
+}
+.media-item{
+    width: 180px;
+    height: 214px;
+    padding: 2px;
+    border: 1px solid #ececec;
+    margin: 5px;
+    float: left;
+}
+.media-img{
+    width: 100%;
+    height: 174px;
+    background: #ececec;
+    position: relative;
+}
+.media-img img{
+    max-width: 174px;
+    max-height: 174px;
+    cursor: zoom-in;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.media-actions{
+    width: 100%;
+    position: relative;
+    height: 34px;
+    padding-top: 3px;
+}
+.media-actions button{
+    height: 28px;
+    width: 32px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+.media-actions button i{
+    display: block;
+    height: 28px;
+    width: 32px;
+    font-size: 28px;
+}
+.mediaTick i{
+    color: #72c02c!important;
+}
+.media-actions:after{
+    display: table;
+    content: "";
+    clear: both;
+}
+.media-tick-btn{
+    float: left;
+}
+button.media-tick-btn i{
+    color:#ddd;
+}
+button.media-delete-btn{
+    float: right;
+}
+button.media-delete-btn i{
+    color: red;
+}
+.load-more-btn{
+    margin-top: 20px;
+    width: 50%;
+    margin-left: 25%;
+    background: #eee;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+}
+.load-more-btn:hover{
+    background: #ddd;
+}
+
+/*--  media modal css  --*/
+.media-modal-item{
+    cursor: pointer;
+    width: 180px;
+    height: 180px;
+    padding: 2px;
+    border: 1px solid #ececec;
+    margin: 5px;
+    float: left;
+    position: relative;
+}
+.media-modal-item .media-img img{
+    cursor: pointer;
+}
+.media-modal-item .media-tick-btn{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    height: 28px;
+    width: 32px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+.media-modal-item .media-tick-btn i{
+    display: block;
+    height: 28px;
+    width: 32px;
+    font-size: 28px;
+}
+
+
+/*---------media detail modal-------*/
+.media-detail-body{
+    position: relative;
+}
+.single-media-image-div{
+    text-align: center;
+    position: relative;
+}
+.media-detail-body img{
+    width: auto;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+.modal-header h5{
+    margin: 0;
+    font-size: 17px;
+}
+.media-detail-body dl{
+    margin-bottom: 0;
+}
+.media-detail-body dt,
+.media-detail-body dd{
+    font-weight: normal;
+    font-size: 14px;
+    padding: 2px 0;
+}
+
+
+/*--- photo gallery modal --*/
+.photo-gallery{
+    padding-bottom: 20px;
+}
+
+.photo-gallery button.media-tick-btn i{
+    /*color: transparent;*/
+}
+
+button.media-left-top-btn{
+    position: absolute;
+    top: 5px;
+    left: 8px;
+    height: 28px;
+    width: 28px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    z-index: 999;
+}
+button.media-left-top-btn i{
+    color: #ddd;
+    display: block;
+    height: 28px;
+    width: 28px;
+    font-size: 28px;
+}
+.mediaTickBlue i{
+    color: #0606f5!important;
+}
+.photo-gallery button.media-delete-btn{
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 28px;
+    width: 32px;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+.photo-gallery button.media-delete-btn i{
+    color: red;
+    display: block;
+    height: 28px;
+    width: 32px;
+    font-size: 28px;
+}
+/*----folder----*/
+.media-folder-name{
+    position: relative;
+    z-index: 10;
+    font-size: 14px; 
+    padding-left: 10px;
+}

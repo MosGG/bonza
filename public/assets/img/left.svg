@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="23px" viewBox="0 0 14 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>left arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PRODUCT-PAGE-Single" transform="translate(-109.000000, -511.000000)" fill-rule="nonzero" fill="#000000">
+            <g id="left-arrow" transform="translate(109.000000, 511.000000)">
+                <g id="Expand-Arrow_000000-Copy" transform="translate(7.381197, 11.858974) rotate(-270.000000) translate(-7.381197, -11.858974) translate(-4.118803, 4.858974)">
+                    <g id="surface1" transform="translate(-0.000000, 0.000000)">
+                        <path d="M21.6303266,0.592600334 C21.4955022,0.597303813 21.3667143,0.663148294 21.2721355,0.778375987 L11.3333333,12.3928724 L1.39453112,0.778375987 C1.29794021,0.660796254 1.16512797,0.597303813 1.02627867,0.594951773 C0.814985667,0.597303813 0.627840909,0.745453445 0.547348485,0.971205953 C0.468868242,1.1993105 0.515151515,1.45798495 0.666074939,1.62965077 L10.9691052,13.6697845 C11.1703363,13.9049434 11.4963304,13.9049434 11.6975614,13.6697845 L22.0005917,1.62965077 C22.1535273,1.45798495 22.1998106,1.19225559 22.1193182,0.964151639 C22.0368136,0.73604709 21.8436318,0.587897458 21.6303266,0.592600334 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

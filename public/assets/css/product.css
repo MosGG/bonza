@@ -1,0 +1,271 @@
+.total-number{
+	font-weight: lighter;
+	height: 35px;
+	border-bottom: 1px solid #CCCCCC;
+	text-align: center;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.total-number-content{
+	background-color: #fff;
+	padding: 0 12px;
+	position: relative;
+	top:30px;
+}
+.page-control{
+	margin: 40px 0;
+	height: 38px;
+	color: #CCCCCC;
+}
+.laypage{
+	float: right;
+	height: 38px;
+	font-size: 16px;
+	font-family: "Montserrat";
+	font-weight: bold;
+	color:#AAAAAA;
+}
+.arrow{
+	width: 10px;
+	position: relative;
+	top:5px;
+}
+nav .drop-down {
+	font-size: 14px;
+	list-style: none; 
+	overflow: hidden;
+    height: 218px;
+	width: 168px;
+  	text-align: left;
+  	border: 1px solid #AAAAAA;
+  	-webkit-transition: height 0.3s ease;
+    transition: height 0.3s ease;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-color: #fff;
+}
+nav .drop-down.closed {
+    height: 36px;
+}
+nav .drop-down li {
+	padding: 0 15px;
+	border-bottom: 1px solid #AAAAAA;
+	line-height: 36px;
+  	height: 36px;
+}
+nav .drop-down li a {
+    display: block;
+    color: #AAAAAA;
+    text-decoration: none;
+}
+.sort-item:hover{
+	color: #000;
+}
+.srot-select{
+	background-color: #CCCCCC;
+}
+nav .drop-down img{
+	transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	width: 10px;
+	position: absolute;
+	right: 22px;
+	top: 10px;
+	cursor: pointer;
+}
+.drop-expand{
+	transform: rotate(90deg)!important;
+	-ms-transform: rotate(90deg)!important;
+}
+.item-per-page{
+	display: inline-block;
+	margin-left: 192px;
+	height: 38px;
+	width: 200px;
+}
+.ipp-title{
+	font-size: 14px;
+	line-height: 14px;
+	padding: 5px 0;
+	width: 30px;
+	float: left;
+}
+.ipp-num{
+	line-height: 38px;
+	float: left;
+	padding: 0 12px;
+	font-size: 16px;
+	font-weight: bold;
+}
+.ipp-num:hover,
+.ipp-active{
+	color: #000;
+}
+.product-content{
+	margin-top: 70px;
+}
+.pc-left{
+	width: 168px;
+	float: left;
+}
+.pc-right{
+	margin-left: 172px;
+	overflow: hidden;
+}
+.category-selector{
+	list-style: none;
+	font-size: 14px;
+}
+.category-selector li{
+	line-height: 27px;
+}
+.category:hover span{
+	font-weight: bold;
+}	
+.ctg-active{
+	color: #AB956E;
+	font-weight: bold;
+	border-bottom: 1px solid currentColor;
+}
+.pc-item{
+	margin-left: 20px;
+	width: calc((100% - 61px)/3);
+	float: left;
+}
+.item-up{
+	width: 100%;
+	overflow: hidden;
+	font-size: 0;
+}
+.item-img{
+	width: 100%;
+	height: auto;
+}
+.item-info{
+	margin:30px 0 60px 0;
+	position: relative;
+	line-height: 18px;
+}
+.item-title{
+	font-size: 16px;
+	font-weight: bold;
+}
+.item-des{
+	font-size: 14px;
+	max-width: 90%;
+}
+.item-price{
+	font-size: 14px;
+	font-weight: bold;
+}
+.item-wishlist{
+	position: absolute;
+	top:0;
+	right: 0;
+}
+.hover-shade{
+	position: absolute;
+	left: 0;
+	right:0;
+	top:0;
+	bottom: 0;
+	background-color: #F8F3EB;
+	opacity: 0;
+	z-index: 5;
+}
+.hover-shade:hover{
+	opacity: 0.6;
+}
+.hover-shade:hover~.item-img{
+	transform: scale(1.1);
+	-ms-transform: scale(1.1);
+}
+.bottom-margin{
+	margin-bottom: 120px;
+}
+.m-page-ctl{
+	border-top: 1px solid #CCCCCC;
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #AAAAAA;
+	margin-bottom: 50px;
+	display: none;
+}
+.laypage_prev,
+.laypage_next{
+	border:none!important;
+	font-size: 14px;
+}
+.laypage_next{
+	position: absolute;
+	right: 0;
+}
+@media(max-width: 768px){
+	.item-wishlist{
+		width: 16px;
+		height: auto;
+	}
+	.pc-left{
+		display: none;
+	}
+	.pc-right{
+		margin-left: -20px;
+	}
+	.item-per-page{
+		display: none;
+	}
+	.bottom-control,
+	#layPage,
+	.bottom-margin{
+		display: none;
+	}
+	.total-number{
+		border-bottom: none;
+		position: absolute;
+		right: 0;
+	}
+	.total-number-content{
+		top:11px;
+	}
+	.page-control{
+		margin: 15px 0;
+	}
+	.product-content{
+		margin-top: 30px;
+	}
+	.m-page-ctl{
+		display: block;
+	}
+}
+@media(max-width: 550px){
+	.pc-item{
+		width: calc((100% - 21px)/2);
+		margin-left: 10px;
+	}
+	.item-itle,
+	.item-des,
+	.item-price{
+		font-size: 12px;
+	}
+	.pc-right{
+		margin-left: -10px;
+	}
+	.item-info{
+		margin: 15px 0 40px 0;
+	}
+	.item-wishlist{
+	    top: -38px;
+	    left: 0px;
+	    z-index: 10;
+	    right: unset;
+	    background-color: #F8F3EB;
+	    border: 4px solid #F8F3EB;
+	}
+	.shopping-num{
+		transform: scale(0.7);
+		-ms-transform: scale(0.7);
+	}
+}

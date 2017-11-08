@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="25px" viewBox="0 0 26 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Search</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PRODUCT-PAGE" transform="translate(-1267.000000, -134.000000)" stroke="#000000" fill-rule="nonzero" fill="#000000">
+            <g id="header" transform="translate(-3.000000, 42.000000)">
+                <g id="search" transform="translate(1211.000000, 80.000000)">
+                    <g id="Search" transform="translate(72.000000, 25.000000) rotate(-90.000000) translate(-72.000000, -25.000000) translate(60.000000, 13.000000)">
+                        <path d="M14.4645606,0 C9.39261824,0 5.26245443,4.1301638 5.26245443,9.20210612 C5.26245443,11.405579 6.0352878,13.4257293 7.33292831,15.0109356 L0,22.3438639 L1.32280275,23.6666667 L8.65573107,16.3337384 C10.2409374,17.6313789 12.2610877,18.4042122 14.4645606,18.4042122 C19.5365029,18.4042122 23.6666667,14.2740484 23.6666667,9.20210612 C23.6666667,4.1301638 19.5365029,0 14.4645606,0 Z M14.4645606,1.84042122 C18.5408065,1.84042122 21.8262454,5.12586113 21.8262454,9.20210612 C21.8262454,13.278352 18.5408065,16.563791 14.4645606,16.563791 C10.3883156,16.563791 7.10287566,13.278352 7.10287566,9.20210612 C7.10287566,5.12586113 10.3883156,1.84042122 14.4645606,1.84042122 Z" id="Shape"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

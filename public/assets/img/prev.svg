@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="13px" viewBox="0 0 8 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Expand Arrow_000000 Copy</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="PRODUCT-PAGE" transform="translate(-1290.000000, -262.000000)" fill-rule="nonzero" fill="#CCCCCC">
+            <g id="页码条" transform="translate(135.000000, 248.000000)">
+                <g id="pages" transform="translate(801.000000, 3.000000)">
+                    <g id="right-arrow" transform="translate(357.000000, 17.000000) rotate(-180.000000) translate(-357.000000, -17.000000) translate(345.000000, 5.000000)">
+                        <g id="Expand-Arrow_000000-Copy" transform="translate(11.600000, 11.600000) scale(-1, 1) rotate(-270.000000) translate(-11.600000, -11.600000) translate(5.600000, 7.600000)">
+                            <g id="surface1" transform="translate(-0.000000, 0.000000)">
+                                <path d="M11.4513494,0.308152174 C11.3799717,0.310597983 11.3117899,0.344837113 11.2617188,0.404755513 L6,6.44429363 L0.738281182,0.404755513 C0.687144818,0.343614052 0.616832455,0.310597983 0.543324,0.309374922 C0.431463,0.310597983 0.332386364,0.387635791 0.289772727,0.505027096 C0.248224364,0.623641461 0.272727273,0.758152174 0.352627909,0.8474184 L5.80717336,7.10828797 C5.91370745,7.23057057 6.08629255,7.23057057 6.19282664,7.10828797 L11.6473721,0.8474184 C11.728338,0.758152174 11.7528409,0.619972904 11.7102273,0.501358852 C11.6665484,0.382744487 11.5642756,0.305706678 11.4513494,0.308152174 Z" id="Shape"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
