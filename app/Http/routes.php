@@ -312,6 +312,11 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'PagesController@product'
     ]);
 
+    Route::get('/newarrival', [
+        'as' => 'newarrival',
+        'uses' => 'PagesController@newarrival'
+    ]);
+
     Route::get('/project/{category}', [
         'as' => 'portfolio',
         'uses' => 'PagesController@portfolioCategory'

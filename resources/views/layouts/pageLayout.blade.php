@@ -159,7 +159,7 @@
 							<div class="buy-wrap">
 								<span class="buy-subtotal">商品总金额（不包含运费）<b>{!!"￥4,450.00"!!}</b></span>
 								<a href="/shopping-cart"><div class="buy-btn go-shoppingbag">查看购物袋</div></a>
-								<a href="/checkout"><div class="buy-btn go-order">结算</div>
+								<a href="/checkout"><div class="buy-btn go-order">结算</div></a>
 							</div>
 						</div>
 					</div>
@@ -168,10 +168,26 @@
 			<div class="bottom-header relative">
 				<div class="wrapper relative">
 					<div class="center sub-nav">
-						<a href="/newarrial"><span class="hvr-underline-from-center">新品</span></a>
-						<a href="/brand"><span class="hvr-underline-from-center">品牌</span></a>
-						<a href="/product"><span class="hvr-underline-from-center">选购</span></a>
-						<a href="/about"><span class="hvr-underline-from-center">关于BONZA</span></a>
+						<a href="/newarrival"><span class="hvr-underline-from-center 
+							<?php 
+								if (isset($action) && $action == 'newarrival') echo "action-selected";
+							?>
+							">新品</span></a>
+						<a href="/brand"><span class="hvr-underline-from-center
+							<?php 
+								if (isset($action) && $action == 'brand') echo "action-selected";
+							?>
+							">品牌</span></a>
+						<a href="/product"><span class="hvr-underline-from-center
+							<?php 
+								if (isset($action) && $action == 'product') echo "action-selected";
+							?>
+							">选购</span></a>
+						<a href="/about"><span class="hvr-underline-from-center
+							<?php 
+								if (isset($action) && $action == 'about') echo "action-selected";
+							?>
+							">关于BONZA</span></a>
 					</div>
 					<form class="search-box transition" action="/search" method="post">
 						<input id="search-input" name="search" type="text" class="transition" placeholder="搜索">

@@ -1,0 +1,12 @@
+.pc-right{
+    margin-left: -20px; 
+}
+.pc-item{
+	width: calc((100% - 81px)/4)
+}
+@media (max-width: 550px){
+	.pc-item {
+	    width: calc((100% - 21px)/2);
+	    margin-left: 10px;
+	}
+}

@@ -81,7 +81,27 @@ class PagesController extends Controller
             "page" => $page,
             "total" => $total,
                     );
-    	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('category','');
+    	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','product');
+    }
+
+    public function newarrival(Request $request){
+        //change logic here
+        $product = DB::table('portfolios')->where('status', '=', '1')->where('client','0')->orderBy('sort')->get();
+        $page = $request->input("page");
+        if (empty($page)) $page = 1;
+        $total = count($product);
+        $items_per_page = $request->input("item");
+        if (empty($items_per_page)) $items_per_page = 24;
+        $allPages = ($total%$items_per_page == 0)?(int)Floor($total / $items_per_page):(int)Floor($total / $items_per_page) + 1;
+        $start = ($page - 1) * $items_per_page;
+        $product = array_slice($product,$start,$items_per_page);
+        $meta_data = array(
+            'allPages' => $allPages,
+            "items_per_page" => $items_per_page,
+            "page" => $page,
+            "total" => $total,
+                    );
+        return view('pages.newarrival')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','newarrival');
     }
 
     public function portfolioCategory($category,Request $request){

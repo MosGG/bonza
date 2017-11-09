@@ -97,7 +97,10 @@ p{
     right: 0;
 }
 
-
+.action-selected:before{
+	left: 0;
+    right: 0;
+}
 
 .wrapper{
 	margin: 0 auto;
