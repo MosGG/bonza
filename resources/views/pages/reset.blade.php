@@ -7,32 +7,40 @@
 @stop
 
 @section('body')
-<div id="login-div">
-	<div class="wrapper">
-		<h2>Token verify {!!$result!!}</h2>
-		<div>Click <a href="/login">HERE</a> to login.</div>
+
+<div class="wrapper single-login-page">
+	<div class="breadcrum">
+		<a href="/">首页</a>
+		<img src="/assets/img/next.svg">
+		<a href="/login">登录或注册</a>
+	</div>
+
+	<h2 class="title">账户验证{!!$result!!}</h2>
+		<div id="login-div">
+		<div>点击<a href="/login">这里</a>登录.</div>
 		<br><br>
 		<?php if ($result == "success") {?>
-		<h2>Reset Password</h2>
+		<h2 class="subtitle">重置密码</h2>
+		<div class="required-label">*此栏为必填</div>
 		<form id="reg-form" class="form-horizontal" onsubmit="return resetSubmit()">
 			<input name="token" required hidden value="{!!$token!!}">
 			<div class="login-input">
-				<div class="login-title">Password*</div>
-				<input name="password" required type='password' minlength="4" maxlength="16" placeholder="Please input your password">
+				<div class="login-title">新密码 *</div>
+				<input name="password" required type='password' minlength="4" maxlength="16" placeholder="请输入您的新密码">
 			</div>
 			<div class="login-input">
-				<div class="login-title">Repeat Password*</div>
-				<input name="repeat-password" type='password' minlength="4" maxlength="16" placeholder="Please input your password" required>
+				<div class="login-title">确认新密码 *</div>
+				<input name="repeat-password" type='password' minlength="4" maxlength="16" placeholder="请再次输入您的新密码" required>
 			</div>
 			<div class="login-err">
 				<img src="/assets/img/loading.gif"><span></span>
 			</div>
 			<div>
-				<input id="reg-submit" type="submit" class="button login-btn" value="Reset">
+				<input id="reg-submit" type="submit" class="button login-btn" value="重置">
 			</div>
 		</form>
 		<?php } else {?>
-		<div>Token expired. Please click <a href="/forget-password">Here</a> to send token.</div>
+		<div>连接已过期，请点击<a href="/forget-password">这里</a>重新发送邮件。</div>
 		<?php } ?>
 	</div>
 </div>

@@ -57,7 +57,7 @@ return [
             'host' => '127.0.0.1',
             'database' => 'bonza',
             'username' => 'root',//'s1070820_admin',
-            'password' => '',//'s1070820_Cheee',  
+            'password' => 'root',//'s1070820_Cheee',  
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',

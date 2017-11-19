@@ -1,0 +1,149 @@
+.wishlist-box{
+	margin-bottom: 160px;
+	text-align: center;
+}
+.wishlist-title{
+	font-size: 28px;
+	margin-top: 75px;
+	font-weight: 200;
+}
+.wishlist-desc{
+	font-size: 22px;
+	font-weight: 200;
+	margin-top: 25px;
+	margin-bottom: 70px;
+}
+.goshopping{
+	width: 158px;
+	height: 39px;
+	margin:0 auto;
+	border: 1px solid #AAAAAA;
+	font-size: 16px;
+	background-color: #fff;
+	line-height: 39px;
+	cursor: pointer;
+}
+.goshopping:hover{
+	background-color: #000;
+	color:#fff;
+}
+.title{
+	margin: 20px 0 30px 0;
+	font-size: 28px;
+	font-weight: 200;
+}
+
+.btn-box{
+	width: 100%;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+.sb-btn{
+	padding: 0 20px;
+	height: 38px;
+	border: 1px solid #000;
+	line-height: 38px;
+	text-align: center;
+	font-size: 16px;
+}
+#btn-l{
+	float: left;
+}
+#btn-r{
+	float: right;
+	color: #fff;
+	background-color: #000;
+}
+.left-detail{
+	width: 66%;
+}
+.item{
+	border-bottom: 1px solid #CCCCCC;
+	padding-bottom: 25px;
+}
+.item-left{
+	width: 123px;
+	float: left;
+}
+.item-left img{
+	width: 100%;
+}
+.item-right{
+	margin-left: 163px;
+}
+.item-right h2{
+	font-size: 22px;
+	font-weight: bold;
+}
+.item-right h3{
+	font-size: 16px;
+	font-weight: normal;
+	margin-bottom: 40px;
+	line-height: 27px;
+}
+.item-right h4{
+	font-size: 16px;
+	font-weight: lighter;
+	line-height: 27px;
+}
+.item-right h2,
+.item-right h3,
+.item-right h4{
+	text-align: left;
+}
+.price{
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
+.links{
+	font-size: 14px;
+	color: #AAAAAA;
+	line-height: 24px;
+	border-bottom: 1px solid #AAAAAA;
+	position: absolute;
+	bottom: 0px;
+	cursor: pointer;
+}
+.links:hover{
+	color: #000;
+	border-bottom: 1px solid #000;
+}
+#to-wl{
+	right: 125px;
+}
+#del{
+	right: 0;
+}
+
+.number-select{
+	position: absolute;
+	top: 25px;
+	right: 130px;
+	font-size: 16px;
+	text-align: center;
+	/*height: 38px;*/
+	line-height: 38px;
+	overflow: hidden;
+}
+.number-select div{
+	display: inline-block;
+	border: 1px solid #AAAAAA;
+	width: 38px;
+	height: 38px;
+	float: left;
+}
+.minuse, .plus{
+	cursor: pointer;
+}
+.number{
+	margin: 0 -1px;
+}
+.minuse img{
+	position: relative;
+	top: -5px;
+}
+.plus img{
+	position: relative;
+	top: 1px;
+}

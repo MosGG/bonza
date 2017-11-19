@@ -239,6 +239,21 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'myaccount',
             'uses' => 'MembershipController@myaccount'
         ]);
+
+        Route::get('/wishlist', [
+            'as' => 'wishlist',
+            'uses' => 'PagesController@wishlist'
+        ]);
+
+        Route::post('/add-to-wishlist', 'MembershipController@addtowishlist');
+        Route::post('/remove-from-wishlist', 'MembershipController@removeFromWishlist');
+
+        Route::get('/shoppingbag', [
+            'as' => 'shoppingbag',
+            'uses' => 'PagesController@shoppingbag'
+        ]);
+        // Route::post('/add-to-wishlist', 'MembershipController@addtowishlist');
+        // Route::post('/remove-from-wishlist', 'MembershipController@removeFromWishlist');
     });
 
      Route::get('/', [

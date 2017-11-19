@@ -1,57 +1,87 @@
-
-#slider{
-	height: 564px;
-	margin-bottom: 80px;
+.wishlist-box{
+	margin-bottom: 160px;
+	text-align: center;
 }
-#slider img{
-	max-height: 564px;
-	opacity: 0.4;
-	transition: opacity 0.3s ease-in-out;
-	object-fit: cover;
-	object-position: center;
-	/*height: 100%;*/
+.wishlist-title{
+	font-size: 28px;
+	margin-top: 75px;
+	font-weight: 200;
 }
-.slick-current{
-	opacity: 1!important;
+.wishlist-desc{
+	font-size: 22px;
+	font-weight: 200;
+	margin-top: 25px;
+	margin-bottom: 70px;
 }
-.arrow{
-	height: 24px;
-	position: absolute;
-	top: calc(50% - 22px);
-	z-index: 10;
-	padding: 10px;
-}
-.arrow img{
-	opacity: 1!important;
-}
-.pre-arrow{
-	left: -34px;
-}
-.nxt-arrow{
-	left: calc(33% + 4px);
-}
-.product-info{
-	width: 45%;
-	min-width: 300px;
-	padding: 60px 30px;
-	position: absolute;
-	right: 15px;
-	top: 80px;
+.goshopping{
+	width: 158px;
+	height: 39px;
+	margin:0 auto;
+	border: 1px solid #AAAAAA;
+	font-size: 16px;
 	background-color: #fff;
-	z-index: 15;
+	line-height: 39px;
+	cursor: pointer;
+}
+.goshopping:hover{
+	background-color: #000;
+	color:#fff;
+}
+.title{
+	margin: 20px 0 30px 0;
+	font-size: 28px;
+	font-weight: 200;
+}
+.item{
+	border-top: 1px solid #AAAAAA;
+	border-bottom:  1px solid #AAAAAA;
+	margin-bottom: -1px;
+	padding: 50px;
+/*	height: 300px;
+	transition: height .3s ease-in-out;*/
+}
+.wishlist-del{
+	position: absolute;
+	right: 50px;
+	top: 10px;
+	height: 18px;
+	width: 18px;
+	cursor: pointer;
+	transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+}
+.wishlist-del:hover{
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+}
+.item-left{
+	width: 40%;
+	float: left;
+	text-align: center;
+}
+.item-left img{
+	height: 196px;
+}
+.item-right{
+	margin-left: 40%;
+	padding-left: 50px; 
+}
+
+.product-info{
+	text-align: left;
 }
 .product-info h2{
-	font-size: 28px;
+	font-size: 22px;
 }
 .product-info h3{
-	font-size: 16px;
+	font-size: 14px;
 }
 .product-info h4{
 	padding-top: 15px;
-	font-size: 24px
+	font-size: 18px
 }
 .p-size-box{
-	margin-top: 45px;
+	margin-top: 35px;
 	height: 50px;
 }
 .p-size-box select{
@@ -62,7 +92,7 @@ nav .drop-down {
 	list-style: none; 
 	overflow: hidden;
     /*height: 185px;*/
-	width: calc(50% - 60px);
+	width: calc(50% - 25px);
   	text-align: left;
   	border-bottom: 1px solid #AAAAAA;
   	-webkit-transition: height 0.3s ease;
@@ -117,10 +147,11 @@ nav .drop-down img{
 	-ms-transform: rotate(90deg)!important;
 }
 
+
 #size-refer{
 	color: #AAAAAA;
 	position: absolute;
-	left:50%;
+	right:0;
 	height: 30px;
 	border-bottom: 1px solid #AAAAAA;
 	display: inline-block;
@@ -134,7 +165,7 @@ nav .drop-down img{
 }
 .p-btn-box div{
 	height: 38px;
-	width: calc(50% - 60px);
+	width: calc(50% - 55px);
  	display: inline-block;
  	border-width: 1px;
  	border-style: solid;
@@ -155,13 +186,13 @@ nav .drop-down img{
 #btn-wishlist{
 	border-color: #AAAAAA;
 	position: absolute;
-	left: 50%;
+	right: 0;
 }
 #btn-wishlist:hover{
 	color: #AB956E;
 	border-color: #AB956E;
 }
-#btn-wishlist:hover .PRODUCT-PAGE{
+#btn-wishlist:hover #PRODUCT-PAGE{
 	fill: #AB956E;
 }
 .p-btn-box div svg{
@@ -169,54 +200,36 @@ nav .drop-down img{
 	right: 15px;
 	top: 7px;
 }
-.detail-box{
-	margin-top: 60px;
-}
-.detail-expand-box{
-	font-size: 14px;
-	line-height: 44px;
-	border-bottom: 1px solid #AAAAAA;
-	/*height: 44px;*/
+
+
+.number-select{
+	position: absolute;
+	top: -9px;
+	left: calc(50% + 25px);
+	font-size: 16px;
+	text-align: center;
+	/*height: 38px;*/
+	line-height: 38px;
 	overflow: hidden;
+}
+.number-select div{
+	display: inline-block;
+	border: 1px solid #AAAAAA;
+	width: 38px;
+	height: 38px;
+	float: left;
+}
+.minuse, .plus{
 	cursor: pointer;
 }
-.detail-expand-box p{
- 	font-size: 0;
-    margin: 0;
-    opacity: 0;
-    padding: 0;
-    transition: opacity .25s,
-                font-size .5s .25s,
-                margin .5s .25s,
-                padding .5s .25s;
+.number{
+	margin: 0 -1px;
 }
-.detail-open p{
-	margin: .5em 0;
-    padding: .5em 0;
-    opacity: 1;
-    font-size: 14px;
- 	transition: font-size .25s,
-                margin .25s,
-                padding .25s,
-                opacity .5s .25s;
+.minuse img{
+	position: relative;
+	top: -5px;
 }
-.detail-expand-btn{
-	position: absolute;
-	right: 0px;
-	top: 14px;
-	width: 15px;
-	height: 15px;
-}
-.detail-expand-btn div{
-	width: 15px;
-	border-bottom: 1px solid #000;
-	transition: all 0.3s ease-in-out;
-	position: absolute;
-	top:8px;
-	transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-}
-.rotate div:nth-child(1){
-	transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
+.plus img{
+	position: relative;
+	top: 1px;
 }

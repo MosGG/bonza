@@ -55,12 +55,11 @@ class PagesController extends Controller
     }
 
     public function login(Request $request){
-        // $text = $this->getTranslate($request->input("language"));
-        return view('pages.login');   
+        $req_url = $request->input('req_url');
+        return view('pages.login')->with('req_url', $req_url);   
     }
 
     public function register(Request $request){
-        // $text = $this->getTranslate($request->input("language"));
         return view('pages.register');   
     }
 
@@ -244,6 +243,40 @@ class PagesController extends Controller
         }
         // var_dump($product[0]);
         return view('pages.productsingle')->with('product', $product[0])->with('imgs',$imgArr);
+    }
+
+    public function wishlist(Request $request){
+        $wishlist = session('wishlist');
+        foreach ($wishlist as $key => $p) {
+            $product = DB::table('portfolios')->where('id',$p['id'])->get();
+            $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
+            if (empty($imgs[0]->media_id)) {
+                $imgSrc = '/assets/img/default.png';
+            } else {
+                $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+            }
+            $product[0]->src = $imgSrc;
+            $wishlist[$key] = $product[0];
+        }
+        return view('pages.wishlist')->with('wishlist', $wishlist);
+    }
+
+    public function shoppingbag(Request $request){
+        $shoppingbag = session('shopping-bag');
+        foreach ($shoppingbag as $key => $p) {
+            $product = DB::table('portfolios')->where('id',$p['id'])->get();
+            $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
+            if (empty($imgs[0]->media_id)) {
+                $imgSrc = '/assets/img/default.png';
+            } else {
+                $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+            }
+            $product[0]->src = $imgSrc;
+            $product[0]->size = $p['size'];
+            $product[0]->qty = $p['qty'];
+            $shoppingbag[$key] = $product[0];
+        }
+        return view('pages.shoppingbag')->with('shoppingbag', $shoppingbag);
     }
 
     private function getTranslate($language){

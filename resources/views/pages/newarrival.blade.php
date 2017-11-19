@@ -8,6 +8,12 @@
 @stop
 
 @section('body')
+<?php 
+	$wishlist = array(); 
+	foreach (session('wishlist') as $value) {
+		$wishlist[$value['id']] = true;
+	}
+?>
 <div class="wrapper">
 	<div class="total-number">
 		<span class="total-number-content">
@@ -50,15 +56,23 @@
 		<div class="pc-right">
 			<?php foreach($product as $p) {?>
 			<div class="pc-item">
-				<a href="/product/1">
+				<a href="/product/{!!$p->id!!}">
 					<div class="item-up relative">
 						<div class="hover-shade transition"></div>
 						<img class="item-img transition" src="/assets/img/default.png">
 					</div>
 				</a>
 				<div class="item-info">
-					<a onclick="addwishlist(1)" href="jsvascript:void(0);">
-						<img class="item-wishlist hover-icon" data-hover="/assets/img/wishlist-add-hover.svg" src="/assets/img/wishlist-add.svg">
+					<a onclick="addwishlist({!!$p->id!!})" href="jsvascript:void(0);">
+						<img class="item-wishlist hover-icon" data-hover="/assets/img/wishlist-add-hover.svg" 
+						<?php 
+							if (isset($wishlist[$p->id])) {
+								echo "src='/assets/img/wishlist-add-hover.svg'";
+							} else {
+								echo "src='/assets/img/wishlist-add.svg'";
+							}
+						?>
+						>
 					</a>
 					<a href="/product/1">
 						<div class="item-title">VETEMENTS</div>

@@ -1,43 +1,112 @@
-h2{
+.title{
+	padding: 20px 0 30px;
 	text-align: center;
-	padding: 10px;
+	border-bottom: 1px solid #CCCCCC;
+}
+.subtitle{
+	font-size: 22px;
+}
+.required-label{
+	text-align: right;
+	color: #555555;
+	font-size: 14px;
+	margin-bottom: 60px;
 }
 #login-div{
-	width:45%;
-	min-width: 300px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, 0%);
-	border: 1px solid #000;
-	padding: 30px;
-	margin-top: 100px;
+	width:calc(50% - 200px);
+	padding: 30px 100px;
+	font-size: 16px;
+	float:left;
+	border-right: 1px solid #CCCCCC;
+	margin-right: -1px;
 }
 .login-input{
 	width: 100%;
 }
 .login-title{
-	padding: 5px;
+	padding-bottom: 8px;
+	font-size: 16px;
 	/*width:100px;*/
 }
 .login-input input{
 	padding: 5px;
-	margin: 5px;
+	height: 39px;
 	width:calc(100% - 10px);
-	border: 1px solid grey;
+	border: 1px solid #AAAAAA;
+	background-color: #fff;
+	margin-bottom: 20px;
 }
 .login-btn{
-	margin: 20px 5px;
-	width: calc(100% - 10px);
+	/*margin: 20px 5px;*/
+	width: 100%;
+	height: 39px;
+	background-color: #000;
+	color: #fff;
+	border: none;
+	font-size: 16px;
+	cursor: pointer;
 }
 .login-err{
-	padding: 5px;
+	/*padding: 5px;*/
+	position: absolute;
+	right: 100px;
+	bottom: 130px;
 	color: red;
+}
+.register-div .login-err{
+	bottom: 113px;
 }
 .login-err img{
 	width:20px;
+	position: relative;
+	top:4px;
 	display: none;
 }
 .input-warning{
 	border-color: red!important;
+}
+.login-remember-box{
+	margin-bottom: 25px;
+	font-size: 16px;
+}
+.login-forget{
+	text-align: center;
+	margin-top: 20px;
+}
+.register-div{
+	margin-left: 50%;
+	width:calc(50% - 200px);
+	padding: 30px 100px;
+	font-size: 16px;
+	border-left: 1px solid #CCCCCC;
+	margin-bottom: 160px;
+}
+.reg-policy{
+	border-bottom: 1px solid #000;
+	margin-bottom: 35px;
+	display: inline-block;
+}
+
+.already-login{
+	width: calc(50% - 200px);
+	padding: 100px;
+	border-right: 1px solid #CCCCCC;
+	margin-bottom: 160px;
+}
+.already-login p{
+	margin-bottom: 30px;
+}
+.already-login p a:hover{
+	text-decoration: underline;
+}
+.single-login-page{
+	overflow: hidden;
+	margin-bottom: 160px;
+}
+.active-des{
+	padding: 30px 0;
+}
+.single-login-page a{
+	/*text-decoration: underline;*/
+	font-weight: bold;
 }

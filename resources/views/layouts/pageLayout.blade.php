@@ -114,7 +114,7 @@
 							if (empty(session('wishlist'))) {
 								echo " hidden>";
 							} else {
-								echo ">".session('wishlist');
+								echo ">".count(session('wishlist'));
 							}?>
 							</div>
 							<img class="hover-icon" data-hover="/assets/img/wishlist-icon-hover.svg" src="/assets/img/wishlist-icon.svg">
@@ -125,7 +125,7 @@
 							if (empty(session('shopping-bag'))) {
 								echo " hidden>";
 							} else {
-								echo ">".session('shopping-bag');
+								echo ">".count(session('shopping-bag'));
 							}?>
 							</div>
 							<img id="shopping_bag" class="hover-icon" data-hover="/assets/img/bag-hover.svg" src="/assets/img/shopping-bag-icon.svg">
@@ -263,140 +263,9 @@
 	<!-- Javascript files -->
 	<script src="/assets/js/jquery-3.2.0.min.js"></script>
 	<script src="/assets/js/auto-complete.min.js"></script>
+	<script src="/assets/js/bonza.js"></script>
 	@yield('js-reference')
 
 </body>
 	@yield('js-function')
-	<script>
-	$(document).ready(function(){
-		var xhr;
-		new autoComplete({
-			minChars: 2,
-			offsetTop: -15,
-		    selector: '#search-input',
-		    source: function(term, response){
-		        try { xhr.abort(); } catch(e){}
-		        xhr = $.getJSON('/search-ajax', { q: term }, function(data){ response(data); });
-		    }
-		});
-
-		new autoComplete({
-			minChars: 1,
-			offsetTop: 10,
-		    selector: '#m-search-input',
-		    menuClass: 'm-search-auto',
-		    source: function(term, response){
-		        try { xhr.abort(); } catch(e){}
-		        xhr = $.getJSON('/search-ajax', { q: term }, function(data){
-	        		response(data);
-			    });
-		    }
-		});
-
-		$(window).scroll(function() {
-		    if ($(this).scrollTop() > 100) {
-		        $('.scroll-up').show();
-		    } else {
-		        $('.scroll-up').hide();
-		    }
-		});
-
-		$('.button-nav').on("click", function(e) {
-		  e.preventDefault();
-		  $(this).toggleClass('button-close');
-		  $(".menu-m-item").toggleClass('open-menu-m');
-		});
-
-		$(".m-service-info").click(function(){
-			$(".mid-footer-content").toggleClass("m-footer-open");
-			$(".footer-links").toggleClass("footer-links-show fadein");
-		});
-
-		$(".hover-icon").hover(function(){
-	  		swapHoverSrc(this)
-	  	},function(){
-	  		swapHoverSrc(this)
-	  	});
-
-		$("#shopping_bag").hover(function(){
-			$(".bag-buy").fadeIn();
-			setTimeout(function(){
-				$(".bag-buy").fadeOut();
-			}, 5000)
-		});
-
-	  	function swapHoverSrc(obj){
-	  		var src = $(obj).attr('src');
-	  		var hover = $(obj).attr('data-hover');
-	  		$(obj).attr('src',hover);
-	  		$(obj).attr('data-hover', src);
-	  	}
-
-	  	//m-menu
-	  	$(".m-menu").click(function(){
-	  		$(".m-wrapper").addClass("m-menu-open");
-	  		$('.m-nav').addClass("m-nav-open");
-	  		$(".m-shade").fadeIn('300');
-	  	});
-	  	$(".m-shade").click(function(){
-	  		$(".m-wrapper").removeClass("m-menu-open");
-	  		$('.m-nav').removeClass("m-nav-open");
-	  		$(".m-shade").fadeOut('300');
-	  		mMenuBack();
-	  	})
-	  	$(".m-menu-second").click(function(){
-	  		$('.m-nav-second').addClass("m-nav-open");
-	  	});
-	  	$("#m-search-clear").click(function(){
-	  		$("#m-search-input").val("");
-	  	});
-	});
-	function scrolltotop(){
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-	function mMenuBack(){
-		$('.m-nav-second').removeClass("m-nav-open");
-	}
-	function open_search(){
-		$('.m-search').fadeIn();
-		$("#m-search-input").focus();
-	}
-	function close_search(){
-		$('.m-search').fadeOut();
-	}
-	function addwishlist(id){
-  		// 		$.ajax({
-  // 			url: "/add-to-wishlist",
-  // 			data:{
-  // 				id: id,
-  // 			}, 
-  // 			success: function(result){
-		        
-		//     }
-		// });
-		$(".wishlist-num").show();
-  		var num = parseInt($(".wishlist-num").html());
-  		$(".wishlist-num").html(num+1);
-  		$(".wishlist-num").addClass("addwishlist");
-		setTimeout(function(){
-			$(".wishlist-num").removeClass("addwishlist");
-		},2100);
-  	}
-
-  	function addShoppingBag(id){
-  		 // 		$.ajax({
-  // 			url: "/add-to-shoppingbag",
-  // 			data:{
-  // 				id: id,
-  // 			}, 
-  // 			success: function(result){
-		        
-		//     }
-		// });
-  		$(".bag-buy").fadeIn();
-		setTimeout(function(){
-			$(".bag-buy").fadeOut();
-		},2000);
-  	}
-	</script>
 </html>

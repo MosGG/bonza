@@ -8,6 +8,12 @@
 @stop
 
 @section('body')
+<?php 
+	$wishlist = array(); 
+	foreach (session('wishlist') as $value) {
+		$wishlist[$value['id']] = true;
+	}
+?>
 <div class="wrapper relative">
 	<div class="breadcrum">
 		<a href="/">首页</a>
@@ -39,11 +45,17 @@
 			  	<ul class="drop-down relative closed">
 			  		<img id="drop-expand" class="transition nav-button" src="/assets/img/right.svg">
 				    <li><a href="javascript:void(0);" id="current-sort" class="nav-button">请选择您的尺码</a></li>
-				    <li><a href="#" class="sort-item">1</a></li>
+					<?php 
+					$size = json_decode($product->size);
+					foreach ($size as $s) {
+						echo "<li><a class='sort-item'>".$s->id." - ".$s->title."</a></li>";
+					}
+					?>
+				    <!-- <li><a href="#" class="sort-item">1</a></li>
 				    <li><a href="#" class="sort-item">2</a></li>
 				    <li><a href="#" class="sort-item">3</a></li>
 				    <li><a href="#" class="sort-item">4</a></li>
-				    <li><a href="#" class="sort-item">5</a></li>
+				    <li><a href="#" class="sort-item">5</a></li> -->
 			  	</ul>
 			</nav>
 			<div id="size-refer" class="transition">查看尺码参考</div>
@@ -64,18 +76,32 @@
 				    </g>
 				</svg>
 			</div>
-			<div id="btn-wishlist" class="transition">加入愿望清单
+			<div id="btn-wishlist" class="transition" onclick="addwishlist({!!$product->id!!})">加入愿望清单
+				<?php if (isset($wishlist[$product->id])) {?>
+				<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+				        <g class="transition PRODUCT-PAGE" transform="translate(-617.000000, -771.000000)" fill-rule="nonzero" fill="#000000">
+				            <g transform="translate(327.000000, 353.000000)">
+			                    <g transform="translate(290.000000, 418.000000)">
+		                            <path d="M11.998125,21.3299999 C11.998125,21.3299999 0,11.8523144 0,6.51981443 C0,2.96307827 2.99953124,0 6.59792756,0 C8.69655825,0 10.8003961,1.5205957 11.998125,2.99953124 C13.1958551,1.5205957 14.9976562,0 17.3983224,0 C20.9967187,0 23.9962499,2.96307827 23.9962499,6.51981443 C23.9962499,11.8523144 11.998125,21.3299999 11.998125,21.3299999 Z" id="Shape"></path>
+			                    </g>
+				            </g>
+				        </g>
+				    </g>
+				</svg>
+				<?php } else {?>
 				<svg width="26px" height="23px" viewBox="0 0 26 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 				    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-				        <g id="PRODUCT-PAGE" class="transition" transform="translate(-1182.000000, -67.000000)" stroke="#fff" stroke-width="0.75" fill="#000" fill-rule="nonzero">
-				            <g id="header" transform="translate(-3.000000, 42.000000)">
-				                <g id="wishlist" transform="translate(1186.000000, 26.000000)">
+				        <g class="transition PRODUCT-PAGE" transform="translate(-1182.000000, -67.000000)" stroke="#fff" stroke-width="0.75" fill="#000" fill-rule="nonzero">
+				            <g transform="translate(-3.000000, 42.000000)">
+				                <g transform="translate(1186.000000, 26.000000)">
 				                    <path d="M17.2781256,2.4 C19.6781256,2.4 21.6,4.3218756 21.6,6.7218756 C21.6,9.1218756 16.9218756,14.4 12,18.4781256 C7.0781256,14.2781256 2.4,9 2.4,6.7218756 C2.4,4.3218756 4.3218756,2.4 6.7218756,2.4 C9.6,2.4 12,6 12,6 C12,6 14.2781256,2.4 17.2781256,2.4 L17.2781256,2.4 Z M17.2781256,0 C15.1218756,0 13.2,1.0781256 12,2.7609372 C10.8,1.0781256 8.8781256,0 6.7218756,0 C3,0 0,3 0,6.7218756 C0,12 12,21.6 12,21.6 C12,21.6 24,12 24,6.7218756 C24,3 21,0 17.2781256,0 Z" id="Shape"></path>
 				                </g>
 				            </g>
 				        </g>
 				    </g>
 				</svg>
+				<?php } ?>
 			</div>
 		</div>
 
@@ -139,7 +165,12 @@
   	});
 
   	$(".nav-button").click(function() {
-    	$(".drop-down").toggleClass("closed");
+  		var height = $(".drop-down li").length * 31 - 1;
+    	if ($(".drop-down").height() == 30) {
+    		$(".drop-down").height(height);
+    	} else {
+    		$(".drop-down").height(30);
+    	}
     	$("#drop-expand").toggleClass("drop-expand");
   	});
 
