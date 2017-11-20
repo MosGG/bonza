@@ -262,7 +262,9 @@ class PagesController extends Controller
     }
 
     public function shoppingbag(Request $request){
-        $shoppingbag = session('shopping-bag');
+        $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
+        $shoppingbag = json_decode($member_bag, true);
+        // $shoppingbag = session('shopping-bag');
         foreach ($shoppingbag as $key => $p) {
             $product = DB::table('portfolios')->where('id',$p['id'])->get();
             $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();

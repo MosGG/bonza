@@ -252,8 +252,6 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'shoppingbag',
             'uses' => 'PagesController@shoppingbag'
         ]);
-        // Route::post('/add-to-wishlist', 'MembershipController@addtowishlist');
-        // Route::post('/remove-from-wishlist', 'MembershipController@removeFromWishlist');
     });
 
      Route::get('/', [
