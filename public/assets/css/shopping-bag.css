@@ -63,6 +63,8 @@
 	border-bottom: 1px solid #CCCCCC;
 	padding-bottom: 25px;
 	margin-bottom: 25px;
+	height: 163px;
+	overflow: hidden;
 }
 .item-left{
 	width: 123px;
@@ -112,10 +114,10 @@
 	color: #000;
 	border-bottom: 1px solid #000;
 }
-#to-wl{
+.to-wl{
 	right: 125px;
 }
-#del{
+.del{
 	right: 0;
 }
 

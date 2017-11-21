@@ -145,7 +145,8 @@ class MembershipController extends Controller
     }
 
     public function myaccount(){
-        return view('pages.myaccount');
+        $member = DB::table('membership')->where("email", session('member'))->get();
+        return view('pages.myaccount')->with('username', $member[0]->username);
     }
 
     public function regEmailSend($member){
@@ -178,10 +179,14 @@ class MembershipController extends Controller
     }
 
     public function removeFromWishlist(Request $request){
-        $i = $request->input('i');
+        $id = $request->input('id');
         $member = session('member');
         $wishlist = session('wishlist');
-        array_splice($wishlist, $i, 1);
+        foreach ($wishlist as $key => $value) {
+            if ($value['id'] == $id) {
+                unset($wishlist[$key]);
+            }
+        }
         $num = count($wishlist);
         DB::table('membership')->where('email', $member)->update(["wishlist" => json_encode($wishlist),"update_time" => time()]);
         $request->session()->put('wishlist', $wishlist);
@@ -206,9 +211,9 @@ class MembershipController extends Controller
             $shoppingbag[] = array("id"=>$id, "size"=>$size, "qty"=>$qty);
         }
         // $num = count($shoppingbag);
-        var_dump($shoppingbag);
-        // DB::table('membership')->where('email', $member)->update(["shopping-bag" => json_encode($shoppingbag),"update_time" => time()]);
-        // $request->session()->put('shopping-bag', $shoppingbag);
+        // var_dump($shoppingbag);
+        DB::table('membership')->where('email', $member)->update(["shopping_bag" => json_encode($shoppingbag),"update_time" => time()]);
+        $request->session()->put('shopping-bag', $shoppingbag);
 
         $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
         foreach ($shoppingbag as $key => $p) {
@@ -227,7 +232,7 @@ class MembershipController extends Controller
         }
         $price['delivery'] = 15;
         $price['subtotal'] = $price['product_total'] + $price['delivery'];
-        return view('partial.shoppingbag')->with("shoppingbag", $shoppingbag)->with('price', $price)->with('id', $id);
+        return view('partial.shoppingbag')->with("shoppingbag", $shoppingbag)->with('price', $price)->with('id', $id)->with('size', $size);
     }
 
     public function removeFromShoppingbag(Request $request){
@@ -241,8 +246,8 @@ class MembershipController extends Controller
             }
         }
         $num = count($shoppingbag);
-        // DB::table('membership')->where('email', $member)->update(["wishlist" => json_encode($wishlist),"update_time" => time(),"token"=>""]);
-        // $request->session()->put('shopping-bag', $shoppingbag);
+        DB::table('membership')->where('email', $member)->update(["shopping_bag" => json_encode($shoppingbag),"update_time" => time()]);
+        $request->session()->put('shopping-bag', $shoppingbag);
         return array("success" => "true", "num" => $num);
     }
 }

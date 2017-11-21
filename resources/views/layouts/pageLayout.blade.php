@@ -123,7 +123,7 @@
 							<div class="shopping-num"
 							<?php 
 							if (empty(session('shopping-bag'))) {
-								echo " hidden>";
+								echo " >";
 							} else {
 								echo ">".count(session('shopping-bag'));
 							}?>

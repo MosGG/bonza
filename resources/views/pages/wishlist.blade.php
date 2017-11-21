@@ -24,10 +24,9 @@
 		<?php } else { ?>
 			<h2 class="title">愿望清单</h2>
 			<?php 
-			$i = 0;
 			foreach($wishlist as $product) { ?>
-				<div class="item relative">
-					<img class="wishlist-del transition" src="/assets/img/bag-delete.svg" onclick="removewishlist({!!$i++!!});">
+				<div class="item relative" data-id="{!!$product->id!!}">
+					<img class="wishlist-del transition" src="/assets/img/bag-delete.svg" onclick="removewishlist({!!$product->id!!});">
 					<div class="item-left">
 						<img src="{!!$product->src!!}">
 					</div>
@@ -39,12 +38,12 @@
 							<div class="p-size-box relative">
 								<nav>
 								  	<ul class="drop-down relative closed">
-								  		<img id="drop-expand" class="transition" src="/assets/img/right.svg">
-									    <li><a href="javascript:void(0);" id="current-sort" class="nav-button">请选择您的尺码</a></li>
+								  		<img class="transition drop" src="/assets/img/right.svg">
+									    <li class="first"><a href="javascript:void(0);" class="nav-button" data-size="" data-id="{!!$product->id!!}">请选择您的尺码</a></li>
 										<?php 
 										$size = json_decode($product->size);
 										foreach ($size as $s) {
-											echo "<li><a class='sort-item'>".$s->id." - ".$s->title."</a></li>";
+											echo "<li><a class='sort-item' data-size='".$s->id."'>".$s->id." - ".$s->title."</a></li>";
 										}
 										?>
 								  	</ul>
@@ -54,13 +53,13 @@
 									<div class="number">1</div>
 									<div class="plus"><img src="/assets/img/plus.svg"></div>
 								</div>
-								<div id="size-refer" class="transition">查看尺码参考</div>
+								<div class="transition size-refer">查看尺码参考</div>
 							</div>
 							<div class="p-btn-box relative">
-								<div id="btn-cart" class="transition">加入购物车
+								<div class="transition btn-cart">加入购物车
 									<svg width="19px" height="22px" viewBox="0 0 19 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 									    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									        <g id="PRODUCT-PAGE-Single" transform="translate(-920.000000, -550.000000)" fill-rule="nonzero" fill="#FFFFFF">
+									        <g class="PRODUCT-PAGE-Single" transform="translate(-920.000000, -550.000000)" fill-rule="nonzero" fill="#FFFFFF">
 									            <g id="Group-4" transform="translate(662.000000, 293.000000)">
 									                <g transform="translate(32.000000, 248.000000)">
 									                    <g transform="translate(226.000000, 9.000000)">
@@ -72,10 +71,10 @@
 									    </g>
 									</svg>
 								</div>
-								<div id="btn-wishlist" class="transition">加入愿望清单
+								<div class="transition btn-wishlist">加入愿望清单
 									<svg width="26px" height="23px" viewBox="0 0 26 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 									    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									        <g id="PRODUCT-PAGE" class="transition" transform="translate(-1182.000000, -67.000000)" stroke="#fff" stroke-width="0.75" fill="#000" fill-rule="nonzero">
+									        <g class="PRODUCT-PAGE transition" transform="translate(-1182.000000, -67.000000)" stroke="#fff" stroke-width="0.75" fill="#000" fill-rule="nonzero">
 									            <g id="header" transform="translate(-3.000000, 42.000000)">
 									                <g id="wishlist" transform="translate(1186.000000, 26.000000)">
 									                    <path d="M17.2781256,2.4 C19.6781256,2.4 21.6,4.3218756 21.6,6.7218756 C21.6,9.1218756 16.9218756,14.4 12,18.4781256 C7.0781256,14.2781256 2.4,9 2.4,6.7218756 C2.4,4.3218756 4.3218756,2.4 6.7218756,2.4 C9.6,2.4 12,6 12,6 C12,6 14.2781256,2.4 17.2781256,2.4 L17.2781256,2.4 Z M17.2781256,0 C15.1218756,0 13.2,1.0781256 12,2.7609372 C10.8,1.0781256 8.8781256,0 6.7218756,0 C3,0 0,3 0,6.7218756 C0,12 12,21.6 12,21.6 C12,21.6 24,12 24,6.7218756 C24,3 21,0 17.2781256,0 Z" id="Shape"></path>
@@ -114,23 +113,46 @@
 		$(this).siblings('.number').html(i);
 	});
 
-	$(".nav-button").click(function() {
-		var nav = $(this).parent().parent();
+	function toggleDropdown(obj){
+		var nav = obj.parent().parent();
 		var height = nav.children("li").length * 31 - 1;
 		if (nav.height() == 30) {
 			nav.height(height);
 		} else {
 			nav.height(30);
 		}
-		$("#drop-expand").toggleClass("drop-expand");
+		nav.find(".drop").toggleClass("drop-expand");
+	}
+
+	$(".nav-button").click(function() {
+		toggleDropdown($(this));
 	});
 
-	function removewishlist(i){
+	$(".sort-item").click(function(){
+		var obj = $(this).parent().siblings('.first').children(".nav-button");
+  		obj.html("&nbsp;&nbsp;&nbsp;&nbsp;"+$(this).html());
+  		obj.attr('data-size', $(this).attr('data-size'));
+  		toggleDropdown($(this));
+  	});
+
+	$(".btn-cart").click(function(){
+		var obj = $(this).parent().parent().find(".nav-button");
+		var size = obj.attr('data-size');
+		var id = obj.attr('data-id');
+		var qty = $(this).parent().parent().find(".number").html();
+  		if (size == "") {
+  			toggleDropdown(obj);
+  		} else {
+  			addShoppingBag(id,size,qty);
+  		}
+	});
+
+	function removewishlist(id){
 		$.ajax({
   			url: "/remove-from-wishlist",
   			method: 'POST',
   			data:{
-  				i: i,
+  				id: id,
   			}, 
   			headers: {
 	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -142,7 +164,7 @@
 				setTimeout(function(){
 					$(".wishlist-num").removeClass("addwishlist");
 				},2100);
-				$(".item").eq(i).fadeOut();
+				$(".item[data-id="+id+"]").fadeOut();
 		    }
 		});
   	}

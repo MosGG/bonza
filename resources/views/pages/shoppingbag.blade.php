@@ -30,7 +30,7 @@
 					<?php 
 					$i = 0;
 					foreach($shoppingbag as $product) { ?>
-						<div class="item relative">
+						<div class="item relative transition" id="p-{!!$product->id!!}">
 							<div class="item-left">
 								<img src="{!!$product->src!!}">
 							</div>
@@ -49,8 +49,8 @@
 									<div class="number">{!!$product->qty!!}</div>
 									<div class="plus"><img src="/assets/img/plus.svg"></div>
 								</div>
-								<div id="to-wl" class="links transition" onclick="removeshoppingbag({!!$product->id!!},{!!$product->size!!},'wishlist')">移至愿望清单</div>
-								<div id="del" class="links transition" onclick="removeshoppingbag({!!$product->id!!},{!!$product->size!!},'none')">从购物袋中删除</div>
+								<div class="to-wl links transition" onclick="removeshoppingbag({!!$product->id!!},{!!$product->size!!},'wishlist')">移至愿望清单</div>
+								<div class="del links transition" onclick="removeshoppingbag({!!$product->id!!},{!!$product->size!!},'none')">从购物袋中删除</div>
 							</div>
 						</div>
 					<?php } ?>
@@ -107,6 +107,16 @@
 		calculateTotal();
 	});
 
+	$(".links").click(function(){
+		var obj = $(this).parent().parent()
+		obj.css('height','0').css('padding-bottom', "0").css('border-bottom', "0px solid #CCCCCC");
+		setTimeout(function(){
+			obj.html("");
+			calculateTotal()
+		}, 500)
+	});
+
+
 	function calculateTotal(){
 		var sum = 0;
 		var id = 0;
@@ -125,44 +135,5 @@
 		delivery = $("#delivery").html();
 		$("#subtotal").html((parseFloat(sum) + parseFloat(delivery)).toFixed(2));
 	}
-
-	// $(".nav-button").click(function() {
-	// 	var nav = $(this).parent().parent();
-	// 	var height = nav.children("li").length * 31 - 1;
-	// 	if (nav.height() == 30) {
-	// 		nav.height(height);
-	// 	} else {
-	// 		nav.height(30);
-	// 	}
-	// 	$("#drop-expand").toggleClass("drop-expand");
-	// });
-
-	function removeshoppingbag(id, size, opt){
-		$.ajax({
-  			url: "/remove-from-shoppingbag",
-  			method: 'POST',
-  			data:{
-  				id: id,
-  				size: size,
-  			}, 
-  			headers: {
-	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-	        },
-  			success: function(result){
-  				console.log(result.num)
-		  //       $(".wishlist-num").show();
-		  // 		$(".wishlist-num").html(result.num);
-		  // 		$(".wishlist-num").addClass("addwishlist");
-				// setTimeout(function(){
-				// 	$(".wishlist-num").removeClass("addwishlist");
-				// },2100);
-				// $(".item").eq(i).fadeOut();
-		    }
-		});
-
-		if (opt == 'wishlist') {
-			addwishlist(id);
-		}
-  	}
 </script>
 @stop
