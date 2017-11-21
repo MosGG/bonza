@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Help - Bonza</title>@stop
+@section('title')<title>帮助 - Bonza</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -13,13 +13,15 @@
 		         <a href="/">首页</a>
 		           <img src="/assets/img/next.svg">
 		          <a href="/help">帮助</a>
+							<img src="/assets/img/next.svg">
+						 <a href="/help">联系我们</a>
          </div>
 
          <div class="nav">
            <h3>帮助</h3>
            <div class="nav_box_one">
              <a href="/help">
-               <span class="hvr-underline-from-center">联系我们</span>
+               <span class="hvr-underline-from-center-selected">联系我们</span>
              </a>
            </div>
 
@@ -54,12 +56,16 @@
            <h3>联系我们</h3>
            <div class="inside">
              <div class="content_box">
-               服务内容：
+               客户服务：
              </div>
 
              <div class="content_box">
                我们的团队一周七天，每天24小时为您服务。
              </div>
+
+						 <div class="content_box">
+						 	服务内容：
+						 </div>
 
              <div class="content_box">
                <p>提供尺码建议</p>

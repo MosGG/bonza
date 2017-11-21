@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Privacy Policy - Bonza</title>@stop
+@section('title')<title>隐私政策 - Bonza</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -13,6 +13,8 @@
 		         <a href="/">首页</a>
 		           <img src="/assets/img/next.svg">
 		          <a href="/help">帮助</a>
+							<img src="/assets/img/next.svg">
+						 <a href="/privacy">隐私政策</a>
          </div>
 
          <div class="nav">
@@ -40,7 +42,7 @@
            </div>
            <div class="nav_box">
              <a href="/privacy">
-               <span class="hvr-underline-from-center">隐私政策</span>
+               <span class="hvr-underline-from-center-selected">隐私政策</span>
              </a>
            </div>
            <div class="nav_box">

@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Deliver Info - Bonza</title>@stop
+@section('title')<title>配送信息 - Bonza</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -13,6 +13,8 @@
 		         <a href="/">首页</a>
 		           <img src="/assets/img/next.svg">
 		          <a href="/help">帮助</a>
+ 		           <img src="/assets/img/next.svg">
+ 		          <a href="/deliver">配送信息</a>
          </div>
 
          <div class="nav">
@@ -25,7 +27,7 @@
 
            <div class="nav_box">
              <a href="/deliver">
-               <span class="hvr-underline-from-center">配送信息</span>
+               <span class="hvr-underline-from-center-selected">配送信息</span>
              </a>
            </div>
            <div class="nav_box">

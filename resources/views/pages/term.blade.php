@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Terms and Conditions - Bonza</title>@stop
+@section('title')<title>服务条款 - Bonza</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -13,6 +13,8 @@
 		         <a href="/">首页</a>
 		           <img src="/assets/img/next.svg">
 		          <a href="/help">帮助</a>
+							<img src="/assets/img/next.svg">
+						 <a href="/term">服务条款</a>
          </div>
 
          <div class="nav">
@@ -35,7 +37,7 @@
            </div>
            <div class="nav_box">
              <a href="/term">
-               <span class="hvr-underline-from-center">服务条款</span>
+               <span class="hvr-underline-from-center-selected">服务条款</span>
              </a>
            </div>
            <div class="nav_box">

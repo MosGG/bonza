@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Recruitment - Bonza</title>@stop
+@section('title')<title>求职招聘 - Bonza</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -14,6 +14,8 @@
 		         <a href="/">首页</a>
 		           <img src="/assets/img/next.svg">
 		          <a href="/help">帮助</a>
+							<img src="/assets/img/next.svg">
+						 <a href="/recruitment">求职招聘</a>
          </div>
 
          <div class="nav">
@@ -46,7 +48,7 @@
            </div>
            <div class="nav_box">
              <a href="/recruitment">
-               <span class="hvr-underline-from-center">求职招聘</span>
+               <span class="hvr-underline-from-center-selected">求职招聘</span>
              </a>
            </div>
          </div>
