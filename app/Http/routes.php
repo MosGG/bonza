@@ -388,6 +388,11 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'PagesController@recruitment'
     ]);
 
+    Route::any('/test', [
+        'as' => 'test',
+        'uses' => 'PayController@getUrl'
+    ]);
+    
     /*
     *  Portfolio Pages (urls for all the portfolio parts)
     */
