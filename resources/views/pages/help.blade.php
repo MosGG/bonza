@@ -76,11 +76,11 @@
              </div>
 
              <div class="content_box">
-               <a href="mailto:customercare@bonza.com.cn">电邮：customercare@bonza.com.cn</a>
+               电邮：<a href="mailto:customercare@bonza.com.cn">customercare@bonza.com.cn</a>
              </div>
 
              <div class="content_box">
-               <a href="tel:1300 0000">联系电话：1300 0000</a>
+               联系电话：<a href="tel:1300 0000">1300 0000</a>
              </div>
 
            </div>
