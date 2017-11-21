@@ -122,12 +122,12 @@ Route::group(['middleware' => 'admin'], function () {
         'as' => 'media-library',
         'uses' => 'admin\PagesController@mediaLibrary'
     ]);
-    
+
     Route::post('/media-library-new-folder', 'admin\PagesController@mediaLibraryNewFolder');
     Route::post('/media-library-delete-folder', 'admin\PagesController@mediaLibraryDelFolder');
     Route::post('/media-modal-sub-folder', 'admin\MediaLibraryController@mediaModalGetFolder');
     Route::post('/media-library-move', 'admin\PagesController@mediaLibraryMove');
-    
+
     Route::get('/logout-action', [
         'as' => 'logout-action',
         'uses' => 'admin\AdminActionController@logout'
@@ -168,6 +168,7 @@ Route::group(['middleware' => 'admin'], function () {
         'uses' => 'admin\PagesController@partnerEdit'
     ]);
 
+
     /*
      Admin Ajax Call From View
     */
@@ -193,15 +194,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin-update-order', 'admin\PortfolioActionController@orderUpdate');
 
     Route::post('/media-upload', 'admin\MediaLibraryController@mediaUpload');
-    
+
     Route::post('/media-upload-to-folder', 'admin\MediaLibraryController@mediaUploadToFolder');
-    
+
     Route::post('/delete-media-file', 'admin\MediaLibraryController@deleteMediaFile');
 
     Route::post('/file-upload', 'admin\MediaLibraryController@fileUpload');
     Route::post('/document-delete-action', 'admin\MediaLibraryController@deleteFile');
 
-   
+
     Route::post('/refund-status-change', 'admin\PortfolioActionController@refundStatusChange');
 
     Route::post('/portfolio-add-action', 'admin\PortfolioActionController@portfolioNew');
@@ -227,7 +228,7 @@ Route::group(['middleware' => 'admin'], function () {
  * Front-end pages
  */
 Route::group(['middleware' => 'web'], function () {
-    
+
     //membership
     Route::group(['middleware' => 'member'], function () {
         Route::get('/logout', [
@@ -300,7 +301,7 @@ Route::group(['middleware' => 'web'], function () {
     ]);
 
     Route::Get('/forget-password', function(){
-        return view('pages.forget'); 
+        return view('pages.forget');
     });
     Route::Post('/forget-password', [
         'as' => 'forget',
@@ -355,6 +356,36 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/service', [
         'as' => 'service',
         'uses' => 'PagesController@service'
+    ]);
+
+    Route::get('/help', [
+        'as' => 'help',
+        'uses' => 'PagesController@help'
+    ]);
+
+    Route::get('/deliver', [
+        'as' => 'deliver',
+        'uses' => 'PagesController@deliver'
+    ]);
+
+    Route::get('/refund', [
+        'as' => 'refund',
+        'uses' => 'PagesController@refund'
+    ]);
+
+    Route::get('/term', [
+        'as' => 'term',
+        'uses' => 'PagesController@term'
+    ]);
+
+    Route::get('/privacy', [
+        'as' => 'privacy',
+        'uses' => 'PagesController@privacy'
+    ]);
+
+    Route::get('/recruitment', [
+        'as' => 'recruitment',
+        'uses' => 'PagesController@recruitment'
     ]);
 
     /*

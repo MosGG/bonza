@@ -56,11 +56,11 @@ class PagesController extends Controller
 
     public function login(Request $request){
         $req_url = $request->input('req_url');
-        return view('pages.login')->with('req_url', $req_url);   
+        return view('pages.login')->with('req_url', $req_url);
     }
 
     public function register(Request $request){
-        return view('pages.register');   
+        return view('pages.register');
     }
 
     public function product(Request $request){
@@ -196,7 +196,7 @@ class PagesController extends Controller
         } else {
             $partners = DB::table('partner')->where('category',$category)->orderBy('date','DESC')->get();
         }
-        
+
         $page = $request->input("page");
         if (empty($page)) $page = 1;
         $total = count($partners);
@@ -283,9 +283,9 @@ class PagesController extends Controller
         $lang_key = $language;
         if ($lang_key !== "ch" && $lang_key !== "en") {
             $lang_key = "en";
-            $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 4);   
+            $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 4);
             if (preg_match("/zh-c/i", $lang) || preg_match("/zh/i", $lang)) {
-                $lang_key = 'ch';  
+                $lang_key = 'ch';
             }
         }
         $translate = DB::table('translate')->get(array("tkey",$lang_key));
@@ -300,4 +300,29 @@ class PagesController extends Controller
         $category = DB::table('category')->where('id', $id)->value('name');
         return $category;
     }
+
+    public function help(Request $request){
+        return view('pages.help');
+    }
+
+    public function deliver(Request $request){
+        return view('pages.deliver');
+    }
+
+    public function refund(Request $request){
+        return view('pages.refund');
+    }
+
+    public function term(Request $request){
+        return view('pages.term');
+    }
+
+    public function privacy(Request $request){
+        return view('pages.privacy');
+    }
+
+    public function recruitment(Request $request){
+        return view('pages.recruitment');
+    }
+
 }

@@ -10,23 +10,31 @@ use Mail;
 class EmailController extends Controller
 {
     public function messageSend(Request $request){
+  $fname = $request->input('firstname');
+  $lname = $request->input('lastname');
+  $phone = $request->input('phone');
+  $email = $request->input('email');
+  $description = $request->input('description');
 
-    	$name = $request->input('name');
-    	$email = $request->input('email');
-    	$message = $request->input('message');
-        $phone = $request->input('phone');
 
-    	$messageBody = "Name: " . $name ."<br>";
-        $messageBody = "Phone: " . $phone ."<br>";
-        $messageBody .= "Email: " . $email ."<br>";
-        $messageBody .= "Message: " . $message ."<br>";
 
-    	Mail::send('emails.emailTemplate', ['messageBody' => $messageBody], function ($message) use ($name, $email) {
-            $message->from($email, "Messages from ".$name);
 
-            $message->to("sicong@cheee.com.au")->subject("Message From TheMap Website - " . $name);
-            });
-        sleep(5);
-        return '{"sendstatus": 1, "message":"Message has been sent, we will contact you as soon as possible!"}';
-    }	
+  $messageBody = "Name: " . $fname ." ".$lname."<br>";
+  $messageBody .= "Email: " . $email ."<br>";
+  $messageBody .= "Phone: " . $phone ."<br>";
+  $messageBody .= "Description: " . $description ."<br>";
+
+  $email = ["xiaofan@cheee.com.au","eazyee6@gmail.com"];
+  Mail::send('emails.emailTemplate', ['messageBody' => $messageBody], function ($m) use ($fname,$email) {
+    foreach ($email as $e)
+     {
+       $m->from('hello@app.com', 'Your Application');
+
+       $m->to($e)->subject("Message From client - " . $fname);
+     }
+
+
+    });
+    return '{"sendstatus": 1, "message":"Message has been sent, Bonza will contact you as soon as possible!"}';
+  }
 }
