@@ -1,6 +1,7 @@
 .wishlist-box{
 	margin-bottom: 160px;
 	text-align: center;
+	min-height: 600px;
 }
 .wishlist-title{
 	font-size: 28px;
@@ -45,6 +46,7 @@
 	line-height: 38px;
 	text-align: center;
 	font-size: 16px;
+	cursor: pointer;
 }
 #btn-l{
 	float: left;
@@ -55,11 +57,12 @@
 	background-color: #000;
 }
 .left-detail{
-	width: 66%;
+	width: 68.3%;
 }
 .item{
 	border-bottom: 1px solid #CCCCCC;
 	padding-bottom: 25px;
+	margin-bottom: 25px;
 }
 .item-left{
 	width: 123px;
@@ -78,7 +81,7 @@
 .item-right h3{
 	font-size: 16px;
 	font-weight: normal;
-	margin-bottom: 40px;
+	margin-bottom: 60px;
 	line-height: 27px;
 }
 .item-right h4{
@@ -145,4 +148,41 @@
 .plus img{
 	position: relative;
 	top: 1px;
+}
+
+
+.right-checkout{
+	width: 28.2%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 16px;
+	/*font-weight: lighter;*/
+	line-height: 36px;
+	
+}
+.rc-detail{
+	padding: 25px;
+	margin-bottom: 30px;
+	border: 1px solid #AAAAAA;
+}
+.rc-d-box{
+	overflow: hidden;
+}
+.rc-left{
+	float: left;
+}
+.rc-right{
+	float: right;
+}
+.rc-line{
+	border-bottom: 1px solid #AAAAAA;
+	margin: 25px 0;
+}
+#rc-b,#rc-c{
+	margin-bottom: 15px;
+}
+#rc-c{
+	color: #fff;
+	background-color: #000
 }

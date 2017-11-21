@@ -264,7 +264,7 @@ class PagesController extends Controller
     public function shoppingbag(Request $request){
         $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
         $shoppingbag = json_decode($member_bag, true);
-        // $shoppingbag = session('shopping-bag');
+        $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
         foreach ($shoppingbag as $key => $p) {
             $product = DB::table('portfolios')->where('id',$p['id'])->get();
             $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
@@ -277,8 +277,11 @@ class PagesController extends Controller
             $product[0]->size = $p['size'];
             $product[0]->qty = $p['qty'];
             $shoppingbag[$key] = $product[0];
+            $price['product_total'] += $product[0]->price * $product[0]->qty;
         }
-        return view('pages.shoppingbag')->with('shoppingbag', $shoppingbag);
+        $price['delivery'] = 15;
+        $price['subtotal'] = $price['product_total'] + $price['delivery'];
+        return view('pages.shoppingbag')->with('shoppingbag', $shoppingbag)->with('price', $price);
     }
 
     private function getTranslate($language){
