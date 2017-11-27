@@ -24,7 +24,7 @@ $(document).ready(function(){
 	});
 
 	$(window).scroll(function() {
-	    if ($(this).scrollTop() > 100) {
+	    if ($(this).scrollTop() > 10) {
 	        $('.scroll-up').show();
 	    } else {
 	        $('.scroll-up').hide();

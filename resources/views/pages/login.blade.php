@@ -76,7 +76,7 @@
 			</div>
 			<div class="login-input">
 				<div class="login-title">密码 *</div>
-				<input name="password" required type='password' minlength="4" maxlength="16" placeholder="请输入您的密码">
+				<input name="r-password" required type='password' minlength="4" maxlength="16" placeholder="请输入您的密码">
 			</div>
 			<div class="login-input">
 				<div class="login-title">确认密码 *</div>
@@ -148,8 +148,9 @@
 			        url: "/register",
 			        data: {
 			        	email: $('input[name=email]').val(),
-			            username: $('input[name=username]').val(),
-			            password: $('input[name=password]').val(),
+			            lastname: $('input[name=lastname]').val(),
+			            firstname: $('input[name=firstname]').val(),
+			            password: $('input[name=r-password]').val(),
 			            address: $('input[name=address]').val(),
 			            mobile: $('input[name=mobile]').val(),
 			        },
@@ -192,7 +193,7 @@
 			$("input[name=repeat-email]").addClass("input-warning");
 			result = false;
 		}
-		if ($("input[name=repeat-password]").val() !== $("input[name=password]").val()) {
+		if ($("input[name=repeat-password]").val() !== $("input[name=r-password]").val()) {
 			$("input[name=repeat-password]").addClass("input-warning");
 			result = false;
 		}

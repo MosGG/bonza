@@ -83,6 +83,54 @@ class PagesController extends Controller
     	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','product');
     }
 
+    public function designers(Request $request){
+        $designers = DB::table('portfolios')->groupBy('origin')->orderBy('origin')->get(array('origin'));
+        $d_array = array(
+            "A" => array(),
+            "B" => array(),
+            "C" => array(),
+            "D" => array(),
+            "E" => array(),
+            "F" => array(),
+            "G" => array(),
+            "H" => array(),
+            "I" => array(),
+            "J" => array(),
+            "K" => array(),
+            "L" => array(),
+            "M" => array(),
+            "N" => array(),
+            "O" => array(),
+            "P" => array(),
+            "Q" => array(),
+            "R" => array(),
+            "S" => array(),
+            "T" => array(),
+            "U" => array(),
+            "V" => array(),
+            "W" => array(),
+            "X" => array(),
+            "Y" => array(),
+            "Z" => array(),
+            "0-9" => array(),
+        );
+        foreach ($designers as $value) {
+            $initial = substr($value->origin, 0, 1);
+            if (is_numeric($initial)) {
+                $d_array['0-9'][] = $value->origin;
+            } else {
+                $d_array[strtoupper($initial)][] = $value->origin;
+            }
+        }
+        return view('pages.designers')->with('action','designers')->with('designers', $d_array);
+    }
+
+    public function singleDesigner($designer, Request $request){
+        // $designer = $request->input('designer');
+        $designer = html_entity_decode($designer);
+        var_dump($designer);
+        return view('pages.singledesigner')->with('action','designers');
+    }
     public function newarrival(Request $request){
         //change logic here
         $product = DB::table('portfolios')->where('status', '=', '1')->where('client','0')->orderBy('sort')->get();

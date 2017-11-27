@@ -97,15 +97,7 @@
 					</div>
 					<img id="logo" class="center" src="/assets/img/bonza.svg">
 					<div class="right vertical-middle icons">
-						<a class="m-hide-icon relative" 
-						<?php 
-							if (empty(session("member"))) {
-								echo "href='/login'";
-							} else {
-								echo "href='/myaccount'";
-							}
-						?>
-						>
+						<a class="m-hide-icon relative" href='/myaccount'>
 							<img class="hover-icon" data-hover="/assets/img/login-hover.svg" src="/assets/img/login-icon.svg">
 						</a>
 						<a class="m-hide-icon relative" href="/wishlist">
@@ -147,9 +139,9 @@
 								if (isset($action) && $action == 'newarrival') echo "action-selected";
 							?>
 							">新品</span></a>
-						<a href="/brand"><span class="hvr-underline-from-center
+						<a href="/designers"><span class="hvr-underline-from-center
 							<?php 
-								if (isset($action) && $action == 'brand') echo "action-selected";
+								if (isset($action) && $action == 'designers') echo "action-selected";
 							?>
 							">品牌</span></a>
 						<a href="/product"><span class="hvr-underline-from-center

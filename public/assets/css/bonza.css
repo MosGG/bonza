@@ -4,8 +4,8 @@ a,a:visited{
 	color:inherit;
 }
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/assets/font/montserrat/Montserrat-Regular.otf');
+    font-family: 'Avenir';
+    src: url('/assets/font/AvenirLTStd-Light.otf');
 }
 /*@font-face {
     font-family: 'Montserrat-UltraLight';
@@ -27,7 +27,7 @@ html,body{
 	height: 100%;
 }
 body{
-	font-family: "PingFang SC", "Montserrat", "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
+	font-family: "Avenir", "PingFang SC",  "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
 	background-color: #fff;
 	overflow-x: hidden;
 }

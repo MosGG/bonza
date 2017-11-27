@@ -328,6 +328,16 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'PagesController@product'
     ]);
 
+    Route::get('/designers', [
+        'as' => 'designers',
+        'uses' => 'PagesController@designers'
+    ]);
+
+    Route::get('/designers/{designer}', [
+        'as' => 'designers',
+        'uses' => 'PagesController@singleDesigner'
+    ]);
+
     Route::get('/newarrival', [
         'as' => 'newarrival',
         'uses' => 'PagesController@newarrival'
@@ -371,4 +381,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/email-sending', 'EmailController@messageSend');
     Route::post('/get-portfolio-data', 'PortfolioController@getPortfolioData');
     Route::get('/search-ajax', 'PortfolioController@searchAjax');
+
+
+
+    // test
+    Route::Get('/amazy', function(){
+        return view('pages.amazy'); 
+    });
 });

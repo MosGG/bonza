@@ -51,7 +51,8 @@ class MembershipController extends Controller
     public function register(Request $request){
         $member = array(
             'email' => trim($request->input("email")),
-            'username' => $request->input("username"),
+            'lastname' => $request->input("lastname"),
+            'firstname' => $request->input("firstname"),
             'password' => md5($request->input("password")),
             'address' => $request->input("address"),
             'mobile' => $request->input("mobile"),
@@ -146,7 +147,7 @@ class MembershipController extends Controller
 
     public function myaccount(){
         $member = DB::table('membership')->where("email", session('member'))->get();
-        return view('pages.myaccount')->with('username', $member[0]->username);
+        return view('pages.myaccount')->with('username', $member[0]->firstname);
     }
 
     public function regEmailSend($member){
