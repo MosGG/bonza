@@ -28,10 +28,10 @@ class MembershipController extends Controller
                     $request->session()->put('shopping-bag', json_decode($member[0]->shopping_bag, true));
 
                     if ($remember == "true") {
-                        setcookie("bonza_username", $username, time()+3600*24*30);  
+                        setcookie("bonza_username", $username, time()+3600*24*30);
                         setcookie("bonza_password", $password, time()+3600*24*30);
                     }
-                    
+
                 }
             }
         }
@@ -42,8 +42,8 @@ class MembershipController extends Controller
     {
         $request->session()->flush();
         if(!empty($_COOKIE['bonza_username'])) {
-            setcookie("bonza_username", null, time()-3600*24*30); 
-            setcookie("bonza_password", null, time()-3600*24*30);   
+            setcookie("bonza_username", null, time()-3600*24*30);
+            setcookie("bonza_password", null, time()-3600*24*30);
         }
         return Redirect::to('/login');
     }
@@ -51,10 +51,11 @@ class MembershipController extends Controller
     public function register(Request $request){
         $member = array(
             'email' => trim($request->input("email")),
-            'username' => $request->input("username"),
+            'firstname' => $request->input("firstname"),
+            'lastname' => $request->input("lastname"),
             'password' => md5($request->input("password")),
             'address' => $request->input("address"),
-            'mobile' => $request->input("mobile"),
+            'mobile' => $request->input("mobile")
         );
 
         if (!empty($member['email']) && !empty($member['password'])){
@@ -112,7 +113,7 @@ class MembershipController extends Controller
             $token_exp = time() + 3600 * 24;
             if ($token_exp - $member[0]->token_exp > 3600){
                 $token = md5($member[0]->email.$member[0]->password.time());
-                
+
                 $member_info = array(
                     "email" => $member[0]->email,
                     "username" => empty($member[0]->username)?"Customer":$member[0]->username,
@@ -186,5 +187,121 @@ class MembershipController extends Controller
         DB::table('membership')->where('email', $member)->update(["wishlist" => json_encode($wishlist),"update_time" => time(),"token"=>""]);
         $request->session()->put('wishlist', $wishlist);
         return array("success" => "true", "num" => $num);
+    }
+
+    public function addressbook(Request $request){
+        $id = session("member_id");
+        $default_address = DB::table('addressbook')->where('member_id', $id)->where('default',1)->first();
+        $address = DB::table('addressbook')->where('member_id', $id)->where('default',0)->get();
+        return view('pages.addressbook')->with('address',$address)->with('default_address',$default_address);
+    }
+
+    public function addressbooknew(Request $request){
+        return view('pages.addressbook_new');
+    }
+
+    public function newaddress(Request $request){
+        $id = session("member_id");
+        if($request->input("default") == "true"){
+          $default = 1;
+          DB::table('addressbook')->where('member_id', $id)->update(["default" => 0]);
+        }else{
+          $default = 0;
+        }
+        $address = array(
+            'firstname' => $request->input("firstname"),
+            'lastname' => $request->input("lastname"),
+            'member_id' => $id,
+            'phone' => $request->input("phone"),
+            'address' => $request->input("address"),
+            'address_second' => $request->input("address2"),
+            'city' => $request->input("city"),
+            'state' => $request->input("state"),
+            'postcode' => $request->input("postcode"),
+            'default' => $default
+        );
+        DB::table('addressbook')->insert($address);
+        return array("success" => "添加成功");
+    }
+
+    public function deleteaddress(Request $request){
+        $id = session("member_id");
+        // $default = DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->first();
+        // if ($default == 1){
+        //   DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->delete();
+        // }
+        DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->delete();
+        return array("success" => "删除成功");
+    }
+
+    public function addressbooksingle($id, Request $request){
+      $info = DB::table('addressbook')->where('id', $id)->get();
+      $firstname = $info[0]->firstname;
+      $lastname = $info[0]->lastname;
+      $phone = $info[0]->phone;
+      $address = $info[0]->address;
+      $address_second = $info[0]->address_second;
+      $city = $info[0]->city;
+      $state = $info[0]->state;
+      $postcode = $info[0]->postcode;
+      $default = $info[0]->default;
+      return view('pages.addressbooksingle')
+                    ->with('firstname', $firstname)->with('lastname', $lastname)
+                    ->with('phone',$phone)
+                    ->with('address',$address)
+                    ->with('address_second',$address_second)
+                    ->with('city',$city)
+                    ->with('state',$state)
+                    ->with('postcode',$postcode)
+                    ->with('default',$default);
+    }
+
+    public function addressbooksingleupdate($id, Request $request){
+      $mem_id = session("member_id");
+      if($request->input("default") == "true"){
+        $default = 1;
+        DB::table('addressbook')->where('member_id', $mem_id)->update(["default" => 0]);
+      }else {
+        $default = 0;
+      }
+        DB::table('addressbook')->where('id', $id)->update(["firstname"=>$request->firstname,"lastname"=>$request->lastname,
+        "phone"=>$request->phone,"address"=>$request->address,"address_second"=>$request->address2,
+        "city"=>$request->city,"state"=>$request->state,"postcode"=>$request->postcode,"default"=>$default]);
+        return array("success" => "修改成功");
+    }
+
+
+    public function accountinfo(Request $request){
+        $id = session("member_id");
+        $info = DB::table('membership')->where('id', $id)->get();
+        $firstname = $info[0]->firstname;
+        $lastname = $info[0]->lastname;
+        $email = $info[0]->email;
+        $phone = $info[0]->mobile;
+        return view('pages.accountinfo')->with('firstname', $firstname)->with('lastname', $lastname)->with('email',$email)->with('phone',$phone);
+    }
+
+    public function updateinfo(Request $request){
+        $id = session("member_id");
+        $existemail = DB::table('membership')->where('email', $request->email)->where('id','<>' ,$id)->exists();
+        if($existemail == false){
+          DB::table('membership')->where('id', $id)->update(["email" => $request->email,"firstname"=>$request->firstname,"lastname"=>$request->lastname,"mobile"=>$request->phone,"update_time" => time(),"token"=>""]);
+          return array("success" => "修改成功");
+        }else {
+          return array("success" => "邮箱已被注册");
+        }
+    }
+
+    public function updatepassword(Request $request){
+        $id = session("member_id");
+        $password = md5($request->input("currentpassword"));
+        $info = DB::table('membership')->where('id', $id)->get();
+        if($password == $info[0]->password){
+          $newpassword = md5($request->newpassword);
+          DB::table('membership')->where('id', $id)->update(["password" => $newpassword, "update_time" => time(),"token"=>""]);
+          return array("success" => "密码修改成功");
+        }else {
+          return array("success" => "密码不正确");
+        }
     }
 }

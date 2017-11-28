@@ -241,6 +241,52 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'MembershipController@myaccount'
         ]);
 
+        Route::get('/myaccount/addressbook', [
+            'as' => 'addressbook',
+            'uses' => 'MembershipController@addressbook'
+        ]);
+
+        Route::get('/myaccount/addressbook/new', [
+            'as' => 'addressbooknew',
+            'uses' => 'MembershipController@addressbooknew'
+        ]);
+
+        Route::post('/myaccount/addressbook/newaddress', [
+            'as' => 'newaddress',
+            'uses' => 'MembershipController@newaddress'
+        ]);
+
+        Route::post('/myaccount/addressbook/deleteaddress', [
+            'as' => 'deleteaddress',
+            'uses' => 'MembershipController@deleteaddress'
+        ]);
+
+        Route::get('/myaccount/addressbooksingle/{id}', [
+            'as' => 'addressbooksingle',
+            'uses' => 'MembershipController@addressbooksingle'
+        ]);
+
+        Route::post('/myaccount/addressbooksingle/{id}/update', [
+            'as' => 'addressbooksingleupdate',
+            'uses' => 'MembershipController@addressbooksingleupdate'
+        ]);
+
+        Route::get('/myaccount/accountinfo', [
+            'as' => 'accountinfo',
+            'uses' => 'MembershipController@accountinfo'
+        ]);
+
+
+        Route::post('/myaccount/updateinfo', [
+            'as' => 'updateinfo',
+            'uses' => 'MembershipController@updateinfo'
+        ]);
+
+        Route::post('/myaccount/updatepassword', [
+            'as' => 'updatepassword',
+            'uses' => 'MembershipController@updatepassword'
+        ]);
+
         Route::get('/wishlist', [
             'as' => 'wishlist',
             'uses' => 'PagesController@wishlist'
@@ -392,7 +438,7 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'test',
         'uses' => 'PayController@getUrl'
     ]);
-    
+
     /*
     *  Portfolio Pages (urls for all the portfolio parts)
     */
