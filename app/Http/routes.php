@@ -256,6 +256,12 @@ Route::group(['middleware' => 'web'], function () {
 
         Route::post('/add-to-shoppingbag', 'MembershipController@addToShoppingbag');
         Route::post('/remove-from-shoppingbag', 'MembershipController@removeFromShoppingbag');
+
+        Route::get('/checkout', [
+            'as' => 'checkout',
+            'uses' => 'PagesController@checkout'
+        ]);
+
     });
 
      Route::get('/', [
