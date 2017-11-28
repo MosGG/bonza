@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>退换货信息 - Bonza</title>@stop
+@section('title')<title>Bonza - 退换货信息</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">

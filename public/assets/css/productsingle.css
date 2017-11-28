@@ -86,6 +86,10 @@ nav .drop-down li a {
     display: block;
     /*color: #AAAAAA;*/
     text-decoration: none;
+    cursor: pointer;
+}
+#current-sort{
+	text-transform: uppercase;
 }
 .sort-item{
 	/*text-align: center;*/

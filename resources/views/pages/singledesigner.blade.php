@@ -1,10 +1,11 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Bonza - 新品</title>@stop
+@section('title')<title>Bonza - {!!$designer_info->name!!}</title>@stop
 
 @section('css-reference')
-<link href="/assets/css/product.css" rel="stylesheet">
-<link href="/assets/css/newarrival.css" rel="stylesheet">
+	<link href="/assets/css/singledesigners.css" rel="stylesheet">
+	<link href="/assets/css/product.css" rel="stylesheet">
+	<link href="/assets/css/newarrival.css" rel="stylesheet">
 @stop
 
 @section('body')
@@ -16,17 +17,20 @@
 		}
 	}
 ?>
+<div class="d-banner relative">
+	<img src="{!!$designer_info->banner!!}">
+	<div class="wrapper relative">
+		<h2>{!!$designer_info->name!!}</h2>
+		<p>{!!$designer_info->description!!}</p>
+	</div>
+</div>
 <div class="wrapper">
-	<div class="total-number">
-		<span class="total-number-content">
-			<?php 
-				if ($meta['items_per_page'] > $meta['total']) {
-					echo "<b>".$meta['total']."</b> / ".$meta['total']."个结果";
-				} else {
-					echo "<b>".$meta['items_per_page']."</b> / ".$meta['total']."个结果";
-				}
-			?>
-		</span>
+	<div class="breadcrum">
+		<a href="/">首页</a>
+		<img src="/assets/img/next.svg">
+		<a href="/designers">品牌</a>
+		<img src="/assets/img/next.svg">
+		<a href="/designers" style="text-transform: uppercase;">{!!$designer_info->name!!}</a>
 	</div>
 	<div class="page-control relative">
 	  	<nav>
@@ -90,26 +94,26 @@
 		<div id='layPage2' class='laypage'></div>
 	</div>
 	<div class="bottom-margin"></div>
-</div>
-<div class="m-page-ctl relative">
-	<span class="center">第{!!$meta['page']!!}/{!!$meta['allPages']!!}页</span>
-	<div id='layPage3'></div>
-</div>
+
+	<div class="m-page-ctl relative">
+		<span class="center">第{!!$meta['page']!!}/{!!$meta['allPages']!!}页</span>
+		<div id='layPage3'></div>
+	</div>
 <?php 
  	//qurey string to array
 	$str = isset($_SERVER['QUERY_STRING'])?$_SERVER['QUERY_STRING']:"";
 	parse_str($str, $qurey);
 	if (empty($qurey["item"])) $qurey["item"] = 24;
 ?>
+</div>
 @stop
 
 @section('js-reference')
+<script type="text/javascript" src="/assets/js/laypage/laypage.js"></script>
 @stop
 
 @section('js-function')
-<script type="text/javascript" src="/assets/js/laypage/laypage.js"></script>
 <script type="text/javascript">
-
 	$(function() {
 	  	$(".nav-button").click(function() {
 	    	$(".drop-down").toggleClass("closed");
@@ -178,6 +182,8 @@
 	      	}
     	}
   	});
-
 </script>
 @stop
+
+
+

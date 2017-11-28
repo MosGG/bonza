@@ -299,8 +299,15 @@ Route::group(['middleware' => 'web'], function () {
             'as' => 'shoppingbag',
             'uses' => 'PagesController@shoppingbag'
         ]);
-        // Route::post('/add-to-wishlist', 'MembershipController@addtowishlist');
-        // Route::post('/remove-from-wishlist', 'MembershipController@removeFromWishlist');
+
+        Route::post('/add-to-shoppingbag', 'MembershipController@addToShoppingbag');
+        Route::post('/remove-from-shoppingbag', 'MembershipController@removeFromShoppingbag');
+
+        Route::get('/checkout', [
+            'as' => 'checkout',
+            'uses' => 'PagesController@checkout'
+        ]);
+
     });
 
      Route::get('/', [
@@ -323,10 +330,10 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'MembershipController@login'
     ]);
 
-    Route::get('/register', [
-        'as' => 'register',
-        'uses' => 'PagesController@register'
-    ]);
+    // Route::get('/register', [
+    //     'as' => 'register',
+    //     'uses' => 'PagesController@register'
+    // ]);
 
     Route::Post('/register', [
         'as' => 'register',
@@ -372,6 +379,16 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/product', [
         'as' => 'product',
         'uses' => 'PagesController@product'
+    ]);
+
+    Route::get('/designers', [
+        'as' => 'designers',
+        'uses' => 'PagesController@designers'
+    ]);
+
+    Route::get('/designers/{designer}', [
+        'as' => 'designers',
+        'uses' => 'PagesController@singleDesigner'
     ]);
 
     Route::get('/newarrival', [
@@ -452,4 +469,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('/email-sending', 'EmailController@messageSend');
     Route::post('/get-portfolio-data', 'PortfolioController@getPortfolioData');
     Route::get('/search-ajax', 'PortfolioController@searchAjax');
+
+
+
+    // test
+    Route::Get('/amazy', function(){
+        return view('pages.amazy'); 
+    });
 });

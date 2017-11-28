@@ -1,0 +1,71 @@
+.checkout-process{
+	border-top: 1px solid #AAAAAA;
+	border-bottom:  1px solid #AAAAAA;
+	height: 48px;
+	position: absolute;
+	top: 120px;
+	z-index: 20;
+	width: 100%;
+	background: #fff;
+}
+.ck-sub-nav {
+    width: 600px;
+    text-align: center;
+}
+.ck-sub-nav span{
+	padding: 0 40px;
+	font-size: 14px;
+	color: #AAAAAA;
+}
+.current-step{
+	color: #000!important;
+}
+.ck-detail{
+	padding: 60px 15px;
+}
+.ck-d-left{
+	margin-right: 400px;
+}
+.ck-d-right{
+	position: absolute;
+	right: 15px;
+	top: 60px;
+	width: 370px;
+	height: 300px;
+}
+.required-label{
+	text-align: right;
+	color: #555555;
+	font-size: 14px;
+	position: absolute;
+	top: -30px;
+	right: 0;
+}
+.ck-detail h2{
+	font-size: 22px;
+	padding-bottom: 30px;
+	border-bottom: 1px solid #AAAAAA;
+}
+.ck-d-wrapper{
+	max-width: 370px;
+	padding: 20px 0;
+}
+.login-input{
+	width: 100%;
+}
+.login-title{
+	padding-bottom: 8px;
+	font-size: 16px;
+}
+.login-input input{
+	padding: 5px;
+	height: 29px;
+	width: calc(100% - 10px);
+	border: 1px solid #AAAAAA;
+	background-color: #fff;
+	margin-bottom: 20px;
+}
+.login-remember-box{
+	margin-bottom: 25px;
+	font-size: 16px;
+}

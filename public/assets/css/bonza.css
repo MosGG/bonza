@@ -4,8 +4,8 @@ a,a:visited{
 	color:inherit;
 }
 @font-face {
-    font-family: 'Montserrat';
-    src: url('/assets/font/montserrat/Montserrat-Regular.otf');
+    font-family: 'Avenir';
+    src: url('/assets/font/AvenirLTStd-Light.otf');
 }
 /*@font-face {
     font-family: 'Montserrat-UltraLight';
@@ -27,7 +27,7 @@ html,body{
 	height: 100%;
 }
 body{
-	font-family: "PingFang SC", "Montserrat", "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
+	font-family: "Avenir", "PingFang SC",  "Noto Sans CJK", "Source Han Sans", "Microsoft Yahei", source-han-sans-simplified-c, sans-serif;
 	background-color: #fff;
 	overflow-x: hidden;
 }
@@ -179,7 +179,7 @@ p{
 	line-height: 18px;
 	color: #fff;
 	position: absolute;
-    top: -18px;
+    top: -23px;
     right: -4px;
 	text-align: center;
 	transform: scale(0.8);
@@ -198,7 +198,7 @@ p{
 }
 .shopping-num{
 	position: absolute;
-    top: -8px;
+    top: -11px;
     right: 4px;
 	transform: scale(0.8);
 	height: 18px;
@@ -689,6 +689,7 @@ footer{
 	margin: 30px 0 20px 0;
 }
 .breadcrum img{
+    margin: 0 5px;
 	height: 14px;
 	position: relative;
 	top: 2px;
@@ -701,7 +702,7 @@ input[type=checkbox] {
   	height: 20px;
   	margin: 0px 15px 0px 0px;
   	cursor: pointer;
-  	font-size: 18px;
+  	font-size: 14px;
     visibility: hidden;
 }
 
@@ -712,8 +713,8 @@ input[type=checkbox]:after {
     display: inline-block;
     padding-left: 2px;
     color:#000;
-    width:18px;
-    height:20px;
+    width:14px;
+    height:16px;
     visibility: visible;
     border:2px solid #000;
 }

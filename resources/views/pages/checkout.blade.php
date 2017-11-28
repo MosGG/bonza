@@ -3,11 +3,75 @@
 @section('title')<title>Bonza - 购物车</title>@stop
 
 @section('css-reference')
-	<link href="/assets/css/shopping-bag.css" rel="stylesheet">
+	<link href="/assets/css/checkout.css" rel="stylesheet">
 @stop
 
 @section('body')
-<div class="wrapper single-login-page">
+<div class="checkout-process">
+	<div class="wrapper relative">
+		<div class="center ck-sub-nav">
+			<span>1&nbsp;&nbsp;&nbsp;登录</span>
+			<span class="current-step">2&nbsp;&nbsp;&nbsp;运送</span>
+			<span>3&nbsp;&nbsp;&nbsp;付款</span>
+			<span>4&nbsp;&nbsp;&nbsp;确定</span>
+		</div>
+	</div>
+</div>
+<div class="wrapper ck-detail relative">
+	<div class="ck-d-left">
+		<h2>添加送货地址</h2>
+		<div class="ck-d-wrapper relative">
+			<div class="required-label">*此栏为必填</div>
+			<div class="login-input">
+				<div class="login-title">名字 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">姓氏 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">邮箱 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">电话 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">地址 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">地址第二行</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">城市 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">省/辖区 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-input">
+				<div class="login-title">邮编 *</div>
+				<input id="name" type='text' placeholder="">
+			</div>
+			<div class="login-remember-box">
+				<input type="checkbox" name="remember"><span>送货地址与账单新地址相同</span>
+			</div>
+			<div class="login-remember-box">
+				<input type="checkbox" name="remember"><span>另外输入账单地址</span>
+			</div>
+		</div>
+	</div>
+	<div class="ck-d-right">
+		<h2>订单总结</h2>
+	</div>
+</div>
+
+<!-- <div class="wrapper single-login-page">
 	<div class="breadcrum">
 		<a href="/">首页</a>
 		<img src="/assets/img/next.svg">
@@ -83,7 +147,7 @@
 			</div>
 		<?php } ?>
 	</div>
-</div>
+</div> -->
 @stop
 
 @section('js-reference')

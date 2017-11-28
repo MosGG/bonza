@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Login - Fine Food Group</title>@stop
+@section('title')<title>Bonza - 登录和注册</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/login.css" rel="stylesheet">
@@ -76,7 +76,7 @@
 			</div>
 			<div class="login-input">
 				<div class="login-title">密码 *</div>
-				<input name="password" required type='password' minlength="4" maxlength="16" placeholder="请输入您的密码">
+				<input name="r-password" required type='password' minlength="4" maxlength="16" placeholder="请输入您的密码">
 			</div>
 			<div class="login-input">
 				<div class="login-title">确认密码 *</div>
@@ -147,10 +147,12 @@
 			        type: "POST",
 			        url: "/register",
 			        data: {
-			        		email: $('input[name=email]').val(),
-									firstname: $('input[name="firstname"]').val(),
-									lastname: $('input[name="lastname"]').val(),
-			            password: $('input[name=password]').val(),
+
+			        	email: $('input[name=email]').val(),
+			            lastname: $('input[name=lastname]').val(),
+			            firstname: $('input[name=firstname]').val(),
+			            password: $('input[name=r-password]').val(),
+			            address: $('input[name=address]').val(),
 			            mobile: $('input[name=mobile]').val(),
 			        },
 			        headers: {
@@ -192,7 +194,7 @@
 			$("input[name=repeat-email]").addClass("input-warning");
 			result = false;
 		}
-		if ($("input[name=repeat-password]").val() !== $("input[name=password]").val()) {
+		if ($("input[name=repeat-password]").val() !== $("input[name=r-password]").val()) {
 			$("input[name=repeat-password]").addClass("input-warning");
 			result = false;
 		}

@@ -5,53 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
+use XeroPrivate;
 
 class PagesController extends Controller
 {
     public function home(Request $request){
-        $text = $this->getTranslate($request->input("language"));
-        $project = DB::table('portfolios')->where('featured', '=', '1')->where('status', "=", '1')->orderBy('sort')->get();
-        $p_array = $this->setPortfolioContent($project, $text);
-        $t1 = 0;
-        $t2 = 0;
-        $t3 = 0;
-        $ongoing = array();
-        $past = array();
-        $future = array();
-        foreach($p_array as $port){
-            if ($port['category_url'] == "on-going" && $t1 < 3){
-                $ongoing[] = $port;
-                $t1++;
-            }
-            if ($port['category_url'] == "future" && $t2 < 3){
-                $future[] = $port;
-                $t2++;
-            }if ($port['category_url'] == "past" && $t3 < 3){
-                $past[] = $port;
-                $t3++;
-            }
-        }
-        $partner = DB::table('partner')->where('featured', '=', '1')->get();
-        $partner_media = array();
-        foreach($partner as $p){
-            $media_src = DB::table('media_library')->where('id', '=', $p->image_id)->value('src_thumb');
-            $partner_media[] = $media_src;
-        }
-        //get banner slider data
-        $slider = array();
-        $client = DB::table('portfolios')->where('client', '=', '1')->where('status', "=", '1')->orderBy('sort')->get();
-        $client = $this->setPortfolioContent($client, $text);
-        foreach($client as $c){
-            $temp = array();
-            $temp['title'] = $c['title'];
-            $temp['subtitle'] = $c['subtitle'];
-            $filename = explode("/", $c['src'])[4];
-            $temp['src'] = "/assets/media/" . $filename;
-            $temp['id'] = $c['id'];
-            $slider[] = $temp;
-        }
 
-        return view('pages.home')->with('text', $text)->with('action',"")->with('past', $past)->with('ongoing', $ongoing)->with('future', $future)->with('partner', $partner_media)->with('slider', $slider);
+        // $xero = $this->app->make('XeroPrivate');
+
+        // $contact = $this->app->make('XeroContact');
+
+        $contact = XeroPrivate::load('Accounting\\item');
+        var_dump($contact);
+
+        // $contact->setAccountNumber('DMA01');
+        // $contact->setContactStatus('ACTIVE');
+        // $contact->setName('Mingzhou');
+        // $contact->setFirstName('Li');
+        // $contact->setLastName('Mingzhou');
+        // $contact->setEmailAddress('info@cheee.com.au');
+        // $contact->setDefaultCurrency('AUD');
+
+        // var_dump($contact);
+        // $xero->save($contact);
+
+
+        return view('pages.home')->with('action',"");
     }
 
     public function login(Request $request){
@@ -83,6 +62,76 @@ class PagesController extends Controller
     	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','product');
     }
 
+    public function designers(Request $request){
+        $designers = DB::table('portfolios')->groupBy('origin')->orderBy('origin')->get(array('origin'));
+        $d_array = array(
+            "A" => array(),
+            "B" => array(),
+            "C" => array(),
+            "D" => array(),
+            "E" => array(),
+            "F" => array(),
+            "G" => array(),
+            "H" => array(),
+            "I" => array(),
+            "J" => array(),
+            "K" => array(),
+            "L" => array(),
+            "M" => array(),
+            "N" => array(),
+            "O" => array(),
+            "P" => array(),
+            "Q" => array(),
+            "R" => array(),
+            "S" => array(),
+            "T" => array(),
+            "U" => array(),
+            "V" => array(),
+            "W" => array(),
+            "X" => array(),
+            "Y" => array(),
+            "Z" => array(),
+            "0-9" => array(),
+        );
+        foreach ($designers as $value) {
+            $initial = substr($value->origin, 0, 1);
+            if (is_numeric($initial)) {
+                $d_array['0-9'][] = $value->origin;
+            } else {
+                $d_array[strtoupper($initial)][] = $value->origin;
+            }
+        }
+        return view('pages.designers')->with('action','designers')->with('designers', $d_array);
+    }
+
+    public function singleDesigner($designer, Request $request){
+        $designer = html_entity_decode($designer);
+        $d_info = DB::table('designer')->where('name', $designer)->get();
+        $d_info = $d_info[0];
+        if (empty($d_info->banner)) {
+            $d_info->banner = "/assets/img/single-designer-default.png";
+        }
+
+         //change logic here
+        $product = DB::table('portfolios')->where('status', '=', '1')->where('origin',$designer)->orderBy('sort')->get();
+        $page = $request->input("page");
+        if (empty($page)) $page = 1;
+        $total = count($product);
+        $items_per_page = $request->input("item");
+        if (empty($items_per_page)) $items_per_page = 24;
+        $allPages = ($total%$items_per_page == 0)?(int)Floor($total / $items_per_page):(int)Floor($total / $items_per_page) + 1;
+        $start = ($page - 1) * $items_per_page;
+        $product = array_slice($product,$start,$items_per_page);
+        $meta_data = array(
+            'allPages' => $allPages,
+            "items_per_page" => $items_per_page,
+            "page" => $page,
+            "total" => $total,
+                    );
+
+        // var_dump($d_info);
+        return view('pages.singledesigner')->with('action','designers')->with('designer_info', $d_info)->with('product', $product)->with('meta', $meta_data);
+    }
     public function newarrival(Request $request){
         //change logic here
         $product = DB::table('portfolios')->where('status', '=', '1')->where('client','0')->orderBy('sort')->get();
@@ -100,7 +149,7 @@ class PagesController extends Controller
             "page" => $page,
             "total" => $total,
                     );
-        return view('pages.newarrival')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','newarrival');
+        return view('pages.newarrival')->with('product', $product)->with('meta', $meta_data)->with('action','newarrival');
     }
 
     public function portfolioCategory($category,Request $request){
@@ -262,7 +311,9 @@ class PagesController extends Controller
     }
 
     public function shoppingbag(Request $request){
-        $shoppingbag = session('shopping-bag');
+        $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
+        $shoppingbag = json_decode($member_bag, true);
+        $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
         foreach ($shoppingbag as $key => $p) {
             $product = DB::table('portfolios')->where('id',$p['id'])->get();
             $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
@@ -275,8 +326,34 @@ class PagesController extends Controller
             $product[0]->size = $p['size'];
             $product[0]->qty = $p['qty'];
             $shoppingbag[$key] = $product[0];
+            $price['product_total'] += $product[0]->price * $product[0]->qty;
         }
-        return view('pages.shoppingbag')->with('shoppingbag', $shoppingbag);
+        $price['delivery'] = 15;
+        $price['subtotal'] = $price['product_total'] + $price['delivery'];
+        return view('pages.shoppingbag')->with('shoppingbag', $shoppingbag)->with('price', $price);
+    }
+
+     public function checkout(Request $request){
+        $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
+        $shoppingbag = json_decode($member_bag, true);
+        $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
+        foreach ($shoppingbag as $key => $p) {
+            $product = DB::table('portfolios')->where('id',$p['id'])->get();
+            $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
+            if (empty($imgs[0]->media_id)) {
+                $imgSrc = '/assets/img/default.png';
+            } else {
+                $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+            }
+            $product[0]->src = $imgSrc;
+            $product[0]->size = $p['size'];
+            $product[0]->qty = $p['qty'];
+            $shoppingbag[$key] = $product[0];
+            $price['product_total'] += $product[0]->price * $product[0]->qty;
+        }
+        $price['delivery'] = 15;
+        $price['subtotal'] = $price['product_total'] + $price['delivery'];
+        return view('pages.checkout')->with('shoppingbag', $shoppingbag)->with('price', $price);
     }
 
     private function getTranslate($language){

@@ -111,6 +111,8 @@ nav .drop-down li {
 	border-bottom: 1px solid #AAAAAA;
 	line-height: 30px;
   	height: 30px;
+  	text-transform: uppercase;
+  	cursor: pointer;
 }
 nav .drop-down li a {
     display: block;
@@ -148,7 +150,7 @@ nav .drop-down img{
 }
 
 
-#size-refer{
+.size-refer{
 	color: #AAAAAA;
 	position: absolute;
 	right:0;
@@ -159,7 +161,7 @@ nav .drop-down img{
 	line-height: 36px;
 	cursor: pointer;
 }
-#size-refer:hover{
+.size-refer:hover{
 	color: #000;
 	border-bottom: 1px solid #000;
 }
@@ -175,24 +177,24 @@ nav .drop-down img{
  	position: relative;
  	cursor: pointer;
 }
-#btn-cart{
+.btn-cart{
 	background-color: #000;
 	color:#fff;
 	border-color: #fff;
 }
-#btn-cart:hover{
+.btn-cart:hover{
 	background-color: #AB956E;
 }
-#btn-wishlist{
+.btn-wishlist{
 	border-color: #AAAAAA;
-	position: absolute;
+	position: absolute!important;
 	right: 0;
 }
-#btn-wishlist:hover{
+.btn-wishlist:hover{
 	color: #AB956E;
 	border-color: #AB956E;
 }
-#btn-wishlist:hover #PRODUCT-PAGE{
+.btn-wishlist:hover .PRODUCT-PAGE{
 	fill: #AB956E;
 }
 .p-btn-box div svg{

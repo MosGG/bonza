@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>{!!$product->title!!} - Bonza</title>@stop
+@section('title')<title>Bonza - {!!$product->title!!}</title>@stop
 
 @section('css-reference')
 <link href="/assets/css/productsingle.css" rel="stylesheet">
@@ -10,8 +10,10 @@
 @section('body')
 <?php 
 	$wishlist = array(); 
-	foreach (session('wishlist') as $value) {
-		$wishlist[$value['id']] = true;
+	if (!empty(session('wishlist'))) {
+		foreach (session('wishlist') as $value) {
+			$wishlist[$value['id']] = true;
+		}
 	}
 ?>
 <div class="wrapper relative">
@@ -44,18 +46,13 @@
 			<nav>
 			  	<ul class="drop-down relative closed">
 			  		<img id="drop-expand" class="transition nav-button" src="/assets/img/right.svg">
-				    <li><a href="javascript:void(0);" id="current-sort" class="nav-button">请选择您的尺码</a></li>
+				    <li><a href="javascript:void(0);" id="current-sort" class="nav-button" data-size="">请选择您的尺码</a></li>
 					<?php 
 					$size = json_decode($product->size);
 					foreach ($size as $s) {
-						echo "<li><a class='sort-item'>".$s->id." - ".$s->title."</a></li>";
+						echo "<li><a class='sort-item' data-size='".$s->id."'>".$s->id." - ".$s->title."</a></li>";
 					}
 					?>
-				    <!-- <li><a href="#" class="sort-item">1</a></li>
-				    <li><a href="#" class="sort-item">2</a></li>
-				    <li><a href="#" class="sort-item">3</a></li>
-				    <li><a href="#" class="sort-item">4</a></li>
-				    <li><a href="#" class="sort-item">5</a></li> -->
 			  	</ul>
 			</nav>
 			<div id="size-refer" class="transition">查看尺码参考</div>
@@ -164,7 +161,11 @@
 	    }]
   	});
 
-  	$(".nav-button").click(function() {
+  	$(".nav-button").click(function(){
+  		toggleDropdown();
+  	});
+
+  	function toggleDropdown() {
   		var height = $(".drop-down li").length * 31 - 1;
     	if ($(".drop-down").height() == 30) {
     		$(".drop-down").height(height);
@@ -172,11 +173,26 @@
     		$(".drop-down").height(30);
     	}
     	$("#drop-expand").toggleClass("drop-expand");
-  	});
+  	}
 
   	$(".detail-expand-box").click(function(){
   		$(this).toggleClass("detail-open");
   		$(this).children(".detail-expand-btn").toggleClass("rotate");
   	})
+
+  	$(".sort-item").click(function(){
+  		$("#current-sort").html("&nbsp;&nbsp;&nbsp;&nbsp;"+$(this).html());
+  		$("#current-sort").attr('data-size', $(this).attr('data-size'));
+  		toggleDropdown();
+  	});
+
+  	$("#btn-cart").click(function(){
+  		var size = $("#current-sort").attr('data-size');
+  		if (size == "") {
+  			toggleDropdown();
+  		} else {
+  			addShoppingBag({!!$product->id!!},size,1)
+  		}
+  	});
 </script>
 @stop

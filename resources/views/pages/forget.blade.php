@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Login - Fine Food Group</title>@stop
+@section('title')<title>Bonza - 忘记密码</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/login.css" rel="stylesheet">
