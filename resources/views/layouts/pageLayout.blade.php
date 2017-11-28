@@ -7,9 +7,9 @@
 	<meta name="author" content="Bonza">
 	<meta name="keywords" content="">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
-	
+
 	@yield('title')
-	
+
 	<!-- Favicons -->
 	<link rel="shortcut icon" href="assets/img/favicon.ico">
 	<link rel="apple-touch-icon" href="assets/img/apple-touch.png">
@@ -24,7 +24,7 @@
 
 
 	@yield('css-reference')
-	
+
 </head>
 <body>
 	<!-- PRELOADER -->
@@ -78,7 +78,7 @@
 		</div>
 
 		<div class="m-shade"></div>
-		<div class="m-body">	
+		<div class="m-body">
 		<!-- header -->
 		<header>
 			<div class="top-header">
@@ -102,7 +102,7 @@
 						</a>
 						<a class="m-hide-icon relative" href="/wishlist">
 							<div class="wishlist-num"
-							<?php 
+							<?php
 							if (empty(session('wishlist'))) {
 								echo " hidden>";
 							} else {
@@ -113,7 +113,7 @@
 						</a>
 						<a class="relative" href="/shoppingbag">
 							<div class="shopping-num"
-							<?php 
+							<?php
 							if (empty(session('shopping-bag'))) {
 								echo " >";
 							} else {
@@ -134,8 +134,8 @@
 			<div class="bottom-header relative">
 				<div class="wrapper relative">
 					<div class="center sub-nav">
-						<a href="/newarrival"><span class="hvr-underline-from-center 
-							<?php 
+						<a href="/newarrival"><span class="hvr-underline-from-center
+							<?php
 								if (isset($action) && $action == 'newarrival') echo "action-selected";
 							?>
 							">新品</span></a>
@@ -145,12 +145,12 @@
 							?>
 							">品牌</span></a>
 						<a href="/product"><span class="hvr-underline-from-center
-							<?php 
+							<?php
 								if (isset($action) && $action == 'product') echo "action-selected";
 							?>
 							">选购</span></a>
 						<a href="/about"><span class="hvr-underline-from-center
-							<?php 
+							<?php
 								if (isset($action) && $action == 'about') echo "action-selected";
 							?>
 							">关于BONZA</span></a>
@@ -185,16 +185,16 @@
 							<img class="right" src="/assets/img/expand.svg">
 						</div>
 						<div class="footer-links flinks-1">
-							<a href="/contact" target="_blank"><span>联系客服</span></a>
-							<a href="/contact" target="_blank"><span>招聘求职</span></a>
+							<a href="/help" target="_blank"><span>联系客服</span></a>
+							<a href="/recruitment" target="_blank"><span>招聘求职</span></a>
 						</div>
 						<div class="footer-links flinks-2">
-							<a href="/contact" target="_blank"><span>配送信息</span></a>
-							<a href="/contact" target="_blank"><span>退换货信息</span></a>
+							<a href="/deliver" target="_blank"><span>配送信息</span></a>
+							<a href="/refund" target="_blank"><span>退换货信息</span></a>
 						</div>
 						<div class="footer-links flinks-3">
-							<a href="/contact" target="_blank"><span>服务条款</span></a>
-							<a href="/contact" target="_blank"><span>隐私政策</span></a>
+							<a href="/term" target="_blank"><span>服务条款</span></a>
+							<a href="/privacy" target="_blank"><span>隐私政策</span></a>
 						</div>
 						<div class="weixin-gzh transition" onclick="$('.qrcode').fadeIn();">
 							<img class="vertical-middle gzh1" src="/assets/img/weixin-2.svg">
@@ -207,7 +207,7 @@
 			<div class="downfooter relative">
 				<div class="wrapper">
 					<div id="copyright" class="vertical-middle">
-						<i class="fa fa-copyright" aria-hidden="true"></i> 2017 BONZA, All Rights Reserved. 
+						<i class="fa fa-copyright" aria-hidden="true"></i> 2017 BONZA, All Rights Reserved.
 					</div>
 				</div>
 			</div>

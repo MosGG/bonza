@@ -1,0 +1,152 @@
+/*contact us*/
+
+.main {
+  margin: 0 auto;
+  max-width: 1170px;
+  padding: 0 15px;
+  height: 1000px;
+}
+
+.nav {
+  position: relative;
+  width: 168px;
+  height: 232px;
+  margin-top: 60px;
+}
+
+.nav_box_one {
+  width: 100%;
+  height: auto;
+  margin-top: 30px
+}
+
+.nav_box {
+  width: 100%;
+  height: auto;
+  margin-top: 15px
+}
+
+.hvr-underline-from-center::before {
+  background: black !important;
+}
+.hvr-underline-from-center-selected {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px transparent;
+    position: relative;
+    /*overflow: hidden;*/
+}
+.hvr-underline-from-center-selected::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 50%;
+    right: 50%;
+    bottom: -4px;
+    background: black;
+    height: 2px;
+    -webkit-transition-property: left, right;
+    transition-property: left, right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    left: 0;
+    right:0
+}
+.nav h3 {
+  font-size: 22px
+}
+.content h3 {
+  font-size: 22px
+}
+
+.content {
+  position: relative;
+  width: 80%;
+  height: auto;
+  float: right;
+  top: -232px;
+}
+
+
+
+.inside {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC;
+}
+
+.content_box {
+  width: 100%;
+  height: auto;
+  margin-bottom: 30px
+}
+
+.content_box a {
+  color:#555555;
+}
+
+
+/*recruitment*/
+
+.re_main {
+  margin: 0 auto;
+  max-width: 1170px;
+  padding: 0 15px;
+  height: 1300px;
+}
+
+.inside_re {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #CCCCCC;
+}
+
+.login-input textarea {
+  padding: 5px;
+  height: 230px;
+  width: calc(100% - 10px);
+  border: 1px solid #AAAAAA;
+  background-color: #fff;
+  margin-bottom: 20px;
+  font-size: 11px;
+  padding-top: 15px;
+}
+
+.sub-err {
+  visibility: hidden;
+  position: relative;
+  float: right;
+  bottom: 10px;
+  color: red;
+}
+
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .content {
+    width: 75%
+  }
+}
+
+@media screen and (max-width: 599px) {
+  .content {
+    width: 100%;
+    top:40px;
+  }
+  .re_main {
+    height: 1400px
+  }
+
+  .main {
+    height:1200px
+  }
+}
