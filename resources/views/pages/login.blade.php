@@ -15,7 +15,7 @@
 	</div>
 
 	<?php if(session('member')) {?>
-	
+
 	<h2 class="title">欢迎回来, {!!session('member')!!}</h2>
 	<div class="already-login">
 		<p>敬请尽情浏览<a href="/product">我们的商品</a>!</p>
@@ -137,8 +137,8 @@
 	});
 
 
-	$(function(){ 
-		// $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); 
+	$(function(){
+		// $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
 		$("#reg-submit").click(function(){
 			if (validator()) {
 				$(".register-div .login-err img").show();
@@ -205,6 +205,3 @@
 	}
 </script>
 @stop
-
-
-
