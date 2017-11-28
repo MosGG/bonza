@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>服务条款 - Bonza</title>@stop
+@section('title')<title>Bonza - 服务条款</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">

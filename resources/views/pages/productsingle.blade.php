@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>{!!$product->title!!} - Bonza</title>@stop
+@section('title')<title>Bonza - {!!$product->title!!}</title>@stop
 
 @section('css-reference')
 <link href="/assets/css/productsingle.css" rel="stylesheet">

@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>帮助 - Bonza</title>@stop
+@section('title')<title>Bonza - 帮助页面</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -76,7 +76,7 @@
              </div>
 
              <div class="content_box">
-               电邮：<a href="mailto:customercare@bonza.com.cn">customercare@bonza.com.cn</a>
+               电邮：<a href="mailto:customercare@bonza.com.co">customercare@bonza.com.co</a>
              </div>
 
              <div class="content_box">

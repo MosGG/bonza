@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Bonza - 我的账户</title>@stop
+@section('title')<title>Bonza - 主页</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/myaccount.css" rel="stylesheet">

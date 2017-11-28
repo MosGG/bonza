@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Bonza - 品牌</title>@stop
+@section('title')<title>Bonza - {!!$designer_info->name!!}</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/singledesigners.css" rel="stylesheet">

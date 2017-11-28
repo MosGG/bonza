@@ -278,10 +278,10 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'MembershipController@login'
     ]);
 
-    Route::get('/register', [
-        'as' => 'register',
-        'uses' => 'PagesController@register'
-    ]);
+    // Route::get('/register', [
+    //     'as' => 'register',
+    //     'uses' => 'PagesController@register'
+    // ]);
 
     Route::Post('/register', [
         'as' => 'register',

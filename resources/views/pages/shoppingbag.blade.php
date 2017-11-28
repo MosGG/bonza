@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Shopping Bag - Bonza</title>@stop
+@section('title')<title>Bonza - 购物车</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/shopping-bag.css" rel="stylesheet">

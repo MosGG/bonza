@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Wishlist - Bonza</title>@stop
+@section('title')<title>Bonza - 愿望清单</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/wishlist.css" rel="stylesheet">
