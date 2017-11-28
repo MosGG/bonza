@@ -10,8 +10,10 @@
 @section('body')
 <?php 
 	$wishlist = array(); 
-	foreach (session('wishlist') as $value) {
-		$wishlist[$value['id']] = true;
+	if (!empty(session('wishlist'))) {
+		foreach (session('wishlist') as $value) {
+			$wishlist[$value['id']] = true;
+		}
 	}
 ?>
 <div class="wrapper">

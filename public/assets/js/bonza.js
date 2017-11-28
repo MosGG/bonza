@@ -104,12 +104,16 @@ function addwishlist(id){
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     	},
 		success: function(result){
-	        $(".wishlist-num").show();
-	  		$(".wishlist-num").html(result.num);
-	  		$(".wishlist-num").addClass("addwishlist");
-			setTimeout(function(){
-				$(".wishlist-num").removeClass("addwishlist");
-			},2100);
+			if (result.num == undefined) {
+				location.href = "/login";
+			} else {
+		        $(".wishlist-num").show();
+		  		$(".wishlist-num").html(result.num);
+		  		$(".wishlist-num").addClass("addwishlist");
+				setTimeout(function(){
+					$(".wishlist-num").removeClass("addwishlist");
+				},2100);
+			}
 	    }
 	});
 }
@@ -127,15 +131,19 @@ function addShoppingBag(id,size,qty){
         	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     	},
 		success: function(result){
-	        $(".bag-buy").html(result);
-			$(".bag-buy").fadeIn();
-			setTimeout(function(){
-				$(".bag-buy").fadeOut();
-			}, 6000)
-			if (!Number.isInteger(parseInt($(".shopping-num").html()))){
-				$(".shopping-num").html('1');
+			if (result.num == undefined) {
+				location.href = "/login";
 			} else {
-				$(".shopping-num").html(parseInt($(".shopping-num").html()) + 1);
+		        $(".bag-buy").html(result);
+				$(".bag-buy").fadeIn();
+				setTimeout(function(){
+					$(".bag-buy").fadeOut();
+				}, 6000)
+				if (!Number.isInteger(parseInt($(".shopping-num").html()))){
+					$(".shopping-num").html('1');
+				} else {
+					$(".shopping-num").html(parseInt($(".shopping-num").html()) + 1);
+				}
 			}
 	    }
 	});
