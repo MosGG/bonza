@@ -22,11 +22,11 @@
 
 	<div class="ctl-box relative">
 		<img src="/assets/img/myaccount.png">
-		<a href="/account/address"><div class="menu">
+		<a href="/myaccount/addressbook"><div class="menu">
 			<h3>邮寄地址</h3>
 			<p>添加或修改账单地址与送货地址</p>
 		</div></a>
-		<a href="/account/info"><div class="menu">
+		<a href="/myaccount/accountinfo"><div class="menu">
 			<h3>账户信息</h3>
 			<p>查看或修改您的登录信息</p>
 		</div></a>
@@ -54,6 +54,3 @@
 <script>
 </script>
 @stop
-
-
-

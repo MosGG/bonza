@@ -49,11 +49,12 @@
          <div class= "content">
            <h3>地址簿</h3>
 					 <div class="new_address"><a href="/myaccount/addressbook/new">添加新的送货地址</a></div>
-           <div class="inside">
-						 <div class="f_head">默认送货地址</div>
+           <div class="inside_re">
+
 
 						 <?php
 						 if($default_address!= null){
+						 echo '<div class="f_head">默认送货地址</div>';
 						 echo '<div class="address_content" id= '.$default_address->id.'>';
 						 echo '<p>'.$default_address->firstname.' '.$default_address->lastname.'</p>';
 						 echo '<p>'.$default_address->phone.'</p>';
@@ -66,18 +67,26 @@
 							 	<div class="revise"><a href="/myaccount/addressbooksingle/'.$default_address->id.'">修改</a></div>
 							 	<div class="delete">删除</div>
 						 	</div>
+						 </div>
 						 </div>';
 					 }else{
-						 echo '<div class="nodefault">没有默认地址</div>';
+
 					 }
 						 ?>
-					 </div>
+
 
 					 <?php
 					 if($address!= null){
-						 echo '<div class="f_head">其他送货地址</div>';
+						 echo '<div class="inside_re"> <div class="f_head">其他送货地址</div>';
+						 $i = 0;
 						 foreach ($address as $a) {
-							 echo '<div class="address_content" id= '.$a->id.'>';
+
+							 if ($i % 2 == 0){
+								 echo '<div class="address_content grid_system_left" id= '.$a->id.'>';
+							 }else{
+								 echo '<div class="address_content grid_system_right" id= '.$a->id.'>';
+							 }
+
   						 echo '<p>'.$a->firstname.' '.$a->lastname.'</p>';
   						 echo '<p>'.$a->phone.'</p>';
   						 echo '<p class="address">'.$a->address.' </p>';
@@ -90,10 +99,13 @@
   							 	<div class="delete">删除</div>
   						 	</div>
   						 </div>';
+							 $i ++;
 						 }
+						 echo "</div>";
 					 }else{
 						 echo '';
 					 }
+
 					 ?>
          </div>
 
@@ -103,7 +115,7 @@
 @section('js-function')
 <script>
 $(function(){
-  $(".delete").click(function(){
+  $(".delete").click(function(event){
 		if(confirm("确认要删除吗？")){
       $.ajax({
             type: "POST",
@@ -116,7 +128,7 @@ $(function(){
             },
             dataType: "json",
             beforeSend  : function() {
-                      		confirm("确认要删除吗？");
+
                         },
             success: function (data) {
                 // $("#newaddress-form .login-loading span").html(data.success);

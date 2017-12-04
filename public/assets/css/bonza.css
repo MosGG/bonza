@@ -707,7 +707,7 @@ input[type=checkbox] {
 }
 
 
-input[type=checkbox]:after {
+/*input[type=checkbox]:after {
     content: " ";
     background-color: #fff;
     display: inline-block;
@@ -717,7 +717,7 @@ input[type=checkbox]:after {
     height:16px;
     visibility: visible;
     border:2px solid #000;
-}
+}*/
 input[type=checkbox]:checked:after {
     content: "\2714";
     font-weight:bold;

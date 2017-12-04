@@ -119,7 +119,7 @@
   width: 100%;
   height: auto;
   margin-top: 20px;
-  padding-top: 20px;
+  padding-top: 17px;
   padding-bottom: 20px;
   border-top: 1px solid #CCCCCC;
 }
@@ -171,17 +171,27 @@
   top: -22px;
   position: relative;
   color: #555555;
-  text-decoration: underline;
+  border-bottom: 2px solid #555555;
 }
 
 .f_head {
   margin-top: 10px;
   margin-bottom: 20px;
+  color: #555555;
+  display: flow-root;
+}
+
+.left_l {
+margin-bottom: 20px;
+}
+
+.right_r {
+margin-bottom: 50px;
 }
 
 .address_content {
   border: 1px black solid;
-  width: 370px;
+  width: 40%;
   height: auto;
   padding: 10px;
   margin-bottom: 20px;
@@ -201,21 +211,17 @@
 .revise {
   color: #555555;
   cursor: pointer;
+  border-bottom: 2px solid #555555
 }
 
 .delete {
   color: #555555;
   margin-left: 20px;
+  border-bottom: 2px solid #555555;
   cursor: pointer;
 }
 
-.revise:hover{
-  text-decoration: underline;
-}
 
-.delete:hover{
-  text-decoration: underline;
-}
 
 .nodefault {
   font-size: 20px;
@@ -224,6 +230,23 @@
 
 .address {
   margin-top: 40px !important;
+}
+
+.grid_system_left {
+  float: left
+}
+
+.grid_system_right {
+  float: right
+}
+
+@media screen and (max-width: 792px) {
+  .grid_system_right, .grid_system_left {
+    float: inherit !important
+  }
+  .address_content {
+    width: auto!important
+  }
 }
 
 
@@ -281,7 +304,7 @@
   width: calc(50% - 100px);
   /*padding-left: 200px;*/
   float: right;
-  padding-top: 30px;
+  /*padding-top: 30px;*/
   font-size: 16px;
   margin-bottom: 160px;
 }
@@ -296,6 +319,10 @@
 @media screen and (max-width: 900px) {
   .left_div, .right_div {
     width: 100% !important
+  }
+
+  .right_r {
+    margin-top: 40px;
   }
 }
 
