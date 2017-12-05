@@ -363,24 +363,29 @@ class MembershipController extends Controller
 
     public function addressbooksingle($id, Request $request){
       $info = DB::table('addressbook')->where('id', $id)->get();
-      $firstname = $info[0]->firstname;
-      $lastname = $info[0]->lastname;
-      $phone = $info[0]->phone;
-      $address = $info[0]->address;
-      $address_second = $info[0]->address_second;
-      $city = $info[0]->city;
-      $state = $info[0]->state;
-      $postcode = $info[0]->postcode;
-      $default = $info[0]->default;
-      return view('pages.addressbooksingle')
-                    ->with('firstname', $firstname)->with('lastname', $lastname)
-                    ->with('phone',$phone)
-                    ->with('address',$address)
-                    ->with('address_second',$address_second)
-                    ->with('city',$city)
-                    ->with('state',$state)
-                    ->with('postcode',$postcode)
-                    ->with('default',$default);
+      $member_id = $info[0]->member_id;
+      if (session('member_id') == $member_id) {
+        $firstname = $info[0]->firstname;
+        $lastname = $info[0]->lastname;
+        $phone = $info[0]->phone;
+        $address = $info[0]->address;
+        $address_second = $info[0]->address_second;
+        $city = $info[0]->city;
+        $state = $info[0]->state;
+        $postcode = $info[0]->postcode;
+        $default = $info[0]->default;
+        return view('pages.addressbooksingle')
+            ->with('firstname', $firstname)->with('lastname', $lastname)
+            ->with('phone',$phone)
+            ->with('address',$address)
+            ->with('address_second',$address_second)
+            ->with('city',$city)
+            ->with('state',$state)
+            ->with('postcode',$postcode)
+            ->with('default',$default);
+      } else {
+        return redirect()->route('addressbook');
+      }
     }
 
     public function addressbooksingleupdate($id, Request $request){
@@ -429,6 +434,50 @@ class MembershipController extends Controller
           return array("success" => "密码修改成功","status" => "true");
         }else {
           return array("success" => "密码不正确","status" => "false");
+        }
+    }
+
+    public function wechat(Request $request){
+        return view('pages.wechat');
+    }
+
+    public function orderlist(Request $request){
+        $id = session("member_id");
+        $order = DB::table('orders')->where('user_id', $id)->get();
+        foreach($order as $key => $value){
+            $order[$key]->number = $value->id + 145200000;
+            $order[$key]->create_time = date("y年m月d日 H:m", $value->create_time);
+            $order[$key]->status = $this->getOrderStatus($value->status);
+            $order[$key]->delivery_status = $this->getOrderStatus($value->delivery_status);
+        }
+        return view('pages.orderlist')->with('order', $order);
+    }
+
+    private function getOrderStatus($n){
+        if ($n == -3) return "已退货";
+        if ($n == -2) return "订单关闭";
+        if ($n == -1) return "订单已取消";
+        if ($n == 0) return "等待处理";
+        if ($n == 1) return "订单已接受";
+    }
+
+    private function getDeliveryStatus($n){
+        if ($n == -1) return "已退货";
+        if ($n == 0) return "未发货";
+        if ($n == 1) return "已发货";
+    }
+
+    public function ordersingle($id, Request $request){
+        $member_id = session("member_id");
+        $order = DB::table('orders')->where('id', $id)->get();
+        if ($order[0]->uer_id == $member_id) {
+            $order[0]->number = $value->id + 145200000;
+            $order[0]->create_time = date("y年m月d日 H:m", $value->create_time);
+            $order[0]->status = $this->getOrderStatus($value->status);
+            $order[0]->delivery_status = $this->getOrderStatus($value->delivery_status);
+            return view('pages.ordersingle')->with('order', $order);
+        } else {
+            return redirect()->route('orderlist');
         }
     }
 }

@@ -18,6 +18,10 @@
          </div>
 
          <div class="nav">
+          <div class="detail-expand-btn rotate">
+            <div></div>
+            <div></div>
+          </div>
            <h3>帮助</h3>
            <div class="nav_box_one">
              <a href="/help">
@@ -84,4 +88,7 @@
 
 	    </div>
 </div>
+@stop
+@section('js-function')
+<script type="text/javascript" src="/assets/js/myaccount-m-nav.js"></script>
 @stop

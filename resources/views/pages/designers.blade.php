@@ -12,7 +12,7 @@
 	<div class="index-box">
 		<?php 
 			foreach ($designers as $key => $value) {
-				echo '<div class="index ';
+				echo '<a href="#'.$key.'"><div class="index ';
 				if (empty($value)) {
 					echo 'd-null';
 				}
@@ -29,7 +29,7 @@
 				if (empty($value)) {
 					echo 'd-null';
 				}
-				echo '">'.$key.'</div>';
+				echo '">'.$key.'</div></a>';
 				foreach ($value as $d) {
 					echo '<div class="d-designer"><a href="/designers/'.$d.'"><span>'.$d.'</span></a></div>';
 				}
@@ -62,6 +62,3 @@
 	});
 </script>
 @stop
-
-
-

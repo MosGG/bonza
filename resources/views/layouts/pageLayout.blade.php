@@ -43,8 +43,12 @@
 				<a href="/about"><div>关于BONZA</div></a>
 			</div>
 			<div class="m-nav-down">
-				<a href="/register"><div>注册</div></a>
+				<?php if (!empty(session('member_id'))) { ?>
+				<a href="/myaccount"><div>我的账户</div></a>
+				<?php } else {?>
+				<a href="/login"><div>注册</div></a>
 				<a href="/login"><div>登录</div></a>
+				<?php } ?>
 			</div>
 		</div>
 
@@ -95,7 +99,7 @@
 					<div class="m-menu left vertical-middle">
 						<img src="/assets/img/m-menu.svg">
 					</div>
-					<img id="logo" class="center" src="/assets/img/bonza.svg">
+					<a href="/"><img id="logo" class="center" src="/assets/img/bonza.svg"></a>
 					<div class="right vertical-middle icons">
 						<a class="m-hide-icon relative" href='/myaccount'>
 							<img class="hover-icon" data-hover="/assets/img/login-hover.svg" src="/assets/img/login-icon.svg">

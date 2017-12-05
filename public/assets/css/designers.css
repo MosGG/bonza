@@ -5,11 +5,12 @@ h2{
 	text-align: center;
 }
 .index-box{
-	height: 55px;
+	/*height: 55px;*/
 	border-top: 1px solid #CCCCCC;
 	border-bottom: 1px solid #CCCCCC;
 	margin-bottom: 65px;
 	padding: 0 40px;
+	overflow: hidden;
 }
 .index{
 	width: 3.7%;
@@ -19,6 +20,8 @@ h2{
 	float: left;
 	cursor: pointer;
 	letter-spacing: 2px;
+    white-space: nowrap;
+    border-bottom: 1px solid transparent;
 }
 .index:hover{
 	border-bottom: 1px solid #000;
@@ -59,4 +62,41 @@ h2{
 	height: 0;
 	top:0;
 	left: 0;
+}
+@media(max-width: 991px){
+	.designers-box{
+		columns: 3;
+	}
+}
+@media(max-width: 768px){
+	.index{
+		width: 7%;
+	}
+	.designers-box{
+		columns: 2;
+	}
+}
+@media(max-width: 550px){
+	h2{
+		font-size: 20px;
+		margin-top: 20px;
+	}
+	.index{
+		width: 14%;
+		line-height: 25px;
+	}
+	.designers-box{
+		columns: 1;
+	}
+	.index-box{
+		padding: 15px 0;
+		margin-bottom: -1px;
+	}
+	.d-designer{
+		font-size: 16px;
+	}
+	.d-title{
+		font-size: 16px;
+		margin-top: 10px;
+	}
 }

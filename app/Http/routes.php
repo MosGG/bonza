@@ -286,6 +286,21 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'MembershipController@updatepassword'
         ]);
 
+        Route::get('/myaccount/order', [
+            'as' => 'orderlist',
+            'uses' => 'MembershipController@orderlist'
+        ]);
+
+        Route::get('/myaccount/order/{id}', [
+            'as' => 'ordersigle',
+            'uses' => 'MembershipController@ordersigle'
+        ]);
+
+        Route::get('/myaccount/wechat', [
+            'as' => 'wechat',
+            'uses' => 'MembershipController@wechat'
+        ]);
+
         Route::get('/wishlist', [
             'as' => 'wishlist',
             'uses' => 'PagesController@wishlist'

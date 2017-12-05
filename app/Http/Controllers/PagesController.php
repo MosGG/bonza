@@ -219,8 +219,7 @@ class PagesController extends Controller
     }
 
     public function about(Request $request){
-        $text = $this->getTranslate($request->input("language"));
-        return view('pages.about')->with('text', $text)->with('action',"about");
+        return view('pages.about')->with('action',"about");
     }
 
     public function termsCondition(Request $request){

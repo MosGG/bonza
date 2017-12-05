@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>修改送货地址 - Bonza</title>@stop
+@section('title')<title>Bonza - 修改送货地址</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -20,6 +20,10 @@
          </div>
 
          <div class="nav">
+          <div class="detail-expand-btn rotate">
+            <div></div>
+            <div></div>
+          </div>
            <h3>我的账户</h3>
            <div class="nav_box_one">
              <a href="/myaccount/addressbook">
@@ -54,9 +58,6 @@
 					 <div class="new_address"><a href="/myaccount/addressbook">返回上页</a></div>
            <div class="inside_re">
 						 <div class="f_head">请修改下面的送货地址</div>
-
-
-
                <form id="reviseaddress-form" class="form-horizontal" onsubmit="return revisSubmit()">
                 <div class="left_div relative">
               		<div class="new_required_label">*此栏为必填</div>
@@ -100,7 +101,7 @@
                    </div>
 
 									 <div class="login-remember-box">
-               			    <input id ="checkbox-3" type="checkbox" name="default" class="styled-checkbox"><label for="checkbox-3">默认为送货地址</label>
+               			    <input id ="checkbox-3" type="checkbox" name="default" class="styled-checkbox" checked><label for="checkbox-3">默认为送货地址</label>
                		</div>
 
               			<!-- <div class="login-loading">
@@ -120,6 +121,7 @@
 
 
 @section('js-function')
+<script type="text/javascript" src="/assets/js/myaccount-m-nav.js"></script>
 <script>
 $(function(){
   var def = <?php echo $default;?>;

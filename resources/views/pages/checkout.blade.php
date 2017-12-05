@@ -18,6 +18,39 @@
 	</div>
 </div>
 <div class="wrapper ck-detail relative">
+	<div class="ck-d-right">
+		<h2>订单总结</h2>
+		<div class="order-detail">
+			<?php 
+			foreach($shoppingbag as $product) { ?>
+				<div class="item relative transition" id="p-{!!$product->id!!}">
+					<div class="item-left">
+						<img src="{!!$product->src!!}">
+					</div>
+					<div class="item-right relative">
+						<h3>{!!$product->title!!}</h3>
+						<h4>{!!$product->subtitle!!}</h4>
+						<br>
+						<h4>颜色：蔚蓝色</h4>
+						<h4>尺寸：{!!$product->size!!}</h4>
+						<h4>数量：{!!$product->qty!!}</h4>
+						<h4 class="price">￥
+							<span id="price{!!$product->id!!}">{!!number_format($product->price,2)!!}</span>
+						</h4>
+					</div>
+				</div>
+			<?php } ?>
+			<div class="price-detail">
+				<div class="justify-line"><span>商品总金额</span>￥{!!number_format($price['product_total'],2)!!}</div>
+				<div class="justify-line"><span>运费</span>￥{!!number_format($price['delivery'],2)!!}</div>
+			</div>
+			<div class="price-detail" style="margin-bottom: -1px;">
+				<div class="justify-line"><span>小计</span>￥{!!number_format($price['subtotal'],2)!!}</div>
+			</div>
+		</div>
+		<div class="tax-des">所有价格包含关税和其他税</div>
+	</div>
+	
 	<div class="ck-d-left">
 		<h2>添加送货地址</h2>
 		<div class="ck-d-wrapper relative address">
@@ -123,38 +156,7 @@
 		</a>
 	</div>
 
-	<div class="ck-d-right">
-		<h2>订单总结</h2>
-		<div class="order-detail">
-			<?php 
-			foreach($shoppingbag as $product) { ?>
-				<div class="item relative transition" id="p-{!!$product->id!!}">
-					<div class="item-left">
-						<img src="{!!$product->src!!}">
-					</div>
-					<div class="item-right relative">
-						<h3>{!!$product->title!!}</h3>
-						<h4>{!!$product->subtitle!!}</h4>
-						<br>
-						<h4>颜色：蔚蓝色</h4>
-						<h4>尺寸：{!!$product->size!!}</h4>
-						<h4>数量：{!!$product->qty!!}</h4>
-						<h4 class="price">￥
-							<span id="price{!!$product->id!!}">{!!number_format($product->price,2)!!}</span>
-						</h4>
-					</div>
-				</div>
-			<?php } ?>
-			<div class="price-detail">
-				<div class="justify-line"><span>商品总金额</span>￥{!!number_format($price['product_total'],2)!!}</div>
-				<div class="justify-line"><span>运费</span>￥{!!number_format($price['delivery'],2)!!}</div>
-			</div>
-			<div class="price-detail" style="margin-bottom: -1px;">
-				<div class="justify-line"><span>小计</span>￥{!!number_format($price['subtotal'],2)!!}</div>
-			</div>
-		</div>
-		<div class="tax-des">所有价格包含关税和其他税</div>
-	</div>
+	
 
 </div>
 @stop

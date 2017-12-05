@@ -49,6 +49,7 @@
 .ck-d-wrapper{
 	max-width: 370px;
 	padding: 20px 0;
+	width: calc(100% - 30px);
 }
 .login-input{
 	width: 100%;
@@ -192,4 +193,37 @@
 .wechat-box h3{
 	font-size: 22px;
 	margin-bottom: 20px;
+}
+
+@media(max-width: 768px){
+	.ck-detail{
+		padding: 15px;
+	}
+	.checkout-process{
+		top: 60px;
+		position: unset;
+		margin-top: -1px;
+	}
+	.ck-d-right{
+		position: unset;
+		width: 100%;
+	}
+	.ck-detail h2{
+		margin-top: 30px;
+	}
+	.ck-d-left{
+		margin-right: 0;
+	}
+	.ck-d-wrapper{
+		max-width: unset;
+		width: calc(100% - 2px);
+	}
+	.ck-sub-nav{
+		width: 100%;
+	}
+}
+@media(max-width: 550px){
+	.ck-sub-nav span{
+		padding: 0 10px;
+	}
 }

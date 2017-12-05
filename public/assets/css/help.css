@@ -63,7 +63,8 @@
 }
 
 .nav h3 {
-  font-size: 22px
+  font-size: 22px;
+  line-height: 24px;
 }
 
 .content h3 {
@@ -156,6 +157,41 @@
   }
   .re_main {
     height: 1400px
+  }
+  .nav h3{
+    font-size: 20px;
+  }
+  .nav{
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 15px 0;
+    border-bottom: 1px solid #CCCCCC;
+    height: 20px;
+    transition: height .3s ease;
+  }
+  .detail-expand-btn{
+    position: absolute;
+    right: 0px;
+    top: 16px;
+    width: 15px;
+    height: 15px;
+  }
+  .detail-expand-btn div{
+    width: 15px;
+    border-bottom: 1px solid #000;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    top:8px;
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+  }
+  .rotate div:nth-child(1){
+    transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+  }
+  .detail-open{
+    height: 250px;
   }
 }
 
@@ -338,6 +374,7 @@ margin-bottom: 50px;
   font-size: 16px;
   cursor: pointer;
   border: 1px solid;
+  border-radius: 0;
 }
 
 .accountinfo-btn:hover {

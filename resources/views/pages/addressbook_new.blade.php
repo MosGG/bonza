@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>添加送货地址 - Bonza</title>@stop
+@section('title')<title>Bonza - 添加送货地址</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/help.css" rel="stylesheet">
@@ -20,6 +20,10 @@
          </div>
 
          <div class="nav">
+          <div class="detail-expand-btn rotate">
+            <div></div>
+            <div></div> 
+          </div>
            <h3>我的账户</h3>
            <div class="nav_box_one">
              <a href="/myaccount/addressbook">
@@ -33,17 +37,17 @@
              </a>
            </div>
            <div class="nav_box">
-             <a href="/refund">
+             <a href="/myaccount/order">
                <span class="hvr-underline-from-center">我的订单</span>
              </a>
            </div>
            <div class="nav_box">
-             <a href="/term">
+             <a href="/wishlist">
                <span class="hvr-underline-from-center">愿望清单</span>
              </a>
            </div>
            <div class="nav_box">
-             <a href="/privacy">
+             <a href="/myaccount/wechat">
                <span class="hvr-underline-from-center">微信绑定</span>
              </a>
            </div>
@@ -116,6 +120,7 @@
 @stop
 
 @section('js-function')
+<script type="text/javascript" src="/assets/js/myaccount-m-nav.js"></script>
 <script>
 $(function(){
   $("#newaddress-submit").click(function(){

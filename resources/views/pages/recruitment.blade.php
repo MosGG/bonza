@@ -19,7 +19,12 @@
          </div>
 
          <div class="nav">
+
            <h3>帮助</h3>
+           <div class="detail-expand-btn rotate">
+            	<div></div>
+            	<div></div>
+          	</div>
            <div class="nav_box_one">
              <a href="/help">
                <span class="hvr-underline-from-center">联系我们</span>
@@ -98,6 +103,7 @@
 @stop
 
 @section('js-function')
+<script type="text/javascript" src="/assets/js/myaccount-m-nav.js"></script>
 <script>
 	$(function(){
 		// $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();

@@ -235,3 +235,50 @@ nav .drop-down img{
 	position: relative;
 	top: 1px;
 }
+
+@media(max-width: 991px){
+	.size-refer,
+	.btn-wishlist,
+	.number-select{
+		display: none!important;
+	}
+	.p-btn-box div{
+		width: calc(100% - 30px);
+	}
+	nav .drop-down{
+		width: 100%
+	}
+}
+@media(max-width: 550px){
+	.title{
+		font-size: 20px;
+		margin: 15px 0; 
+	}
+	.item{
+		padding: 20px 0;
+		height: 280px;
+	}
+	.p-btn-box{
+		position: absolute;
+		width: calc(100vw - 30px);
+	    top: 220px;
+	    right: 1px;
+	    text-align: center;
+	}
+	nav .drop-down{
+		position: absolute;
+		width: calc(100vw - 30px);
+	    top: 75px;
+	    right: 0px;
+	}
+	.item-right{
+		padding-left: 30px;
+	}
+	.wishlist-del{
+		top:15px;
+		right: 0;
+	}
+	.item-left img{
+		height: 160px;
+	}
+}

@@ -564,6 +564,7 @@ footer{
 	color: #fff;
 	background-color: #000;
 	opacity: 0.5;
+	z-index: 99;
 }
 .scroll-up:hover{
 	opacity: 1;
@@ -866,6 +867,8 @@ input[type=checkbox]:checked ~.checkbox-span:after {
 		display: inline-block;
 	}
 }
-@media(max-width: 520px){
-
+@media(max-width: 550px){
+	.breadcrum{
+		display: none;
+	}
 }
