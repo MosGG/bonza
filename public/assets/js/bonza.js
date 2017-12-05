@@ -119,34 +119,38 @@ function addwishlist(id){
 }
 
 function addShoppingBag(id,size,qty){
-	$.ajax({
-		url: "/add-to-shoppingbag",
-		method: 'POST',
-		data:{
-			id: id,
-			size: size,
-			qty: qty,
-		}, 
-		headers: {
-        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    	},
-		success: function(result){
-			if (result.num == undefined) {
-				location.href = "/login";
-			} else {
-		        $(".bag-buy").html(result);
-				$(".bag-buy").fadeIn();
-				setTimeout(function(){
-					$(".bag-buy").fadeOut();
-				}, 6000)
-				if (!Number.isInteger(parseInt($(".shopping-num").html()))){
-					$(".shopping-num").html('1');
-				} else {
-					$(".shopping-num").html(parseInt($(".shopping-num").html()) + 1);
-				}
-			}
-	    }
-	});
+	if (member !== "") {
+		$.ajax({
+			url: "/add-to-shoppingbag",
+			method: 'POST',
+			data:{
+				id: id,
+				size: size,
+				qty: qty,
+			}, 
+			headers: {
+	        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    	},
+			success: function(result){
+				// if (result.num == undefined) {
+				// 	location.href = "/login";
+				// } else {
+			        $(".bag-buy").html(result);
+					$(".bag-buy").fadeIn();
+					setTimeout(function(){
+						$(".bag-buy").fadeOut();
+					}, 6000)
+					if (!Number.isInteger(parseInt($(".shopping-num").html()))){
+						$(".shopping-num").html('1');
+					} else {
+						$(".shopping-num").html(parseInt($(".shopping-num").html()) + 1);
+					}
+				// }
+		    }
+		});
+	} else {
+		location.href = "/login";
+	}
 }
 
 function removeshoppingbag(id, size, opt){

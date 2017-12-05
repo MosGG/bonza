@@ -29,7 +29,7 @@ class MembershipPermission
                     $request->session()->put('member_id', $member[0]->id);
                     $request->session()->put('memberlevel', $member[0]->level);
                     $request->session()->put('wishlist', json_decode($member[0]->wishlist, true));
-                    $request->session()->put('shopping-bag', count(json_decode($member[0]->shopping_bag, true)));
+                    $request->session()->put('shopping-bag', json_decode($member[0]->shopping_bag, true));
                     
                 } else {
                     return Redirect::to('/login?req_url='.$_SERVER["REQUEST_URI"]);

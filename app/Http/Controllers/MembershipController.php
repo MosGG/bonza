@@ -87,6 +87,31 @@ class MembershipController extends Controller
         return view('pages.active')->with("result", $result);
     }
 
+    public function reative(Request $request){
+        $email = $request->input("email");
+        $member = DB::table('membership')->where("email", $email)->where('active_status', '0')->get();
+        if(!empty($member)){
+            $token_exp = time() + 3600 * 24;
+            if (($token_exp - $member[0]->token_exp > 300)){
+                $token = md5($member[0]->email.$member[0]->password.time());
+
+                $member_info = array(
+                    "email" => $member[0]->email,
+                    "username" => empty($member[0]->firstname)?"Customer":$member[0]->firstname,
+                    "token" => $token,
+                );
+                // $this->regEmailSend($member_info);
+                DB::table('membership')->where("email", $email)->update(['token' => $token, "token_exp" => $token_exp]);
+                $res = array("success" => "true", "msg" => "邮件已发送，请登录邮箱按邮件内容操作。");
+            } else {
+                $res = array("success" => "failed", "msg" => "系统检测到您的账户最近进行过激活账户或忘记密码的操作。<br>请勿在短时间内重复操作。您可在五分钟后继续尝试。");
+            }
+        } else {
+            $res = array("success" => "failed", "msg" => "找不到您的账户或您的账户已经激活，请重新输入。");
+        }
+        return $res;
+    }
+
     public function reset(Request $request){
         $token = $request->input("token");
         $result = $this->checkToken($token);
@@ -98,8 +123,8 @@ class MembershipController extends Controller
         $result = $this->checkToken($token);
         if ($result == "success") {
             $password = md5($request->input('password'));
-            DB::table('membership')->where('token', $token)->update(["password" => $password, "update_time" => time(),"token"=>""]);
-            $res = array("success" => "ture", "msg" => "success");
+            DB::table('membership')->where('token', $token)->update(["password" => $password, "update_time" => time(), "token"=>""]);
+            $res = array("success" => "true", "msg" => "success");
         } else {
             $res = array("success" => "failed", "msg" => "Token has expired.");
         }
@@ -108,25 +133,25 @@ class MembershipController extends Controller
 
     public function forget(Request $request){
         $email = $request->input("email");
-        $member = DB::table('membership')->where("email", $email)->get();
+        $member = DB::table('membership')->where("email", $email)->where('active_status', '1')->get();
         if(!empty($member)){
             $token_exp = time() + 3600 * 24;
-            if ($token_exp - $member[0]->token_exp > 3600){
+            if (($token_exp - $member[0]->token_exp > 300)){
                 $token = md5($member[0]->email.$member[0]->password.time());
 
                 $member_info = array(
                     "email" => $member[0]->email,
-                    "username" => empty($member[0]->username)?"Customer":$member[0]->username,
+                    "username" => empty($member[0]->firstname)?"Customer":$member[0]->firstname,
                     "token" => $token,
                 );
                 // $this->forgetEmailSend($member_info);
                 DB::table('membership')->where("email", $email)->update(['token' => $token, "token_exp" => $token_exp]);
                 $res = array("success" => "true", "msg" => "邮件已发送，请登录邮箱按邮件内容操作。");
             } else {
-                $res = array("success" => "true", "msg" => "请勿重复操作。");
+                $res = array("success" => "failed", "msg" => "系统检测到您的账户最近进行过激活账户或忘记密码的操作。<br>请勿在短时间内重复操作。您可在五分钟后继续尝试。");
             }
         } else {
-            $res = array("success" => "failed", "msg" => "找不到您的账户，请重新输入。");
+            $res = array("success" => "failed", "msg" => "找不到您的账户或您的账户还未激活，请重新输入。");
         }
         return $res;
     }
@@ -250,6 +275,35 @@ class MembershipController extends Controller
         DB::table('membership')->where('email', $member)->update(["shopping_bag" => json_encode($shoppingbag),"update_time" => time()]);
         $request->session()->put('shopping-bag', $shoppingbag);
         return array("success" => "true", "num" => $num);
+    }
+
+    public function submitorder(Request $request){
+        $address = array(
+            "firstname" => $request->input('firstname'),
+            "lastname" => $request->input('lastname'),
+            "email" => $request->input('email'),
+            "tel" => $request->input('tel'),
+            "add" => $request->input('add'),
+            "add2" => $request->input('add2'),
+            "city" => $request->input('city'),
+            "state" => $request->input('state'),
+            "postcode" => $request->input('postcode'),
+        );
+        
+        $billing_address = array(
+            "firstname" => $request->input('firstnameb'),
+            "lastname" => $request->input('lastnameb'),
+            "email" => $request->input('emailb'),
+            "tel" => $request->input('telb'),
+            "add" => $request->input('addb'),
+            "add2" => $request->input('add2b'),
+            "city" => $request->input('cityb'),
+            "state" => $request->input('stateb'),
+            "postcode" => $request->input('postcodeb'),
+        );
+        $request->session()->put('address', $address);
+        $request->session()->put('billing_address', $billing_address);
+        return array("success" => "true", "link" => "checkout-confirm");
     }
 
     public function addressbook(Request $request){

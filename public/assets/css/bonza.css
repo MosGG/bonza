@@ -644,6 +644,7 @@ footer{
 .open-menu-m{
 	height: 220px!important;
 }
+.modal,
 .qrcode{
 	position: fixed;
 	left: 0;
@@ -662,6 +663,66 @@ footer{
 	width: 50vmin;
 	height: auto;
 }
+.modal-box{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	max-width: 828px;
+	min-width: 300px;
+	width: 65%;
+	background: #fff;
+	padding: 40px 20px;
+	text-align: center;
+	height: 304px;
+}
+.layer{
+	position: absolute;
+	background: #fff;
+	width: calc(100% - 40px);
+	height: calc(100% - 80px);
+	padding-top: 5px;
+}
+.modal-box h2{
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+.modal-box .login-btn{
+	max-width: 370px;
+	margin: 0 auto;
+	line-height: 38px;
+    margin-bottom: 35px;
+}
+#forget-email{
+	max-width: 350px;
+	padding: 5px 10px;
+    height: 29px;
+    width: calc(100% - 20px);
+    border: 1px solid #AAAAAA;
+    background-color: #fff;
+    margin-bottom: 35px;
+}
+#forget-loading{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+}
+.input-des{
+	color: #AAAAAA;
+	margin-top: 60px;
+	margin-bottom: 10px;
+}
+.close-modal{
+	cursor: pointer;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	width: 18px;
+	height: 18px;
+}
+
+
 #copyright{
 	font-size: 14px;
 }
@@ -703,11 +764,11 @@ input[type=checkbox] {
   	margin: 0px 15px 0px 0px;
   	cursor: pointer;
   	font-size: 14px;
-    visibility: hidden;
+  	opacity: 0;
 }
 
 
-input[type=checkbox]:after {
+.checkbox-span:after {
     content: " ";
     background-color: #fff;
     display: inline-block;
@@ -717,10 +778,15 @@ input[type=checkbox]:after {
     height:16px;
     visibility: visible;
     border:2px solid #000;
-}
-input[type=checkbox]:checked:after {
-    content: "\2714";
+    position: absolute;
     font-weight:bold;
+    left: 0px;
+    z-index: -1;
+    font-size: 14px;
+    line-height: 18px;
+}
+input[type=checkbox]:checked ~.checkbox-span:after {
+    content: "\2714";
 }
 @media(max-width: 1200px){
 

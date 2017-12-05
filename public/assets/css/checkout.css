@@ -25,13 +25,13 @@
 }
 .ck-d-left{
 	margin-right: 400px;
+	overflow: hidden;
 }
 .ck-d-right{
 	position: absolute;
 	right: 15px;
 	top: 60px;
 	width: 370px;
-	height: 300px;
 }
 .required-label{
 	text-align: right;
@@ -58,9 +58,9 @@
 	font-size: 16px;
 }
 .login-input input{
-	padding: 5px;
+	padding: 5px 10px;
 	height: 29px;
-	width: calc(100% - 10px);
+	width: calc(100% - 20px);
 	border: 1px solid #AAAAAA;
 	background-color: #fff;
 	margin-bottom: 20px;
@@ -68,4 +68,128 @@
 .login-remember-box{
 	margin-bottom: 25px;
 	font-size: 16px;
+}
+.delivery-box{
+	padding: 35px 0;
+	border-top: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+.delivery-box h3{
+	font-size: 22px;
+	margin-bottom: 20px;
+}
+.delivery-item{
+	padding: 30px;
+	border: 1px solid #AAAAAA;
+	max-width: 310px;
+	font-size: 16px;
+	line-height: 20px;
+	/*float: left;*/
+}
+.delivery-item:hover{
+	border: 1px solid #000;
+}
+.delete{
+	text-decoration: line-through;
+	color: #AAAAAA;
+}
+.checkout-button{
+	width: 254px;
+	height: 38px;
+	background-color: #000;
+	border: 1px solid #000;
+	color: #fff;
+	font-size: 16px;
+	text-align: center;
+	line-height: 38px;
+	margin: 30px 0 125px 0;
+}
+.address-another{
+	display: none;
+}
+.address-another-show{
+	display: block!important;
+}
+.order-detail{
+	padding: 0 15px;
+	border: 1px solid #AAAAAA;
+	margin-top: -1px;
+}
+.item{
+	border-bottom: 1px solid #AAAAAA;
+	padding-bottom: 30px;
+	overflow: hidden;
+	padding: 20px 0;
+}
+.item-left{
+	float: left;
+}
+.item-left img{
+	width: 123px;
+	height: auto;
+}
+.item-right{
+	font-size: 16px;
+	margin-left: 133px;
+	line-height: 20px;
+}
+.item-right h3{
+	font-size: 16px;
+	font-weight: bold;
+}
+.item-right h4{
+	font-size: 14px;
+	font-weight: normal;
+}
+.justify-line{
+	text-align: right;
+	padding: 10px 0;
+}
+.justify-line span{
+	float: left;
+}
+.price-detail{
+	border-bottom: 1px solid #aaaaaa;
+	padding:  20px 0;
+}
+.tax-des{
+	text-align: center;
+	padding-top: 20px;
+}
+.input-warning{
+	border-color: red!important;
+}
+
+/* confirm checkout*/
+.address-item{
+	width: 385px;
+	float: left;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 30px 0;
+}
+.address-item h4{
+	margin-bottom: 15px;
+}
+.address-item p{
+
+}
+.cc-btn{
+	width: 165px;
+	border: 1px solid #AAAAAA;
+	line-height: 38px;
+	text-align: center;
+	color: #AAAAAA;
+	margin-top: 20px;
+}
+.cc-btn:hover{
+	border-color: #000;
+	color: #000;
+}
+.wechat-box{
+	padding: 35px 0;
+}
+.wechat-box h3{
+	font-size: 22px;
+	margin-bottom: 20px;
 }

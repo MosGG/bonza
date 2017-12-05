@@ -22,15 +22,15 @@
 
 	<div class="ctl-box relative">
 		<img src="/assets/img/myaccount.png">
-		<a href="/account/address"><div class="menu">
+		<a href="/myaccount/addressbook"><div class="menu">
 			<h3>邮寄地址</h3>
 			<p>添加或修改账单地址与送货地址</p>
 		</div></a>
-		<a href="/account/info"><div class="menu">
+		<a href="/myaccount/accountinfo"><div class="menu">
 			<h3>账户信息</h3>
 			<p>查看或修改您的登录信息</p>
 		</div></a>
-		<a href="/account/order"><div class="menu">
+		<a href="/myaccount/order"><div class="menu">
 			<h3>我的订单</h3>
 			<p>退换货品、追踪配送状态、查看订单记录</p>
 		</div></a>
@@ -38,7 +38,7 @@
 			<h3>愿望清单</h3>
 			<p>查看愿望清单、加入心爱商品、整理愿望清单、购买清单商品</p>
 		</div></a>
-		<a href="/account/wechat"><div class="menu">
+		<a href="/myaccount/wechat"><div class="menu">
 			<h3>微信绑定</h3>
 			<p>及时获得新品推送和折扣信息</p>
 		</div></a>

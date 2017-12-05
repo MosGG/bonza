@@ -276,7 +276,6 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'MembershipController@accountinfo'
         ]);
 
-
         Route::post('/myaccount/updateinfo', [
             'as' => 'updateinfo',
             'uses' => 'MembershipController@updateinfo'
@@ -308,6 +307,17 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'PagesController@checkout'
         ]);
 
+        Route::post('/submit-order', 'MembershipController@submitorder');
+
+        Route::get('/submit-order', [
+            'as' => 'submit-order',
+            'uses' => 'PagesController@checkout'
+        ]);
+
+         Route::get('/checkout-confirm', [
+            'as' => 'checkout-confirm',
+            'uses' => 'PagesController@checkoutconfirm'
+        ]);
     });
 
      Route::get('/', [
@@ -344,14 +354,23 @@ Route::group(['middleware' => 'web'], function () {
         'as' => 'active',
         'uses' => 'MembershipController@active'
     ]);
+
+    Route::get('/register/reactive', function(){
+        return view('pages.reactive');
+    });
+    Route::Post('/register/reactive', 'MembershipController@reative');
+
     Route::get('/register/reset', [
         'as' => 'reset',
         'uses' => 'MembershipController@reset'
     ]);
-    Route::Post('/register/reset', [
-        'as' => 'reset',
-        'uses' => 'MembershipController@resetPassword'
-    ]);
+    Route::Post('/register/reset', 'MembershipController@resetPassword');
+
+    Route::get('/register/resetcompelete', function(){
+        return view('pages.resetcompelete');
+    });
+
+    
 
     Route::Get('/forget-password', function(){
         return view('pages.forget');

@@ -233,5 +233,8 @@
 	@yield('js-reference')
 
 </body>
+	<script>
+		member = "{!!session('member')!!}";
+	</script>
 	@yield('js-function')
 </html>

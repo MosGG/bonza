@@ -126,10 +126,13 @@
 		<div class="odd">
 			<div class="wrapper">
 				<div class="img-box relative">
-					<div class="img-shade">
-						<img class="pic-hov-corner" src="/assets/amazy/btn1.svg">
+					<div class="img-shade transition">
 						<img class="search-icon" src="/assets/amazy/search.svg">
+						<div class="img-shade-2">
+							<img class="pic-hov-corner" src="/assets/amazy/btn1.svg">
+						</div>
 					</div>
+					
 					<img class="img-content" src="/assets/amazy/amazy2.png">
 				</div>
 				<div class="o-right">
@@ -149,14 +152,14 @@
 			<div class="form-box">
 				<div class="input-box box-1 relative">
 					<input placeholder="Name" type="text" name="name">
-					<img class="input-corner" src="/assets/amazy/input-corner.png">
+					<img class="input-corner" src="/assets/amazy/btn1.svg">
 				</div>
 				<div class="input-box box-2 relative">
 					<input placeholder="Email Address" type="text" name="email">
-					<img class="input-corner" src="/assets/amazy/input-corner.png">
+					<img class="input-corner" src="/assets/amazy/btn1.svg">
 				</div>
 				<div class="select relative">
-					<img class="select-arrow transition" src="/assets/amazy/arrow.svg">
+					<img class="select-arrow" src="/assets/amazy/arrow.svg">
 					<div class="select-holder">Select Location</div>
 					<div class="options">
 						<div data-i="0">Melbourne</div>
@@ -219,9 +222,11 @@
 	});
 
 	$(".img-box").hover(function(){
-		$(".img-shade").removeClass("img-shade-reverse").addClass("img-shade-go");
+		$(".img-shade").css("opacity", '1');
+		$(".img-shade-2").removeClass("img-shade-reverse").addClass("img-shade-go");
 	}, function(){
-		$(".img-shade").removeClass("img-shade-go").addClass("img-shade-reverse");
+		$(".img-shade").css("opacity", '0');
+		$(".img-shade-2").removeClass("img-shade-go").addClass("img-shade-reverse");
 	});
 
 	$(".icon").hover(function(){

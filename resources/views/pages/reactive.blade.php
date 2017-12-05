@@ -1,6 +1,6 @@
 @extends('layouts.pageLayout')
 
-@section('title')<title>Bonza - 忘记密码</title>@stop
+@section('title')<title>Bonza - 激活账户</title>@stop
 
 @section('css-reference')
 	<link href="/assets/css/login.css" rel="stylesheet">
@@ -12,10 +12,10 @@
 	<div class="breadcrum">
 		<a href="/">首页</a>
 		<img src="/assets/img/next.svg">
-		<a href="/forget-password">忘记密码</a>
+		<a href="/register/reactive">激活账户</a>
 	</div>
 
-	<h2 class="title">忘记密码</h2>
+	<h2 class="title">激活账户</h2>
 	<div class="reset-div relative reset-sm-div">
 		<h2 class="subtitle">请输入您的邮箱</h2>
 		<div class="required-label">*此栏为必填</div>
@@ -27,7 +27,7 @@
 			<img src="/assets/img/loading.gif"><span></span>
 		</div>
 		<div style="margin-top: 30px;">
-			<input class="button login-btn" type="button" value="找回密码">
+			<input class="button login-btn" type="button" value="提交">
 		</div>
 		<div class="login-input">
 			<div class="login-forget"><a href="/login">点击这里登录</a></div>
@@ -47,7 +47,7 @@
 		$(".login-err span").html("");
 		$.ajax({
 	        type: "POST",
-	        url: "/forget-password",
+	        url: "/register/reactive",
 	        data: {
 	            email: $('#username').val(),
 	        },
@@ -68,6 +68,3 @@
 	});
 </script>
 @stop
-
-
-
