@@ -52,10 +52,17 @@
          <div class= "content">
            <h3>我的账户信息</h3>
            <div class="inside_re">
-						 <div class="f_head">修改个人信息</div>
+
+						 <div class="f_head">
+						 <!-- <div class="left_l">修改个人信息</div>
+						 <div class="right_r">修改密码</div> -->
+					 </div>
 
                 <div class="left_div relative">
+
                 <form id="repersonal-form" class="form-horizontal" onsubmit="return repSubmit()">
+									<div class="left_l">修改个人信息</div>
+									
               		<div class="new_required_label">*此栏为必填</div>
 
                  <div class="login-input">
@@ -83,9 +90,9 @@
                    <input name="phone" required="" value="{!!$phone!!}" type="text">
                  </div>
 
-                <div class="login-loading">
+                <!-- <div class="login-loading">
                   <img src="/assets/img/loading.gif"><span></span>
-                </div>
+                </div> -->
 
                 <div>
                   <input id="repersonal-submit" type="submit" class="button accountinfo-btn" value="更新信息">
@@ -100,17 +107,18 @@
               	<div class="right_div relative">
 
                   <form id="repassword-form" class="form-horizontal" onsubmit="return repaSubmit()">
+										 <div class="right_r">修改密码</div>
                   <div class="login-input">
                     <div class="login-title">现在的密码 *</div>
                     <input name="currentpassword" required="" type="password">
                   </div>
                   <div class="login-input">
                     <div class="login-title">新密码 *</div>
-                    <input name="newpassword" required="" type="password">
+                    <input name="newpassword" required="" type="password" minlength="4" maxlength="16">
                   </div>
                   <div class="login-input">
                     <div class="login-title">确认新密码 *</div>
-                    <input name="newpasswordconfirm" required="" type="password">
+                    <input name="newpasswordconfirm" required="" type="password" minlength="4" maxlength="16">
                   </div>
               			<div class="login-loading">
               				<img src="/assets/img/loading.gif"><span></span>
@@ -152,14 +160,15 @@ $(function(){
                         $("#repersonal-form .login-loading span").html("");
                         },
             success: function (data) {
-                $("#repersonal-form .login-loading span").html(data.success);
+                // $("#repersonal-form .login-loading span").html(data.success);
+								window.location.href = "/myaccount";
             },
             error: function (jqXHR) {
                 alert("Error:" + jqXHR.status + ". Please contact the admin.");
             },
             complete: function () {
-              $("#repersonal-form .login-loading img").css('visibility','hidden');
-							setTimeout(function(){ $("#repersonal-form .login-loading span").html(""); }, 2000);
+              // $("#repersonal-form .login-loading img").css('visibility','hidden');
+							// setTimeout(function(){ $("#repersonal-form .login-loading span").html(""); }, 2000);
             }
         });
     }
@@ -187,12 +196,18 @@ $(function(){
 												$("#repassword-form .login-loading span").html("");
 												},
 						success: function (data) {
+							if (data.status == "true"){
+								window.location.href = "/myaccount";
+							}else{
 								$("#repassword-form .login-loading span").html(data.success);
+							}
+
 						},
 						error: function (jqXHR) {
 								alert("Error:" + jqXHR.status + ". Please contact the admin.");
 						},
 						complete: function () {
+
 							$("#repassword-form .login-loading img").css('visibility','hidden');
 							setTimeout(function(){ $("#repassword-form .login-loading span").html(""); }, 2000);
 						}

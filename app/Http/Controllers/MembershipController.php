@@ -219,6 +219,7 @@ class MembershipController extends Controller
         return array("success" => "true", "num" => $num);
     }
 
+
     public function addToShoppingbag(Request $request){
         $id = $request->input('id');
         $size = $request->input('size');
@@ -319,12 +320,19 @@ class MembershipController extends Controller
 
     public function newaddress(Request $request){
         $id = session("member_id");
+
+
         if($request->input("default") == "true"){
           $default = 1;
           DB::table('addressbook')->where('member_id', $id)->update(["default" => 0]);
         }else{
           $default = 0;
+          $first = DB::table('addressbook')->where('member_id', $id)->first();
+          if ($first == NULL){
+            $default = 1;
+          }
         }
+
         $address = array(
             'firstname' => $request->input("firstname"),
             'lastname' => $request->input("lastname"),
@@ -337,17 +345,19 @@ class MembershipController extends Controller
             'postcode' => $request->input("postcode"),
             'default' => $default
         );
+
         DB::table('addressbook')->insert($address);
         return array("success" => "添加成功");
     }
 
     public function deleteaddress(Request $request){
         $id = session("member_id");
-        // $default = DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->first();
-        // if ($default == 1){
-        //   DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->delete();
-        // }
         DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->delete();
+        $first = DB::table('addressbook')->where('member_id', $id)->first();
+        if ($first != NULL){
+          DB::table('addressbook')->where('member_id', $id)->where('id',$first->id)->update(["default" => 1]);
+        }
+
         return array("success" => "删除成功");
     }
 
@@ -416,9 +426,9 @@ class MembershipController extends Controller
         if($password == $info[0]->password){
           $newpassword = md5($request->newpassword);
           DB::table('membership')->where('id', $id)->update(["password" => $newpassword, "update_time" => time(),"token"=>""]);
-          return array("success" => "密码修改成功");
+          return array("success" => "密码修改成功","status" => "true");
         }else {
-          return array("success" => "密码不正确");
+          return array("success" => "密码不正确","status" => "false");
         }
     }
 }

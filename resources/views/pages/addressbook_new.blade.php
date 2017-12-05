@@ -100,9 +100,9 @@
                    <div class="login-remember-box">
                			    <input id ="checkbox-2" type="checkbox" name="default" class="styled-checkbox"><label for="checkbox-2">默认为送货地址</label>
                		</div>
-              			<div class="login-loading">
+              			<!-- <div class="login-loading">
               				<img src="/assets/img/loading.gif"><span></span>
-              			</div>
+              			</div> -->
               			<div>
               				<input id="newaddress-submit" type="submit" class="button login-btn" value="保存地址">
               			</div>
@@ -139,18 +139,19 @@ $(function(){
             },
             dataType: "json",
             beforeSend  : function() {
-                        $(".login-loading").css('visibility','visible');
-                        $(".login-loading span").html("");
+                        // $(".login-loading").css('visibility','visible');
+                        // $(".login-loading span").html("");
                         },
             success: function (data) {
-                $("#newaddress-form .login-loading span").html(data.success);
+                // $("#newaddress-form .login-loading span").html(data.success);
+								window.location.href = "/myaccount/addressbook";
             },
             error: function (jqXHR) {
                 alert("Error:" + jqXHR.status + ". Please contact the admin.");
             },
             complete: function () {
-              $("#newaddress-form .login-loading img").css('visibility','hidden');
-							setTimeout(function(){ $("#newaddress-form .login-loading span").html(""); }, 2000);
+              // $("#newaddress-form .login-loading img").css('visibility','hidden');
+							// setTimeout(function(){ $("#newaddress-form .login-loading span").html(""); }, 2000);
             }
         });
     }
