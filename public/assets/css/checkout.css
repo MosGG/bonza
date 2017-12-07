@@ -21,7 +21,7 @@
 	color: #000!important;
 }
 .ck-detail{
-	padding: 60px 15px;
+	padding: 60px 15px 200px 15px;
 }
 .ck-d-left{
 	margin-right: 400px;
@@ -45,6 +45,7 @@
 	font-size: 22px;
 	padding-bottom: 30px;
 	border-bottom: 1px solid #AAAAAA;
+	line-height: 24px;
 }
 .ck-d-wrapper{
 	max-width: 370px;
@@ -182,19 +183,52 @@
 	text-align: center;
 	color: #AAAAAA;
 	margin-top: 20px;
+	display: inline-block;
+	margin-right: 20px;
 }
 .cc-btn:hover{
 	border-color: #000;
 	color: #000;
 }
+.black-btn{
+	width: 165px;
+	border: 1px solid #000;
+	line-height: 38px;
+	text-align: center;
+	color: #fff;
+	margin-top: 20px;
+	background: #000;
+	display: inline-block;
+}
+/*.black-btn{
+	border-color: #000;
+	color: #000;
+}*/
 .wechat-box{
 	padding: 35px 0;
+	height: 300px;
 }
 .wechat-box h3{
 	font-size: 22px;
-	margin-bottom: 20px;
+	margin: 20px 0;
 }
-
+#qrcode{
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+.layer{
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff;
+	height: 300px;
+}
+.wechatpay{
+	padding: 20px;
+}
+.wechatpay img{
+	margin: 0 auto;
+}
 @media(max-width: 768px){
 	.ck-detail{
 		padding: 15px;
@@ -207,6 +241,7 @@
 	.ck-d-right{
 		position: unset;
 		width: 100%;
+		margin-bottom: 20px;
 	}
 	.ck-detail h2{
 		margin-top: 30px;

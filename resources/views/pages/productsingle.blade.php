@@ -55,7 +55,7 @@
 					?>
 			  	</ul>
 			</nav>
-			<div id="size-refer" class="transition">查看尺码参考</div>
+			<div id="size-refer" class="transition" onclick="$('.modal').fadeIn();">查看尺码参考</div>
 		</div>
 		<div class="p-btn-box">
 			<div id="btn-cart" class="transition">加入购物车
@@ -134,6 +134,8 @@
 		</div>
 	</div>
 </div>
+
+@include('partial.sizeModal');
 @stop
 
 @section('js-reference')
@@ -153,7 +155,7 @@
 		nextArrow: "<div class='nxt-arrow arrow'><img src='/assets/img/right.svg'></div>",
 		responsive: [
 	    {
-		    breakpoint: 769,
+		    breakpoint: 768,
 		    settings: {
 		        slidesToShow: 2,
 		        slidesToScroll: 1

@@ -53,7 +53,7 @@
 		</div>
 	</div>
 
-	<div class="register-div relative">
+	<div id="reg" class="register-div relative">
 		<h2 class="subtitle">注册新账户</h2>
 		<div class="required-label">*此栏为必填</div>
 		<form id="reg-form" class="form-horizontal" onsubmit="return regSubmit()">

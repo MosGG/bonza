@@ -102,7 +102,7 @@
                         <input name="postcode" required="" placeholder="请输入您的邮编" type="text">
                    </div>
                    <div class="login-remember-box">
-               			    <input id ="checkbox-2" type="checkbox" name="default" class="styled-checkbox"><label for="checkbox-2">默认为送货地址</label>
+               			    <input id ="checkbox-2" type="checkbox" name="default" class="styled-checkbox" checked><label for="checkbox-2">默认为送货地址</label>
                		</div>
               			<!-- <div class="login-loading">
               				<img src="/assets/img/loading.gif"><span></span>

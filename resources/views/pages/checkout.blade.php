@@ -50,46 +50,46 @@
 		</div>
 		<div class="tax-des">所有价格包含关税和其他税</div>
 	</div>
-	
+
 	<div class="ck-d-left">
 		<h2>添加送货地址</h2>
 		<div class="ck-d-wrapper relative address">
 			<div class="required-label">*此栏为必填</div>
 			<div class="login-input">
 				<div class="login-title">名字 *</div>
-				<input id="firstname" class="required" type='text' placeholder="">
+				<input id="firstname" class="required" type='text' placeholder="" value="{!!$address['firstname']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">姓氏 *</div>
-				<input id="lastname" class="required" type='text' placeholder="">
+				<input id="lastname" class="required" type='text' placeholder="" value="{!!$address['lastname']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">邮箱 *</div>
-				<input id="email" class="required" type='text' placeholder="">
+				<input id="email" class="required" type='text' placeholder="" value="{!!$address['email']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">电话 *</div>
-				<input id="tel" class="required" type='text' placeholder="">
+				<input id="tel" class="required" type='text' placeholder="" value="{!!$address['tel']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">地址 *</div>
-				<input id="add" class="required" type='text' placeholder="">
+				<input id="add" class="required" type='text' placeholder="" value="{!!$address['add']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">地址第二行</div>
-				<input id="add-2" type='text' placeholder="">
+				<input id="add-2" type='text' placeholder="" value="{!!$address['add2']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">城市 *</div>
-				<input id="city" class="required" type='text' placeholder="">
+				<input id="city" class="required" type='text' placeholder="" value="{!!$address['city']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">省/辖区 *</div>
-				<input id="state" class="required" type='text' placeholder="">
+				<input id="state" class="required" type='text' placeholder="" value="{!!$address['state']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">邮编 *</div>
-				<input id="postcode" class="required" type='text' placeholder="">
+				<input id="postcode" class="required" type='text' placeholder="" value="{!!$address['postcode']!!}">
 			</div>
 			<div class="login-remember-box">
 				<input type="checkbox" name="billing-address" checked><span class="checkbox-span">送货地址与账单新地址相同</span>
@@ -104,39 +104,39 @@
 		<div class="ck-d-wrapper relative ">
 			<div class="login-input">
 				<div class="login-title">名字 *</div>
-				<input id="firstname-b" class="required" type='text' placeholder="">
+				<input id="firstname-b" class="required" type='text' placeholder="" value="{!!$billing_address['firstname']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">姓氏 *</div>
-				<input id="lastname-b" class="required" type='text' placeholder="">
+				<input id="lastname-b" class="required" type='text' placeholder="" value="{!!$billing_address['lastname']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">邮箱 *</div>
-				<input id="email-b" class="required" type='text' placeholder="">
+				<input id="email-b" class="required" type='text' placeholder="" value="{!!$billing_address['email']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">电话 *</div>
-				<input id="tel-b" class="required" type='text' placeholder="">
+				<input id="tel-b" class="required" type='text' placeholder="" value="{!!$billing_address['tel']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">地址 *</div>
-				<input id="add-b" class="required" type='text' placeholder="">
+				<input id="add-b" class="required" type='text' placeholder="" value="{!!$billing_address['add']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">地址第二行</div>
-				<input id="add-2-b" type='text' placeholder="">
+				<input id="add-2-b" type='text' placeholder="" value="{!!$billing_address['add2']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">城市 *</div>
-				<input id="city-b" class="required" type='text' placeholder="">
+				<input id="city-b" class="required" type='text' placeholder="" value="{!!$billing_address['city']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">省/辖区 *</div>
-				<input id="state-b" class="required" type='text' placeholder="">
+				<input id="state-b" class="required" type='text' placeholder="" value="{!!$billing_address['state']!!}">
 			</div>
 			<div class="login-input">
 				<div class="login-title">邮编 *</div>
-				<input id="postcode-b" class="required" type='text' placeholder="">
+				<input id="postcode-b" class="required" type='text' placeholder="" value="{!!$billing_address['postcode']!!}">
 			</div>
 		</div>
 	</div>
@@ -170,21 +170,38 @@
 		if ($(".ck-detail").height() < $(".ck-d-right").height()) {
 			$(".ck-detail").height($(".ck-d-right").height());
 		}
+
+		$(window).on('resize', function () {
+			if ($(window).width() < 768) {
+				$(".ck-detail").height('auto');
+			} else {
+				if ($(".ck-detail").height() < $(".ck-d-right").height()) {
+					$(".ck-detail").height($(".ck-d-right").height());
+				}
+			}
+		});
 	})
 
 	$("input[name=billing-address]").click(function(){
 		$(".address-another").toggleClass("address-another-show");
 	});
 
-	$(".address input").change(function(){
-		if ($("input[name=billing-address]")[0].checked) {
-			var text = $(this).val();
-			var id = $(this).attr('id');
-			$("#"+id+"-b").val(text);
-		}
-	});
+	// $(".address input").change(function(){
+	// 	if ($("input[name=billing-address]")[0].checked) {
+	// 		var text = $(this).val();
+	// 		var id = $(this).attr('id');
+	// 		$("#"+id+"-b").val(text);
+	// 	}
+	// });
 
 	function submitOrder(){
+		if ($("input[name=billing-address]")[0].checked) {
+			$.each($(".address input"), function() {
+				var text = $(this).val();
+				var id = $(this).attr('id');
+				$("#"+id+"-b").val(text);
+			});
+		}
 		var result = true;
 		$.each($(".required"), function() {
 			if($(this).val() == "") {

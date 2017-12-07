@@ -18,6 +18,39 @@
 	</div>
 </div>
 <div class="wrapper ck-detail relative">
+	<div class="ck-d-right">
+		<h2>订单总结</h2>
+		<div class="order-detail">
+			<?php 
+			foreach($shoppingbag as $product) { ?>
+				<div class="item relative transition" id="p-{!!$product->id!!}">
+					<div class="item-left">
+						<img src="{!!$product->src!!}">
+					</div>
+					<div class="item-right relative">
+						<h3>{!!$product->title!!}</h3>
+						<h4>{!!$product->subtitle!!}</h4>
+						<br>
+						<h4>颜色：蔚蓝色</h4>
+						<h4>尺寸：{!!$product->size!!}</h4>
+						<h4>数量：{!!$product->qty!!}</h4>
+						<h4 class="price">￥
+							<span id="price{!!$product->id!!}">{!!number_format($product->price,2)!!}</span>
+						</h4>
+					</div>
+				</div>
+			<?php } ?>
+			<div class="price-detail">
+				<div class="justify-line"><span>商品总金额</span>￥{!!number_format($price['product_total'],2)!!}</div>
+				<div class="justify-line"><span>运费</span>￥{!!number_format($price['delivery'],2)!!}</div>
+			</div>
+			<div class="price-detail" style="margin-bottom: -1px;">
+				<div class="justify-line"><span>小计</span>￥{!!number_format($price['subtotal'],2)!!}</div>
+			</div>
+		</div>
+		<div class="tax-des">所有价格包含关税和其他税</div>
+	</div>
+
 	<div class="ck-d-left">
 		<h2>查看订单地址与送货地址</h2>
 		<?php 
@@ -55,50 +88,45 @@
 		</div>
 	</div>
 
-	<div class="ck-d-left wechat-box">
-		<h3>微信扫码支付</h3>
-		<img>
-		<a href="/checkout"><div class="cc-btn">回上页</div></a>
-	</div>
-
-
-	<div class="ck-d-right">
-		<h2>订单总结</h2>
-		<div class="order-detail">
-			<?php 
-			foreach($shoppingbag as $product) { ?>
-				<div class="item relative transition" id="p-{!!$product->id!!}">
-					<div class="item-left">
-						<img src="{!!$product->src!!}">
-					</div>
-					<div class="item-right relative">
-						<h3>{!!$product->title!!}</h3>
-						<h4>{!!$product->subtitle!!}</h4>
-						<br>
-						<h4>颜色：蔚蓝色</h4>
-						<h4>尺寸：{!!$product->size!!}</h4>
-						<h4>数量：{!!$product->qty!!}</h4>
-						<h4 class="price">￥
-							<span id="price{!!$product->id!!}">{!!number_format($product->price,2)!!}</span>
-						</h4>
-					</div>
-				</div>
-			<?php } ?>
-			<div class="price-detail">
-				<div class="justify-line"><span>商品总金额</span>￥{!!number_format($price['product_total'],2)!!}</div>
-				<div class="justify-line"><span>运费</span>￥{!!number_format($price['delivery'],2)!!}</div>
-			</div>
-			<div class="price-detail" style="margin-bottom: -1px;">
-				<div class="justify-line"><span>小计</span>￥{!!number_format($price['subtotal'],2)!!}</div>
-			</div>
+	<div class="ck-d-left wechat-box relative">
+		<div class="layer">
+			<br>
+			<p>糟糕，下订单时遇到了问题！<br>请返回上一步重试或联系客服info@bonza.com.co</p>
 		</div>
-		<div class="tax-des">所有价格包含关税和其他税</div>
+		<!-- <div class="wechatpay layer">
+			<h3>微信扫码支付</h3>
+			<div id="qrcode"></div>
+			<a href="/myaccount/order"><div class="black-btn">支付完成</div></a>
+		</div> -->
+		<div class="loading layer">
+			<img src="/assets/img/loading.gif" style="margin:40px;">
+		</div>
+		<div class="confirm layer">
+			<a href="/checkout"><div class="cc-btn">返回上页</div></a>
+			<a href="javascript:void(0);" onclick="confirmOrder();"><div class="black-btn">立即付款</div></a>
+		</div>
+		
 	</div>
 
+
+	
+
+</div>
+
+<div class="modal">
+	<div class="modal-box">
+		<img class="close-modal" src="/assets/img/delete.svg" onclick="$('.modal').fadeOut();">
+		<div class="wechatpay layer">
+			<h3>微信扫码支付</h3>
+			<div id="qrcode"></div>
+			<a href="/myaccount/order"><div class="black-btn">支付完成</div></a>
+		</div>
+	</div>
 </div>
 @stop
 
 @section('js-reference')
+<script type="text/javascript" src="/assets/js/qrcode.min.js"></script>
 @stop
 
 @section('js-function')
@@ -107,6 +135,54 @@
 		if ($(".ck-detail").height() < $(".ck-d-right").height()) {
 			$(".ck-detail").height($(".ck-d-right").height());
 		}
+
+		$(window).on('resize', function () {
+			if ($(window).width() < 768) {
+				$(".ck-detail").height('auto');
+			} else {
+				if ($(".ck-detail").height() < $(".ck-d-right").height()) {
+					$(".ck-detail").height($(".ck-d-right").height());
+				}
+			}
+		});	
 	})
+
+	function confirmOrder(){
+		$(".confirm").fadeOut();
+		$.ajax({
+	        type: "POST",
+	        url: "/confirmorder",
+	        data: {
+	        },
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        },
+	        dataType: "json",
+	        success: function (data) {
+	        	if (data.success == "true") {
+	        		var qrcode = new QRCode("qrcode", {
+					    text: data.link,
+					    width: 160,
+					    height: 160,
+					    colorDark : "#000000",
+					    colorLight : "#ffffff",
+					    correctLevel : QRCode.CorrectLevel.H
+					});
+	        		// $(".loading").fadeOut();
+	        		$('.modal').fadeIn();
+	        	} else {
+	        		$(".loading").fadeOut();
+	        		// $(".wechatpay").fadeOut();
+	        	}
+	        },
+	        error: function (jqXHR) {
+	            $(".loading").fadeOut();
+        		// $(".wechatpay").fadeOut();
+	        },
+	        // complete: function () {
+	        // 	$("#forget-loading").hide();
+	        // }
+	    });
+	}
 </script>
 @stop

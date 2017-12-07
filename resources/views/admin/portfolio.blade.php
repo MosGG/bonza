@@ -59,7 +59,7 @@
                                         </th>
                                         <th data-filterable="true" data-sortable="true" data-direction="desc">Stock
                                         </th>
-                                        <th data-filterable="true" data-sortable="true" data-direction="desc">Origin
+                                        <th data-filterable="true" data-sortable="true" data-direction="desc">Designer
                                         </th>
                                         <th data-filterable="true" data-sortable="true" data-direction="desc">Category
                                         </th>
@@ -210,6 +210,8 @@
                     });
                 }
             }
+
+            
         });
     </script>
 @stop

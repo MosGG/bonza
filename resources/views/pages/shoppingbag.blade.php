@@ -23,7 +23,7 @@
 			<h2 class="title">购物袋</h2>
 			<div class="btn-box">
 				<a href="/product"><div id="btn-l" class="sb-btn">继续购物</div></a>
-				<a href="/checkout"><div id="btn-r" class="sb-btn">结算</div></a>
+				<a href="javascript:checkout();"><div id="btn-r" class="sb-btn">结算</div></a>
 			</div>
 			<div class="relative">
 				<div class="left-detail">
@@ -39,14 +39,14 @@
 								<div class="relative">
 									<h3>{!!$product->subtitle!!}</h3>
 									<h4 class="price">￥
-										<span id="price{!!$product->id!!}">{!!$product->price!!}</span>
+										<span id="price{!!$product->id!!}">{!!number_format($product->price,2)!!}</span>
 									</h4>
 								</div>
 								<h4>颜色：蔚蓝色</h4>
 								<h4>尺寸：{!!$product->size!!}</h4>
 								<div id="qty{!!$product->id!!}" class="number-select">
 									<div class="minuse"><img src="/assets/img/minuse.svg"></div>
-									<div class="number">{!!$product->qty!!}</div>
+									<div class="number" data-size="{!!$product->size!!}">{!!$product->qty!!}</div>
 									<div class="plus"><img src="/assets/img/plus.svg"></div>
 								</div>
 								<div class="to-wl links transition" onclick="removeshoppingbag({!!$product->id!!},{!!$product->size!!},'wishlist')">移至愿望清单</div>
@@ -60,24 +60,24 @@
 						<div class="rc-d-box">
 							<span class="rc-left">商品总金额</span>
 							<span class="rc-right">￥
-								<span id="product_total">{!!$price['product_total']!!}</span>
+								<span id="product_total">{!!number_format($price['product_total'],2)!!}</span>
 							</span>
 						</div>
 						<div class="rc-d-box">
 							<span class="rc-left">运费</span>
 							<span class="rc-right">￥
-								<span id="delivery">{!!$price['delivery']!!}</span>
+								<span id="delivery">{!!number_format($price['delivery'],2)!!}</span>
 							</span>
 						</div>
 						<div class="rc-line"></div>
 						<div class="rc-d-box">
 							<span class="rc-left">小计</span>
 							<span class="rc-right">￥
-								<span id="subtotal">{!!$price['subtotal']!!}</span>
+								<span id="subtotal">{!!number_format($price['subtotal'],2)!!}</span>
 							</span>
 						</div>
 					</div>
-					<a href="/checkout"><div class="sb-btn" id="rc-c">结算</div></a>
+					<a href="javascript:checkout();"><div class="sb-btn" id="rc-c">结算</div></a>
 					<a href="/product"><div class="sb-btn" id="rc-b">继续购物</div></a>
 				</div>
 			</div>
@@ -134,6 +134,34 @@
 		$("#product_total").html(sum.toFixed(2));
 		delivery = $("#delivery").html();
 		$("#subtotal").html((parseFloat(sum) + parseFloat(delivery)).toFixed(2));
+	}
+
+	function checkout(){
+		var shoppingbag = [];
+		var temp = {}
+		$.each($(".number"), function(){
+			qty = $(this).html();
+			id = $(this).parent().attr('id').substr(3);
+			size = $(this).attr("data-size");
+			temp = {qty: qty, id: id, size: size};
+			shoppingbag.push(temp);
+		});
+		console.log(JSON.stringify(shoppingbag));
+		$.ajax({
+			url: "/submit-shopping-cart",
+			method: 'POST',
+			data:{
+				data: JSON.stringify(shoppingbag)
+			}, 
+			headers: {
+	        	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    	},
+			success: function(result){
+				if (result.link !== undefined) {
+					location.href = result.link;
+				}
+			}
+		});
 	}
 </script>
 @stop

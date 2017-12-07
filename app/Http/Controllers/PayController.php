@@ -34,7 +34,7 @@ class PayController extends Controller
       $input->SetTime_start(date("YmdHis"));
       $input->SetTime_expire(date("YmdHis", time() + 60000));
       $input->SetGoods_tag($request->input('tag'));
-      $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
+      $input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");//接受返回
       $input->SetTrade_type("NATIVE");
       $input->SetProduct_id($request->input('id'));
       $result = $notify->GetPayUrl($input);

@@ -37,7 +37,7 @@
 		<div class="m-nav transition">
 			<div class="m-nav-up">
 				<a href="/newarrival"><div>新品</div></a>
-				<a href="/brand"><div>品牌</div></a>
+				<a href="/designers"><div>品牌</div></a>
 				<a href="javascript:;"><div class="m-menu-second relative">选购
 					<img class="m-nav-next" src="/assets/img/m-nav-next.svg"></div></a>
 				<a href="/about"><div>关于BONZA</div></a>
@@ -46,7 +46,7 @@
 				<?php if (!empty(session('member_id'))) { ?>
 				<a href="/myaccount"><div>我的账户</div></a>
 				<?php } else {?>
-				<a href="/login"><div>注册</div></a>
+				<a href="/login#reg"><div>注册</div></a>
 				<a href="/login"><div>登录</div></a>
 				<?php } ?>
 			</div>
@@ -59,14 +59,12 @@
 			</div></a>
 			<div class="m-n-s-title">选购</div>
 			<div class="m-n-s-menu">
-				<a href="#"><div>全部产品</div></a>
-				<a href="#"><div>上装</div></a>
-				<a href="#"><div>下装</div></a>
-				<a href="#"><div>外套</div></a>
-				<a href="#"><div>连衣裙</div></a>
-				<a href="#"><div>鞋履</div></a>
-				<a href="#"><div>配饰</div></a>
-				<a href="#"><div>护肤</div></a>
+				<a href="/product"><div>全部产品</div></a>
+				<?php 
+				foreach ($category as $c) {
+					echo "<a href='/product/category/".$c->id."'><div>".$c->name."</div></a>";
+				}
+				?>
 			</div>
 		</div>
 

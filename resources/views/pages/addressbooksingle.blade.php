@@ -101,7 +101,7 @@
                    </div>
 
 									 <div class="login-remember-box">
-               			    <input id ="checkbox-3" type="checkbox" name="default" class="styled-checkbox" checked><label for="checkbox-3">默认为送货地址</label>
+               			    <input id ="checkbox-3" type="checkbox" name="default" class="styled-checkbox" {!!($default == '1')?'checked':''!!}><label for="checkbox-3">默认为送货地址</label>
                		</div>
 
               			<!-- <div class="login-loading">
@@ -124,10 +124,10 @@
 <script type="text/javascript" src="/assets/js/myaccount-m-nav.js"></script>
 <script>
 $(function(){
-  var def = <?php echo $default;?>;
-  if (def == 1){
-    $('input[name=default]').click();
-  }
+  // var def = <?php echo $default;?>;
+  // if (def == 1){
+  //   $('input[name=default]').click();
+  // }
   $("#reviseaddress-submit").click(function(){
     var currenturl = window.location.href;
     if (validator()) {

@@ -112,87 +112,57 @@
                         <div class="col-sm-2">
                             <div class="from-group">
                                 <label>Project Date</label>
-                                <div id="project-date" class="input-group date" data-auto-close="true" data-date="@{{ortfolio.date}}" data-date-format="dd-mm-yyyy" data-date-autoclose="true">
+                                <div id="project-date" class="input-group date" data-auto-close="true" data-date="@{{portfolio.date}}" data-date-format="dd-mm-yyyy" data-date-autoclose="true">
                                     <input class="form-control" type="text" ng-model="portfolio.date">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="from-group">
-                                <label>Title Chinese</label>
-                                <input type="text" ng-model="portfolio.title_cn" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="from-group">
-                                <label>Subtitle Chinese</label>
-                                <input type="text" ng-model="portfolio.subtitle_cn" class="form-control">
-                            </div>
-                        </div>
-                        
-                    </div>
+                    
                     <div class="row">
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Price(AUD)</label>
+                                <label>Price</label>
                                 <input type="text" ng-model="portfolio.price" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Discount Price(AUD)</label>
+                                <label>Discount Price</label>
                                 <input type="text" ng-model="portfolio.discount_price" class="form-control">
                             </div>
                         </div>
                         
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Origin</label>
+                                <label>Designer</label>
                                 <input type="text" ng-model="portfolio.origin" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Stock</label>
-                                <input type="text" ng-model="portfolio.stock" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="from-group">
-                                <label>Weight</label>
-                                <input type="text" ng-model="portfolio.weight" class="form-control">
+                                <label>Color</label>
+                                <input type="text" ng-model="portfolio.sales" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2">
-                            <div class="from-group">
-                                <label>Price(CNY)</label>
-                                <input type="text" ng-model="portfolio.price_cn" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-sm-2">
-                            <div class="from-group">
-                                <label>Discount Price(CNY)</label>
-                                <input type="text" ng-model="portfolio.discount_price_cn" class="form-control">
-                            </div>
-                        </div>
-                         <div class="col-sm-2">
-                            <div class="from-group">
-                                <label>Origin CN</label>
-                                <input type="text" ng-model="portfolio.origin_cn" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-sm-2">
-                            <div class="from-group">
-                                <label>Sales</label>
-                                <input type="text" ng-model="portfolio.sales" class="form-control">
-                            </div>
-                        </div>
+                        <table class="size-table">
+                            <tr><th>Size</th><th>Stock</th><th>Action</th></tr>
+                            <tr ng-repeat="size in portfolio.size track by $index">
+                                <td>
+                                    <input type="text" ng-model="size.id" class="form-control">
+                                </td>
+                                <td>
+                                    <input type="text" ng-model="size.title" class="form-control">
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" ng-click="removeProduct($index)">Delete</button>
+                                </td>
+                            </tr>
+                            <tr><td><button type="button" class="btn btn-info" ng-click="addProduct()">Add</button></td></tr>
+                        </table>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
@@ -205,24 +175,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="from-group">
-                                <label>Short Description Chinese</label>
-                                <input type="text" ng-model="portfolio.content_cn" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="from-group">
                                 <label>Portfolio Brief</label>
                                 <div id="project-content" class="cheee-admin-editor"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="from-group">
-                                <label>Brief Chinese</label>
-                                <div id="project-content-cn" class="cheee-admin-editor"></div>
                             </div>
                         </div>
                     </div>
@@ -230,7 +184,7 @@
                         <div class="col-sm-12">
                             <div style="padding-bottom: 16px">
                                 <button class="btn btn-secondary" ng-click="showMediaModal()">Insert Photo From Media Library</button>
-                                 <button class="btn btn-secondary" ng-click="openTags()" href="#tag-modal" data-toggle="modal">Select Tags</button>
+                                <button class="btn btn-secondary" ng-click="openTags()" href="#tag-modal" data-toggle="modal">Select Tags</button>
                             </div>
                             <div ui-sortable="sortableOptions" ng-model="tickMediaAttr">
                                 <div class="media-modal-item" ng-repeat="media in tickMediaAttr" >
@@ -334,14 +288,14 @@
             }
             $scope.list = tmpList;
             $scope.detailArr = [];
-
+            // $scope.portfolio = [];
+            // $scope.portfolio['size'] = [];
 
             $scope.tag = {!! $tag !!};
 
             $scope.new = function () {
                 $scope.portfolio['medias'] = $scope.tickMediaAttr;
                 $scope.portfolio['brief'] = $('#project-content').froalaEditor('html.get', true);
-                $scope.portfolio['brief_cn'] = $('#project-content-cn').froalaEditor('html.get', true);
                 $scope.portfolio['tag'] = tagsArr;
                 $scope.portfolio['category'] = $("#ctg").val();
                 var data = JSON.stringify($scope.portfolio);
@@ -416,6 +370,18 @@
                 for (var i = $(".tag-select:checked").length - 1; i >= 0; i--) {
                     tagsArr.push($(".tag-select:checked")[i].value);
                 }
+            }
+
+            $scope.addProduct = function(){
+                if ($scope.portfolio['size'] == undefined){
+                    $scope.portfolio['size'] = [];
+                }
+                var newline = {"id":"","title":""};
+                $scope.portfolio['size'].push(newline);
+            }
+
+            $scope.removeProduct = function(index){
+                $scope.portfolio['size'].splice(index,1);
             }
 
         });

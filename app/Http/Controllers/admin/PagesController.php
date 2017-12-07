@@ -126,12 +126,12 @@ class PagesController extends AdminBaseController
         ->with('start', date("d-m-Y", $date_start))->with('end', date("d-m-Y", $date_end));
     }
 
-    public function order(Request $request, $region){
+    public function order(Request $request){
         $date_start = ($request->input('start'))?strtotime($request->input('start')):strtotime("-1 month");
         $date_end = ($request->input('end'))?strtotime($request->input('end')):time();
-        $orders = DB::table('orders')->where('region',$region)->whereBetween('create_time', [$date_start, $date_end])->get();
+        $orders = DB::table('orders')->whereBetween('create_time', [$date_start, $date_end])->get();
         foreach ($orders as $key => $value) {
-            $orders[$key]->user_id = DB::table('membership')->where('id', $value->user_id)->value("username");
+            $orders[$key]->user_id = DB::table('membership')->where('id', $value->user_id)->value("firstname");
             $orders[$key]->status_name = $this->order_status($value->status);
             $orders[$key]->delivery_status_name = $this->delivery_status($value->delivery_status);
             $orders[$key]->payment_status_name = $this->payment_status($value->payment_status);

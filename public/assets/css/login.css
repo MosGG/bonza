@@ -130,3 +130,25 @@
 	width: 158px;
 	margin: 0 auto;
 }
+@media (max-width: 768px){
+	#login-div,
+	.register-div{
+		padding: 30px;
+    	width: calc(50% - 60px);
+	}
+}
+@media(max-width: 550px){
+	#login-div{
+		float: unset;
+		margin: 30px 0 ;
+	}
+	.register-div{
+		margin-left: 0%;
+	}
+	#login-div,
+	.register-div{
+		padding: 15px;
+    	width: calc(100% - 30px);
+    	border:none;
+	}
+}

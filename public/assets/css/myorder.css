@@ -5,8 +5,92 @@
 }
 .orderlist th{
 	text-align: left;
-	padding-bottom: 30px;
+	padding: 0 5px 30px 5px;
 }
 .orderlist td{
-	padding: 3px 0;
+	padding: 5px;
+}
+.single-order-des{
+	font-size: 16px;
+}
+.single-order-des a:hover{
+	text-decoration: underline;
+}
+.single-order-detail{
+	width: 100%;
+	font-size: 16px;
+	margin: 30px 0;
+}
+.single-order-detail img{
+	width: 123px;
+	height: auto;
+}
+.imgth{
+	max-width: 160px;
+}
+.single-order-detail th{
+	text-align: left;
+	color: #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+	padding: 15px 5px;
+}
+.single-order-detail td{
+	padding: 35px 5px 20px 5px;
+	vertical-align: top;
+	border-bottom: 1px solid #AAAAAA;
+}
+.single-order-detail h3{
+	font-size: 22px;
+}
+.price-detail{
+	padding-bottom: 45px;
+	overflow: hidden;
+}
+.pd-box{
+	width: 310px;
+	float: right;
+	color: #AAAAAA;
+	font-size: 16px;
+	line-height: 24px;
+}
+.pd-line{
+	overflow: hidden;
+}
+.pd-line span{
+	display: inline-block;
+}
+.pd-black{
+	color: #000;
+	font-weight: bold;
+}
+.pd-left{
+	float: left;
+}
+.pd-right{
+	float: right;
+}
+.pd-up{
+	border-bottom: 1px solid #AAAAAA;
+	padding: 12px 0;
+	color: #AAAAAA; 
+}
+.pd-down{
+	padding-top: 40px;
+}
+@media(max-width: 600px){
+	.single-order-detail img{
+		width: 50px;
+	}
+	.single-order-detail h3{
+		font-size: 16px;
+	}
+	.single-order-detail{
+		font-size: 12px;
+	}
+	.pd-box{
+		width: 250px;
+	}
+	.orderlist{
+		font-size: 14px;
+	}
 }

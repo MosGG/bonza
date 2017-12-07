@@ -721,6 +721,7 @@ footer{
 	top: 20px;
 	width: 18px;
 	height: 18px;
+	z-index: 20;
 }
 
 
@@ -761,7 +762,7 @@ footer{
 }
 input[type=checkbox] {
   	width: 20px;
-  	height: 20px;
+  	height: 18px;
   	margin: 0px 15px 0px 0px;
   	cursor: pointer;
   	font-size: 14px;

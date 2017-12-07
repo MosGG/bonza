@@ -2,6 +2,7 @@
 #slider{
 	height: 564px;
 	margin-bottom: 80px;
+	overflow: hidden;
 }
 #slider img{
 	max-height: 564px;
@@ -20,12 +21,16 @@
 	top: calc(50% - 22px);
 	z-index: 10;
 	padding: 10px;
+	cursor: pointer;
 }
+/*.arrow:hover{
+	background: rgba(248,243,235,0.5);
+}*/
 .arrow img{
 	opacity: 1!important;
 }
 .pre-arrow{
-	left: -34px;
+	left: -10px;
 }
 .nxt-arrow{
 	left: calc(33% + 4px);
@@ -112,7 +117,7 @@ nav .drop-down img{
 	height: 14px;
 	position: absolute;
 	right: 5px;
-	top: 11px;
+	top: 7px;
 	cursor: pointer;
 }
 
@@ -124,7 +129,7 @@ nav .drop-down img{
 #size-refer{
 	color: #AAAAAA;
 	position: absolute;
-	left:50%;
+	left:calc(50% + 30px);
 	height: 30px;
 	border-bottom: 1px solid #AAAAAA;
 	display: inline-block;
@@ -135,6 +140,9 @@ nav .drop-down img{
 #size-refer:hover{
 	color: #000;
 	border-bottom: 1px solid #000;
+}
+.p-btn-box{
+	position: relative;
 }
 .p-btn-box div{
 	height: 38px;
@@ -159,7 +167,7 @@ nav .drop-down img{
 #btn-wishlist{
 	border-color: #AAAAAA;
 	position: absolute;
-	left: 50%;
+	left: calc(50% + 30px);
 }
 #btn-wishlist:hover{
 	color: #AB956E;
@@ -223,4 +231,42 @@ nav .drop-down img{
 .rotate div:nth-child(1){
 	transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
+}
+
+@media(max-width: 768px){
+	.product-info{
+		position: relative;
+		top:0;
+		right: 0;
+		width: unset;
+	}
+	.nxt-arrow{
+		left: calc(50% - 25px);
+	}
+	#slider{
+		margin-bottom: 0;
+	}
+}
+@media(max-width: 550px){
+	#size-refer,
+	#btn-wishlist{
+	    left: calc(50% + 10px);
+	}
+	nav .drop-down{
+		width: calc(50% - 10px);
+	}
+	.p-btn-box div{
+		width: calc(50% - 40px);
+	}
+	.product-info{
+		padding: 30px 0 80px 0;
+		min-width: unset;
+	}
+	#slider{
+		height: 70vw;
+		margin-top: 30px;
+	}
+	.p-btn-box div svg{
+		display: none;
+	}
 }

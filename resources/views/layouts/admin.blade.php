@@ -178,6 +178,13 @@
                     </ul>
                 </li> -->
 
+                <li class="">
+                    <a href="/admin-order">
+                        <i class="fa fa-shopping-cart"></i>
+                        Orders Management
+                    </a>
+                </li>
+
                 <li class="dropdown">
                     <a href="javascript:;">
                         <i class="fa fa-shopping-cart"></i>

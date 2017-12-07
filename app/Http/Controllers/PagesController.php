@@ -42,8 +42,20 @@ class PagesController extends Controller
         return view('pages.register');
     }
 
-    public function product(Request $request){
-        $product = DB::table('portfolios')->where('status', '=', '1')->orderBy('sort')->get();
+    public function product(Request $request, $cate_id = 0){
+        $sort = 'sort';
+        
+        $cate = DB::table('category')->where('id', '=', $cate_id)->get();
+        if (!empty($cate)) {
+            $product = DB::table('portfolios')->where('status', '=', '1')->where('category',$cate_id)->orderBy($sort)->get();
+        } else {
+            $product = DB::table('portfolios')->where('status', '=', '1')->orderBy($sort)->get();
+        }
+       
+        $category = DB::table('category')->where('father', '!=', '0')->get();
+        
+
+        // $product = DB::table('portfolios')->where('status', '=', '1')->orderBy('sort')->get();
         $page = $request->input("page");
         if (empty($page)) $page = 1;
         $total = count($product);
@@ -59,7 +71,7 @@ class PagesController extends Controller
             "page" => $page,
             "total" => $total,
                     );
-    	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','product');
+    	return view('pages.product')->with('product', $product)->with('meta', $meta_data)->with('action','product')->with('action','product')->with('category', $category)->with('cate_id', $cate_id);
     }
 
     public function designers(Request $request){
@@ -335,28 +347,66 @@ class PagesController extends Controller
      public function checkout(Request $request){
         $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
         $shoppingbag = json_decode($member_bag, true);
-        $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
-        foreach ($shoppingbag as $key => $p) {
-            $product = DB::table('portfolios')->where('id',$p['id'])->get();
-            $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
-            if (empty($imgs[0]->media_id)) {
-                $imgSrc = '/assets/img/default.png';
-            } else {
-                $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+        //if nothing return to shoppingbag
+        if (empty($shoppingbag)) {
+            return redirect()->route('shoppingbag');
+        } else {
+            $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
+            foreach ($shoppingbag as $key => $p) {
+                $product = DB::table('portfolios')->where('id',$p['id'])->get();
+                $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
+                if (empty($imgs[0]->media_id)) {
+                    $imgSrc = '/assets/img/default.png';
+                } else {
+                    $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+                }
+                $product[0]->src = $imgSrc;
+                $product[0]->size = $p['size'];
+                $product[0]->qty = $p['qty'];
+                $shoppingbag[$key] = $product[0];
+                $price['product_total'] += $product[0]->price * $product[0]->qty;
             }
-            $product[0]->src = $imgSrc;
-            $product[0]->size = $p['size'];
-            $product[0]->qty = $p['qty'];
-            $shoppingbag[$key] = $product[0];
-            $price['product_total'] += $product[0]->price * $product[0]->qty;
+            $price['delivery'] = 15;
+            $price['subtotal'] = $price['product_total'] + $price['delivery'];
+
+            if (empty(session('address')) || empty(session('billing_address'))) {
+                $add = DB::table('addressbook')->where("member_id", session('member_id'))->where('default', '1')->get();
+                if (!empty($add)) {
+                    $address = array(
+                        "firstname" => $add[0]->firstname,
+                        "lastname" => $add[0]->lastname,
+                        "email" => session("member"),
+                        "tel" => $add[0]->phone,
+                        "add" => $add[0]->address,
+                        "add2" => $add[0]->address_second,
+                        "city" => $add[0]->city,
+                        "state" => $add[0]->state,
+                        "postcode" => $add[0]->postcode,
+                    );
+                } else {
+                    $member = DB::table('membership')->where("id", session('member_id'))->get();
+                    $address = array(
+                        "firstname" => $member[0]->firstname,
+                        "lastname" => $member[0]->lastname,
+                        "email" => session("member"),
+                        "tel" => "",
+                        "add" => "",
+                        "add2" => "",
+                        "city" => "",
+                        "state" => "",
+                        "postcode" => "",
+                    );
+                }
+                $billing_address = $address;
+                $request->session()->put('address', $address);
+                $request->session()->put('billing_address', $billing_address);
+            }
+            return view('pages.checkout')->with('shoppingbag', $shoppingbag)->with('price', $price)->with('address', session("address"))->with('billing_address', session("billing_address"));
         }
-        $price['delivery'] = 15;
-        $price['subtotal'] = $price['product_total'] + $price['delivery'];
-        return view('pages.checkout')->with('shoppingbag', $shoppingbag)->with('price', $price);
     }
 
     public function checkoutconfirm(){
-        if (empty(session('address')) || empty(session('billing_address'))) {
+        if (empty(session('address')) || empty(session('billing_address')) || empty(session('shopping-bag'))) {
             return redirect()->route('checkout');
         } else {
             $member_bag = DB::table('membership')->where("email", session('member'))->value('shopping_bag');
@@ -378,6 +428,7 @@ class PagesController extends Controller
             }
             $price['delivery'] = 15;
             $price['subtotal'] = $price['product_total'] + $price['delivery'];
+
             return view('pages.checkoutConfirm')->with('shoppingbag', $shoppingbag)->with('price', $price);
         }
     }

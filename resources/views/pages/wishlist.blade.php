@@ -53,7 +53,7 @@
 									<div class="number">1</div>
 									<div class="plus"><img src="/assets/img/plus.svg"></div>
 								</div>
-								<div class="transition size-refer">查看尺码参考</div>
+								<div class="transition size-refer" onclick="$('.modal').fadeIn();">查看尺码参考</div>
 							</div>
 							<div class="p-btn-box relative">
 								<div class="transition btn-cart">加入购物车
@@ -92,6 +92,7 @@
 		<?php } ?>
 	</div>
 </div>
+@include('partial.sizeModal');
 @stop
 
 @section('js-reference')

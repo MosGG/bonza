@@ -15,8 +15,8 @@
                 <div class="modal-body" id="admin-add-body">
                     <label>Category Name* </label>
                     <input class="form-control" type="text" ng-model="categoryName" placeholder='Max 20 letters' value=""/></br>
-                    <label>Category Name Chinese* </label>
-                    <input class="form-control" type="text" ng-model="categoryNameCn" placeholder='Max 20 letters' value=""/></br>
+                    <!-- <label>Category Name Chinese* </label> -->
+                    <input class="form-control" type="hidden" ng-model="categoryNameCn" placeholder='Max 20 letters' value=""/></br>
                     <label>Belongs To*</label>
                     <select class="form-control" id="ctg-new">
                         <option value="0" selected="selected">Nothing</option>

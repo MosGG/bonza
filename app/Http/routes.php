@@ -98,7 +98,7 @@ Route::group(['middleware' => 'admin'], function () {
         'uses' => 'admin\PagesController@category'
     ]);
 
-    Route::get('/admin-order/{region}', [
+    Route::get('/admin-order', [
         'as' => 'admin-order',
         'uses' => 'admin\PagesController@order'
     ]);
@@ -292,8 +292,8 @@ Route::group(['middleware' => 'web'], function () {
         ]);
 
         Route::get('/myaccount/order/{id}', [
-            'as' => 'ordersigle',
-            'uses' => 'MembershipController@ordersigle'
+            'as' => 'ordersingle',
+            'uses' => 'MembershipController@ordersingle'
         ]);
 
         Route::get('/myaccount/wechat', [
@@ -322,7 +322,9 @@ Route::group(['middleware' => 'web'], function () {
             'uses' => 'PagesController@checkout'
         ]);
 
+        Route::post('/submit-shopping-cart', 'MembershipController@submitShoppingCart');
         Route::post('/submit-order', 'MembershipController@submitorder');
+        Route::any('/confirmorder', 'MembershipController@confirmorder');
 
         Route::get('/submit-order', [
             'as' => 'submit-order',
@@ -332,6 +334,11 @@ Route::group(['middleware' => 'web'], function () {
          Route::get('/checkout-confirm', [
             'as' => 'checkout-confirm',
             'uses' => 'PagesController@checkoutconfirm'
+        ]);
+
+         Route::any('/getwechaturl', [
+            'as' => 'getwechaturl',
+            'uses' => 'PayController@getUrl'
         ]);
     });
 
@@ -415,6 +422,11 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'PagesController@product'
     ]);
 
+    Route::get('/product/category/{cate_id}', [
+        'as' => 'product',
+        'uses' => 'PagesController@product'
+    ]);
+
     Route::get('/designers', [
         'as' => 'designers',
         'uses' => 'PagesController@designers'
@@ -485,10 +497,7 @@ Route::group(['middleware' => 'web'], function () {
         'uses' => 'PagesController@recruitment'
     ]);
 
-    Route::any('/test', [
-        'as' => 'test',
-        'uses' => 'PayController@getUrl'
-    ]);
+    
 
     /*
     *  Portfolio Pages (urls for all the portfolio parts)

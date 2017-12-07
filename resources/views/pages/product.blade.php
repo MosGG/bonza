@@ -56,14 +56,18 @@
 	<div class="product-content">
 		<div class="pc-left">
 			<ul class="category-selector">
-				<li>全部产品</li>
-				<a href="#"><li class="category"><span class="ctg-active">上装</span></li></a>
-				<li class="category"><span>下装</span></li>
-				<li class="category"><span>外套</span></li>
-				<li class="category"><span>连衣裙</span></li>
-				<li class="category"><span>鞋履</span></li>
-				<li class="category"><span>配饰</span></li>
-				<li class="category"><span>护肤</span></li>
+				<a href="/product"><li>
+					<span {!!($cate_id==0)?"class='ctg-active'":""!!}>全部产品</span>
+				</li></a>
+				<?php 
+				foreach ($category as $c) {
+					echo "<a href='/product/category/".$c->id."'><li class='category'><span ";
+					if ($cate_id == $c->id) {
+						echo "class='ctg-active'";
+					}
+					echo ">".$c->name."</span></li></a>";
+				}
+				?>
 			</ul>
 		</div>
 		<div class="pc-right">

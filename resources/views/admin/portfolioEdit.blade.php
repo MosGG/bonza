@@ -123,26 +123,26 @@
                     <div class="row">
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Price(AUD)</label>
+                                <label>Price</label>
                                 <input type="text" ng-model="portfolio.price" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Discount Price(AUD)</label>
+                                <label>Discount Price</label>
                                 <input type="text" ng-model="portfolio.discount_price" class="form-control">
                             </div>
                         </div>
                         
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Origin</label>
+                                <label>Designer</label>
                                 <input type="text" ng-model="portfolio.origin" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="from-group">
-                                <label>Sales</label>
+                                <label>Color</label>
                                 <input type="text" ng-model="portfolio.sales" class="form-control">
                             </div>
                         </div>
@@ -287,7 +287,6 @@
             $("#ctg").val($scope.portfolio['category']);
 
             $scope.update = function(){
-                
                 $scope.portfolio['medias'] = $scope.tickMediaAttr;
                 $scope.portfolio['brief'] = $('#project-content').froalaEditor('html.get', true);
                 $scope.portfolio['category'] = $("#ctg").val();

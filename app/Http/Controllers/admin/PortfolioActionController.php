@@ -15,29 +15,29 @@ class PortfolioActionController extends Controller
 
         $id = $request->input('id');
         $title = $request->input('title');
-        $title_cn = $request->input('title_cn');
+       
         $subtitle = $request->input('subtitle');
-        $subtitle_cn = $request->input('subtitle_cn');
+      
         $category = $request->input('category');
         $content = $request->input('content');
-        $content_cn = $request->input('content_cn');
+      
         $medias = $request->input('medias');
         $date = date_create($request->input('date'));
         $brief = $request->input('brief');
-        $brief_cn = $request->input('brief_cn');
+       
         $price = $request->input('price');
-        $price_cn = $request->input('price_cn');
+       
         $discount_price = $request->input('discount_price');
-        $discount_price_cn = $request->input('discount_price_cn');
+       
         $origin = $request->input('origin');
-        $origin_cn = $request->input('origin_cn');
+       
         $stock = $request->input('stock');
         $sales = $request->input('sales');
-        $weight = $request->input('weight');
+        $size = $request->input('size');
         $tags = $request->input('tag');
         
         $portfolioId = DB::table('portfolios')->insertGetId(
-            ['title' => $title, 'title_cn' => $title_cn, 'subtitle' => $subtitle, 'subtitle_cn' =>$subtitle_cn , 'origin' => $origin, 'origin_cn'=>$origin_cn,'category' => $category, 'content' => $content, 'content_cn' => $content_cn, 'brief' => $brief, 'brief_cn' => $brief_cn, 'price' => $price, 'price_cn' => $price_cn, 'discount_price' => $discount_price, 'discount_price_cn' => $discount_price_cn, 'stock' => $stock, 'sales' => $sales, 'weight' => $weight, 'date' => $date, 'publisher' => $request->session()->get('admin'), 'tag' => json_encode($tags)]
+            ['title' => $title, 'subtitle' => $subtitle, 'origin' => $origin,'category' => $category, 'content' => $content, 'brief' => $brief, 'price' => $price, 'discount_price' => $discount_price, 'stock' => $stock, 'sales' => $sales, 'size' => json_encode($size), 'date' => $date, 'publisher' => $request->session()->get('admin'), 'tag' => json_encode($tags)]
         );
 
         $hasFeatured = 0;
@@ -380,6 +380,7 @@ class PortfolioActionController extends Controller
         $id = $request->input('id');
 
         DB::table('category')->where('id', '=', $id)->delete();
+        DB::table('portfolios')->where('category', '=', $id)->update(["category" => "1"]);
 
         return '{"success":true}';
     }

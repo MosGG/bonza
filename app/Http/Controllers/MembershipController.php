@@ -227,15 +227,19 @@ class MembershipController extends Controller
         $member = session('member');
         $shoppingbag = session('shopping-bag');
 
-        $flag = false;
-        foreach($shoppingbag as $k => $p){
-            if ($p['id'] == $id && $p['size'] == $size) {
-                $shoppingbag[$k]['qty'] += $qty;
-                $flag = true;
+        if (empty($shoppingbag)) {
+            $shoppingbag = array(array("id"=>$id, "size"=>$size, "qty"=>$qty));
+        } else {
+            $flag = false;
+            foreach($shoppingbag as $k => $p){
+                if ($p['id'] == $id && $p['size'] == $size) {
+                    $shoppingbag[$k]['qty'] += $qty;
+                    $flag = true;
+                }
             }
-        }
-        if (!$flag) {
-            $shoppingbag[] = array("id"=>$id, "size"=>$size, "qty"=>$qty);
+            if (!$flag) {
+                $shoppingbag[] = array("id"=>$id, "size"=>$size, "qty"=>$qty);
+            }
         }
         // $num = count($shoppingbag);
         // var_dump($shoppingbag);
@@ -278,6 +282,13 @@ class MembershipController extends Controller
         return array("success" => "true", "num" => $num);
     }
 
+    public function submitShoppingCart(Request $request){
+        $data = $request->input('data');
+        DB::table('membership')->where('email', session('member'))->update(["shopping_bag" => $data,"update_time" => time()]);
+        $request->session()->put('shopping-bag', json_decode($data, true));
+        return array("success" => "true", "link" => "checkout");
+    }
+
     public function submitorder(Request $request){
         $address = array(
             "firstname" => $request->input('firstname'),
@@ -305,6 +316,72 @@ class MembershipController extends Controller
         $request->session()->put('address', $address);
         $request->session()->put('billing_address', $billing_address);
         return array("success" => "true", "link" => "checkout-confirm");
+    }
+
+    public function confirmorder(Request $request){
+        $address = session('address');
+        $billing_address = session('billing_address');
+        $member_id = session('member_id');
+        //shopping bag and pricing
+        $shoppingbag = DB::table('membership')->where('id', $member_id)->value("shopping_bag");
+        $shoppingbag = json_decode($shoppingbag, true);
+        $price = array("product_total"=>0, "delivery"=>0, "subtotal"=>0);
+        foreach ($shoppingbag as $key => $p) {
+            $product = DB::table('portfolios')->where('id',$p['id'])->get();
+            $imgs = DB::table('media_portfolio')->where('portfolio_id', $p['id'])->orderBy('featured','DESC')->get();
+            if (empty($imgs[0]->media_id)) {
+                $imgSrc = '/assets/img/default.png';
+            } else {
+                $imgSrc = DB::table('media_library')->where('id', $imgs[0]->media_id)->value('src_thumb');
+            }
+            $product[0]->src = $imgSrc;
+            $product[0]->size = $p['size'];
+            $product[0]->qty = $p['qty'];
+            $shoppingbag[$key] = $product[0];
+            $price['product_total'] += $product[0]->price * $product[0]->qty;
+        }
+        $price['delivery'] = 15;
+        $price['subtotal'] = $price['product_total'] + $price['delivery'];
+        $shoppingbag = json_encode($shoppingbag);
+        $delivery_method = "standard";
+
+        //insert data
+        $order = array(
+            "delivery_method" => $delivery_method,
+            "create_time" => time(),
+            "user_id" => $member_id,
+            "recipient" => $address['firstname']." ".$address['lastname'],
+            "address" => $address['add']." ".
+                        $address['add2']." ".
+                        $address['city']." ".
+                        $address['state']." ".
+                        $address['postcode'],
+            "billing_recipient" => $billing_address['firstname']." ".$billing_address['lastname'],           
+            "billing_address" =>$billing_address['add']." ".
+                        $billing_address['add2']." ".
+                        $billing_address['city']." ".
+                        $billing_address['state']." ".
+                        $billing_address['postcode'],
+            "total_price" => $price['product_total'],
+            "status" => "0",
+            "detail" => $shoppingbag,
+            "delivery_status" => "0",
+            "payment_status" => "0",
+        );
+        $result = DB::table('orders')->insert($order);
+        if ($result) {
+            DB::table("membership")->where("id", $member_id)->update(["shopping_bag" => "[]"]);
+            $request->session()->put('shopping-bag',"");
+            $request->session()->put('address',"");
+            $request->session()->put('billing_address',"");
+             //add logic
+            // $request = Request::create('/getwechaturl?body=hello&attach=hello&fee=1&tag=hello&id=123456', 'GET');
+            // $response = app()->handle($request)->getContent();
+            $response = "weixin://wxpay/bizpayurl?pr=ylsWaXe";
+            return array("success" => "true", "link" => $response);
+        } else {
+            return array("success" => "false", "msg" => "db error");
+        }
     }
 
     public function addressbook(Request $request){
@@ -352,12 +429,14 @@ class MembershipController extends Controller
 
     public function deleteaddress(Request $request){
         $id = session("member_id");
+        $default = DB::table('addressbook')->where('id',$request->id)->value('default');
         DB::table('addressbook')->where('member_id', $id)->where('id',$request->id)->delete();
-        $first = DB::table('addressbook')->where('member_id', $id)->first();
-        if ($first != NULL){
-          DB::table('addressbook')->where('member_id', $id)->where('id',$first->id)->update(["default" => 1]);
+        if ($default == '1') {
+            $first = DB::table('addressbook')->where('member_id', $id)->first();
+            if ($first != NULL){
+                DB::table('addressbook')->where('member_id', $id)->where('id',$first->id)->update(["default" => 1]);
+            }
         }
-
         return array("success" => "删除成功");
     }
 
@@ -443,7 +522,7 @@ class MembershipController extends Controller
 
     public function orderlist(Request $request){
         $id = session("member_id");
-        $order = DB::table('orders')->where('user_id', $id)->get();
+        $order = DB::table('orders')->where('user_id', $id)->orderBy("create_time","DESC")->get();
         foreach($order as $key => $value){
             $order[$key]->number = $value->id + 145200000;
             $order[$key]->create_time = date("y年m月d日 H:m", $value->create_time);
@@ -470,14 +549,21 @@ class MembershipController extends Controller
     public function ordersingle($id, Request $request){
         $member_id = session("member_id");
         $order = DB::table('orders')->where('id', $id)->get();
-        if ($order[0]->uer_id == $member_id) {
-            $order[0]->number = $value->id + 145200000;
-            $order[0]->create_time = date("y年m月d日 H:m", $value->create_time);
-            $order[0]->status = $this->getOrderStatus($value->status);
-            $order[0]->delivery_status = $this->getOrderStatus($value->delivery_status);
-            return view('pages.ordersingle')->with('order', $order);
+        if ($order[0]->user_id == $member_id) {
+            $order[0]->number = $id + 145200000;
+            $order[0]->create_time = date("y年m月d日 H:m", $order[0]->create_time);
+            $order[0]->status = $this->getOrderStatus($order[0]->status);
+            $order[0]->delivery_status = $this->getOrderStatus($order[0]->delivery_status );
+            $order[0]->detail = json_decode($order[0]->detail, true);
+            $order[0]->delivery_fee = $this->getDeliveryFee($order[0]->delivery_status);
+            $order[0]->subtotal = $order[0]->total_price + $order[0]->delivery_fee;
+            return view('pages.ordersingle')->with('order', $order[0]);
         } else {
             return redirect()->route('orderlist');
         }
+    }
+
+    private function getDeliveryFee(){
+        return 15;
     }
 }
